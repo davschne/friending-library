@@ -41,6 +41,12 @@ gulp.task('copy', function() {
     .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('build', ['sass', 'copy', 'webpack']);
+gulp.task('copy-fonts', function() {
+
+  return gulp.src('./app/**/*.otf')
+    .pipe(gulp.dest('./public/'));
+});
+
+gulp.task('build', ['sass', 'copy', 'copy-fonts', 'webpack']);
 
 gulp.task('default', ['build']);
