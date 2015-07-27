@@ -4,11 +4,11 @@ var findOrCreate = require("mongoose-findorcreate");
 var userSchema = new mongoose.Schema({
   _id: String,
   displayName: String,
-  name: {
-    familyName: String,
-    givenName: String
-    },
-  email: String,
+  // name: {
+  //   familyName: String,
+  //   givenName: String
+  //   },
+  // email: String,
   books: [{type: mongoose.Schema.Types.ObjectId, ref: "Book"}],
   borrowing: [{type: mongoose.Schema.Types.ObjectId, ref: "Book"}]
 });

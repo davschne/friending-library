@@ -32,11 +32,7 @@ passport.use(new FacebookStrategy({
     User.findOrCreate({
       _id: profile.id
     }, {
-      displayName: profile.displayName,
-      name: {
-        familyName: profile.lastName,
-        givenName: profile.firstName
-      }
+      displayName: profile.displayName
     }, function(err, user) {
       return done(err, user);
     });
@@ -49,11 +45,8 @@ app.get("/auth/facebook",
 app.get("/auth/facebook/callback",
   passport.authenticate("facebook", {failureRedirect: "/login"}),
   function(req, res) {
-    res.redirect("/");
+    res.json("ooookay");
   });
 
-app.get("/", function(req, res) {
-  res.json({msg: "oooookay"});
-});
 
 app.listen(3000);
