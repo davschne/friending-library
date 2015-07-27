@@ -2,8 +2,9 @@
 
 require('angular/angular');
 require('angular-route');
+require('angular-cookies');
 
-var friendingLibrary = angular.module('friendingLibrary', ['ngRoute']);
+var friendingLibrary = angular.module('friendingLibrary', ['ngRoute', 'ngCookes']);
 
 //controllers
 require('./welcome/controllers/welcome_controller.js')(friendingLibrary);
