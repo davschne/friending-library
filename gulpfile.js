@@ -43,7 +43,7 @@ gulp.task('copy', function() {
 
 gulp.task('copy-fonts', function() {
 
- return gulp.src('./app/**/*.otf')
+  return gulp.src('./app/**/*.otf')
     .pipe(gulp.dest('./public/'));
 });
 
