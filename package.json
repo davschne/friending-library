@@ -1,0 +1,19 @@
+{
+  "name": "friending-library",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davschne/friending-library.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davschne/friending-library/issues"
+  },
+  "homepage": "https://github.com/davschne/friending-library#readme"
+}

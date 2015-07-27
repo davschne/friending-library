@@ -1,0 +1,11 @@
+Waffle
+
+User
+  -email (_id) : primary key? enforce uniqueness
+  -first name
+  -last name
+  -books (Books)
+  -friends (other Users)
+
+Book
+  -
