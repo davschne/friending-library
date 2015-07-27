@@ -8,4 +8,5 @@ User
   -friends (other Users)
 
 Book
+  -ISBN (primary key)
   -
