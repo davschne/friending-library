@@ -63,6 +63,8 @@ passport.use(new BearerStrategy(
     }
   ))
 
+app.use(express.static("public"));
+
 app.get("/auth/facebook",
   passport.authenticate("facebook"));
 
