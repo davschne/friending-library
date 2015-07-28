@@ -15,14 +15,20 @@ var book = testData.books[0];
 
 describe("/api/books", function() {
 
-  before(function(done) {
+  beforeEach(function(done) {
     User.create(user, function(err, data) {
       if (!err) done();
     });
   });
 
+  afterEach(function(done) {
+    User.findByIdAndRemove(user._id, function(err, data) {
+      if (!err) done();
+    });
+  });
+
   describe("POST", function() {
-    it("should add a new Book document to the database and add a reference to this document's id in the corresponding User document", function(done) {
+    it("should add a new Book document to the database, add a reference to this document's id in the corresponding User document, and return the added Book document as JSON", function(done) {
       chai.request(url)
         .post("/api/books")
         .set("Authorization", "Bearer " + user.access_token)
@@ -37,17 +43,26 @@ describe("/api/books", function() {
           done();
         });
     });
-  });
-
-  after(function(done) {
-    User.findByIdAndRemove(user._id, function(err, data) {
-      if (!err) {
-        Book.findByIdAndRemove(book._id, function(err, data) {
-          if (!err) {
-            done();
-          }
-        });
-      }
+    after(function(done) {
+      Book.findByIdAndRemove(book._id, function(err, data) {
+        if (!err) done();
+      });
     });
   });
+
+  describe("GET", function() {
+    it("should return an array of the user's books as JSON", function(done) {
+      chai.request(url)
+        .get("/api/books")
+        .set("Authorization", "Bearer " + user.access_token)
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.be.an("array");
+          done();
+        });
+    });
+  });
+
 });
