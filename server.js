@@ -23,6 +23,7 @@ var authenticate = require("./middleware/auth-bearer");
 app.use(express.static("public"));
 
 app.use("/auth", authRouter);
+app.use(authenticate);
 app.use("/api/users", usersRouter);
 app.use("/api/books", booksRouter);
 
