@@ -11,10 +11,12 @@ mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/friending-l
 });
 
 var authRouter = express.Router();
+var selfRouter = express.Router();
 var usersRouter = express.Router();
 var booksRouter = express.Router();
 
 require("./routes/auth-routes")(authRouter);
+require("./routes/self-routes")(selfRouter);
 require("./routes/users-routes")(usersRouter);
 require("./routes/books-routes")(booksRouter);
 
@@ -29,6 +31,7 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 
 app.use("/auth", authRouter);
+app.use("/api/self", authenticate, selfRouter);
 app.use("/api/users", authenticate, usersRouter);
 app.use("/api/books", authenticate, booksRouter);
 
