@@ -11,7 +11,8 @@ var userSchema = new mongoose.Schema({
   //   },
   // email: String,
   books: [{type: mongoose.Schema.Types.ObjectId, ref: "Book"}],
-  borrowing: [{type: mongoose.Schema.Types.ObjectId, ref: "Book"}]
+  borrowing: [{type: mongoose.Schema.Types.ObjectId, ref: "Book"}],
+  requests: [{type: mongoose.Schema.Types.ObjectId, ref: "Book"}]
 });
 
 userSchema.plugin(findOrCreate);
