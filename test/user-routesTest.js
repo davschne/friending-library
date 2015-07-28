@@ -19,7 +19,10 @@ describe("/api/users", function() {
       if (!err) {
         testBooks[0].owner = testUsers[0]._id;
         Book.create(testBooks[0], function(err, data) {
-          done();
+          testBooks[1].owner = testUsers[0]._id;
+          Book.create(testBooks[1], function(err, data) {
+            done();
+          });
         });
       }
     });
