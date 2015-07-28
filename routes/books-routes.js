@@ -26,4 +26,17 @@ module.exports = function(router) {
       });
   });
 
+  router.get("/", function(req, res) {
+    console.log("Received GET request at api/books");
+    var user = req.user;
+    User.findById(user._id)
+      .populate("books")
+      .exec()
+      .then(function(userDoc) {
+        res.json(userDoc.books);
+      }, function(err) {
+        handle[500](err, res);
+      });
+  });
+
 };
