@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" data-ng-app="friendingLibrary">
+<html class="no-js" lang="en" data-ng-app="friendLibrary">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,17 +18,25 @@
 
     <header>
       <nav>
-        <a href="/">
-          <img src="" alt="logo" />
-        </a>
+        <h1 class="nav__heading">
+          <a href="/">
+            <img src="images/book.svg" class="nav__logo" alt="logo">Friending Library<!-- <img src="" alt="logo" /> -->
+          </a>
+        </h1>
 
-        <form>
+        <form class="login__form">
           <fieldset>
-            <label>Username:</label>
-            <input type="text" placeholder="Username"></input>
-            <label>Password:</label>
-            <input type="password" placeholder="Password"></input>
-            <button id="sign-in">Sign In</button>
+            <div class="login__wrapper">
+              <label class="login__label">Username:</label>
+              <input type="text" placeholder="Username" required></input>
+            </div>
+
+            <div class="login__wrapper">
+              <label class="login__label">Password:</label>
+              <input type="password" placeholder="Password" required></input>
+            </div>
+
+            <button class="login__button" id="sign-in">Sign In</button>
           </fieldset>
         </form>
       </nav>
@@ -36,29 +44,49 @@
 
     <main role="main">
       <div data-ng-view></div>
-      <article role="article">
-        <form>
-          <fieldset>
-            <label class="block">Username:</label>
-            <input class="block" type="text" placeholder="Username"></input>
-            <label>First Name:</label>
-            <input class="block" type="text" placeholder="First Name"></input>
-            <label>Last Name:</label>
-            <input class="block" type="text" placeholder="Last Name"></input>
-            <label>Password:</label>
-            <input class="block" type="password" placeholder="Password"></input>
-            <label>Email:</label>
-            <input class="block" type="email" placeholder="example@example.com"></input>
-            <label>Location:</label>
-            <input class="block" type="text" placeholder="Seattle, WA"></input>
-            <button class="block" id="sign-up">Sign Up</button>
-          </fieldset>
+      <article>
+        <form class="signup">
+            <p>Don't have an account? Sign up below.</p>
+            <!-- <label>First Name:</label> -->
+            <input aria-label="Your First Name" type="text" placeholder="First Name"></input>
+            <!-- <label>Last Name:</label> -->
+            <input aria-label="Your Last Name" type="text" placeholder="Last Name"></input>
+            <!-- <label>Location:</label> -->
+            <input type="text" placeholder="Seattle, WA"></input>
+            <!-- <label>Username:</label> -->
+            <input aria-label="Your Username" type="text" placeholder="Username"></input>
+            <!-- <label>Password:</label> -->
+            <input aria-label="Your Password" type="password" placeholder="Password"></input>
+            <!-- <label>Email:</label> -->
+            <input aria-label="Your Email" type="email" placeholder="example@example.com"></input>
+            <button class="signup__button" id="sign-up">Sign Up</button>
         </form>
       </article>
+
+      <article>
+        <ul class="list">
+          <li class="list__item"><input type="checkbox">Book 1</li>
+          <li class="list__item"><input type="checkbox">Book 2</li>
+          <li class="list__item"><input type="checkbox">Book 3</li>
+        </ul>
+      </article>
+
+      <!-- <article>
+        <section>
+          <p>Blog hella cliche, cornhole kale chips literally ethical trust fund beard Portland occupy mixtape DIY health goth Wes Anderson. Swag Brooklyn freegan, keffiyeh DIY High Life Odd Future shabby chic hella mustache polaroid plaid. Dreamcatcher trust fund Carles sriracha messenger bag. Pitchfork squid Banksy vegan taxidermy mumblecore, roof party banh mi gastropub lo-fi High Life Godard stumptown letterpress lomo. Normcore Intelligentsia gastropub, artisan salvia food truck readymade Godard slow-carb pickled heirloom sustainable swag skateboard biodiesel. Dreamcatcher 8-bit Blue Bottle, slow-carb hella sartorial Kickstarter raw denim post-ironic. Migas Echo Park cred squid, Williamsburg master cleanse actually iPhone butcher Banksy whatever ethical gastropub drinking vinegar.</p>
+
+          <p>VHS Thundercats Wes Anderson, PBR&B disrupt irony Portland listicle whatever chambray +1. American Apparel meggings lomo try-hard, tilde Godard next level readymade craft beer. Fap normcore stumptown, tofu Bushwick butcher bitters. Blog cred polaroid gluten-free keffiyeh. Wes Anderson jean shorts locavore, cardigan Carles yr next level photo booth. Actually next level fingerstache skateboard, slow-carb Brooklyn selvage. Photo booth disrupt scenester artisan, chambray umami Helvetica Wes Anderson flannel cronut.</p>
+
+          <p>Flexitarian polaroid banh mi, drinking vinegar lo-fi meh VHS DIY tote bag umami ugh mumblecore tilde leggings synth. Jean shorts cred craft beer four loko, lumbersexual put a bird on it raw denim cliche. Flexitarian deep v beard cred, put a bird on it lo-fi bespoke migas craft beer cornhole. Church-key tattooed 3 wolf moon farm-to-table salvia. Bitters tilde pour-over, readymade fixie wolf VHS cray tousled swag. Raw denim organic vinyl heirloom. Actually banh mi meditation tofu, vinyl wayfarers umami typewriter before they sold out raw denim forage messenger bag ethical whatever.</p>
+
+          <p>Listicle selfies church-key master cleanse gluten-free before they sold out kale chips viral, flannel banh mi wolf. Schlitz 3 wolf moon organic mustache. Kogi 8-bit craft beer, fingerstache tote bag bitters umami try-hard gastropub. Wes Anderson Godard plaid, wolf kogi stumptown literally letterpress health goth mustache gluten-free meditation slow-carb occupy XOXO. Asymmetrical pork belly ennui, DIY banjo Blue Bottle church-key cardigan mustache. Schlitz 90's selfies fashion axe bespoke American Apparel. Beard raw denim deep v banjo.</p>
+        </section>
+      </article> -->
     </main>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2015 Friending Library</p>
+      <p class="footer__text footer__padding">Copyright &copy; 2015 Friending Library</p>
+      <p class="footer__text">Built by David Schneider, Colin Coltrera, Philip Hirt, and Brandon LaFave</p>
     </footer>
 
   </body>
