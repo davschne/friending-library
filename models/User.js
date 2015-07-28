@@ -17,7 +17,8 @@ var userSchema = new mongoose.Schema({
 userSchema.plugin(findOrCreate);
 
 userSchema.statics.addBook = function(bookDoc, user) {
-  return this.findByIdAndUpdate(user._id, {$push: {books: bookDoc._id}}).
+  return this.findByIdAndUpdate(user._id, {$push: {books: bookDoc._id}})
+    .exec()
     .then(function(userDoc) {
       return bookDoc;
     }, function(err) {
