@@ -33,6 +33,7 @@ describe("/api/books", function() {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
           expect(res.body.title).to.equal(book.title);
+          expect(res.body.owner).to.equal(user._id);
           done();
         });
     });
