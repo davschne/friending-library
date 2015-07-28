@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 // var User = require("./User");
 
 var bookSchema = new mongoose.Schema({
-  _owner: {type: String, ref: "User"},
+  owner: {type: String, ref: "User"},
   title: String,
   subtitle: String,
   authors: [String],

@@ -55,7 +55,7 @@ gulp.task('build', ['sass', 'copy', 'copy-fonts', 'webpack']);
 gulp.task('default', ['build']);
 
 gulp.task("test", function() {
-  return gulp.src("./test/*Test.js")
+  return gulp.src("./test/*.js")
     .pipe(mocha({"reporter" : "nyan"}));
 });
 
