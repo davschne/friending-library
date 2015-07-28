@@ -7,6 +7,7 @@ var uglify = require('gulp-uglify');
 var minifyCSS = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
 var mongoose = require("mongoose");
+var mocha = require("gulp-mocha");
 
 gulp.task('sass', function() {
   gulp.src('./app/sass/**/*.scss')
@@ -51,6 +52,11 @@ gulp.task('copy-fonts', function() {
 gulp.task('build', ['sass', 'copy', 'copy-fonts', 'webpack']);
 
 gulp.task('default', ['build']);
+
+gulp.task("test", function() {
+  return gulp.src("./test/*Test.js")
+    .pipe(mocha({"reporter" : "nyan"}));
+});
 
 gulp.task("dbSetup", function() {
   var user1 = {
