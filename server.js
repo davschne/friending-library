@@ -22,11 +22,11 @@ var authenticate = require("./middleware/auth-bearer");
 
 app.use(express.static("public"));
 
-app.use("/auth", authRouter);
-app.use(authenticate);
 app.use(bodyParser);
-app.use("/api/users", usersRouter);
-app.use("/api/books", booksRouter);
+
+app.use("/auth", authRouter);
+app.use("/api/users", authenticate, usersRouter);
+app.use("/api/books", authenticate, booksRouter);
 
 app.get("/api/test", authenticate, function(req, res) {
   res.send("Logged in as " + req.user.displayName);
