@@ -3,7 +3,9 @@ var User = require("../models/User");
 var handle = require("../lib/handle");
 
 module.exports = function(router) {
-  router.post(function(req, res) {
+
+  router.post("/", function(req, res) {
+    console.log("Received POST request at api/books");
     var user = req.user;
     var book = req.body;
     var output;           // Book document to create and return
