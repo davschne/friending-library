@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" data-ng-app="friendLibrary">
+<html class="no-js" lang="en" data-ng-app="friendingLibrary">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -46,20 +46,20 @@
       <div data-ng-view></div>
       <article>
         <form class="signup">
-            <p>Don't have an account? Sign up below.</p>
-            <!-- <label>First Name:</label> -->
-            <input aria-label="Your First Name" type="text" placeholder="First Name"></input>
-            <!-- <label>Last Name:</label> -->
-            <input aria-label="Your Last Name" type="text" placeholder="Last Name"></input>
-            <!-- <label>Location:</label> -->
-            <input type="text" placeholder="Seattle, WA"></input>
-            <!-- <label>Username:</label> -->
-            <input aria-label="Your Username" type="text" placeholder="Username"></input>
-            <!-- <label>Password:</label> -->
-            <input aria-label="Your Password" type="password" placeholder="Password"></input>
-            <!-- <label>Email:</label> -->
-            <input aria-label="Your Email" type="email" placeholder="example@example.com"></input>
-            <button class="signup__button" id="sign-up">Sign Up</button>
+          <p>Don't have an account? Sign up below.</p>
+          <!-- <label>First Name:</label> -->
+          <input aria-label="Your First Name" type="text" placeholder="First Name"></input>
+          <!-- <label>Last Name:</label> -->
+          <input aria-label="Your Last Name" type="text" placeholder="Last Name"></input>
+          <!-- <label>Location:</label> -->
+          <input type="text" placeholder="Seattle, WA"></input>
+          <!-- <label>Username:</label> -->
+          <input aria-label="Your Username" type="text" placeholder="Username"></input>
+          <!-- <label>Password:</label> -->
+          <input aria-label="Your Password" type="password" placeholder="Password"></input>
+          <!-- <label>Email:</label> -->
+          <input aria-label="Your Email" type="email" placeholder="example@example.com"></input>
+          <button class="signup__button" id="sign-up">Sign Up</button>
         </form>
       </article>
 
@@ -72,9 +72,11 @@
       </article>
 
       <article>
-        <form>
-          <input type="text" placeholder="Search..." required>
-          <input type="button" value="Search">
+        <form class="search">
+          <fieldset>
+            <input aria-label="Search field" type="text" placeholder="Search..." required>
+            <button aria-label="Search button"><span class="icon-search"></button>
+          </fieldset>
         </form>
       </article>
       <!-- <article>
