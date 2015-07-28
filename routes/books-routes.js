@@ -6,22 +6,22 @@ module.exports = function(router) {
   router.post(function(req, res) {
     var user = req.user;
     var book = req.body;
-    Book.add(book, user)
+    var output;           // Book document to create and return
+    book.owner = user._id;
+
+    Book.create(book)
       .then(function(bookDoc) {
-        res.json(bookDoc);
+        output = bookDoc;
+        return User.findByIdAndUpdate(user._id, {$push: {books: bookDoc._id}})
+          .exec();
+      }, function(err) {
+        throw err;
+      })
+      .then(function(userDoc) {
+        res.json(output);
       }, function(err) {
         handle[500](err, res);
       });
+  });
 
-    // Book.create(book)
-    //   .then(function(foundBook) {
-    //     // Add book to user's "books" array
-    //     User.
-    //   }, function(err) {
-    //     handle[500](err, res);
-    //   })
-
-
-    // Return Book
-  })
-}
+};

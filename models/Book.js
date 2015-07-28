@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var User = require("./User");
+// var User = require("./User");
 
 var bookSchema = new mongoose.Schema({
   _owner: {type: String, ref: "User"},
@@ -23,16 +23,14 @@ var bookSchema = new mongoose.Schema({
   }
 });
 
-bookSchema.statics.add = function(book, user) {
-  book._owner = user._id;
-  return this.create(book)
-    .then(function(bookDoc) {
-      // Add to user's "books" array
-      return User.addBook(bookDoc, user);
-    }, function(err) {
-      throw err;
-    });
-};
+// bookSchema.statics.add = function(book) {
+//   return this.create(book)
+//     .then(function(bookDoc) {
+//       return bookDoc;
+//     }, function(err) {
+//       throw err;
+//     });
+// };
 
 var Book = mongoose.model("Book", bookSchema);
 
