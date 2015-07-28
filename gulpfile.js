@@ -29,7 +29,7 @@ gulp.task('webpack', function() {
       .pipe(gulp.dest('./public/js/'));
 });
 
-gulp.task('copy', function() {
+gulp.task('copy-html', function() {
   var opts = {
     conditionals: true,
     spare: true
@@ -47,6 +47,12 @@ gulp.task('copy-fonts', function() {
     .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('build', ['sass', 'copy', 'copy-fonts', 'webpack']);
+gulp.task('copy-images', function() {
+
+  return gulp.src('./app/**/*.png')
+    .pipe(gulp.dest('./public/'));
+});
+
+gulp.task('build', ['sass', 'copy-html', 'copy-fonts', 'copy-images', 'webpack']);
 
 gulp.task('default', ['build']);

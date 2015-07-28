@@ -1,3 +1,75 @@
 .block {
-  display: block;
+  display: block
+}
+
+/*----- Navigation -----*/
+.nav__heading {
+  font-family: 'NotCourierSans-Bold', sans-serif;
+  font-size: 150%;
+  padding: 1em;
+}
+
+.nav__logo {
+  height: 1.5em;
+  margin-top: -.25em;
+  padding-right: .5em;
+  width: auto;
+  float: left;
+}
+
+/*----- Sign Up Module -----*/
+.signup {
+  width: 50%;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.signup__button {
+  width: 100%;
+}
+
+.signup input {
+  margin-top: .5em;
+  margin-bottom: .5em;
+  width: 100%;
+  padding:.5em;
+  box-sizing: border-box;
+}
+
+.signup fieldset {
+  width: 20em;
+}
+
+/*----- Login Module -----*/
+.login__form {
+  float: right;
+  vertical-align: middle;
+  margin-top: -4.5em;
+}
+
+.login__wrapper {
+    display: inline-block;
+    margin-left: .5em;
+    // margin-right: .5em;
+    height: 2.5em;
+}
+
+.login__button {
+  margin-left: .5em
+}
+
+.login__label {
+    display: block;
+    padding-bottom: .25em;
+}
+
+/*----- Footer Module -----*/
+.footer__text {
+  text-align: center;
+}
+
+.footer__padding {
+  padding-top: 1em;
 }
