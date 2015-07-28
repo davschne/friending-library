@@ -1,6 +1,6 @@
 var express = require("express");
 var app = express();
-
+var bodyParser = require("body-parser");
 var passport = require("passport");
 
 var mongoose = require("mongoose");
@@ -24,6 +24,7 @@ app.use(express.static("public"));
 
 app.use("/auth", authRouter);
 app.use(authenticate);
+app.use(bodyParser);
 app.use("/api/users", usersRouter);
 app.use("/api/books", booksRouter);
 
