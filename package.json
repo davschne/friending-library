@@ -18,6 +18,7 @@
   "homepage": "https://github.com/davschne/friending-library#readme",
   "devDependencies": {
     "angular-cookies": "^1.4.3",
+    "angular-mocks": "^1.4.3",
     "chai": "^3.2.0",
     "chai-http": "^1.0.0",
     "gulp": "^3.9.0",

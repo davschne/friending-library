@@ -13,12 +13,17 @@ require('./services/CRUD_resource.js')(friendingLibrary);
 //controllers
 require('./welcome/controllers/welcome_controller.js')(friendingLibrary);
 require('./auth/controllers/auth_controller.js')(friendingLibrary);
+require('./books/controllers/books_controller.js')(friendingLibrary);
 
 //routes
 friendingLibrary.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/another', {
-      templateUrl: 'templates/views/welcome.html',
-      controller: 'welcomeController'
+      templateUrl: '/templates/views/test.html',
+      controller: 'booksController'
+    })
+    .otherwise({
+      redirectTo: '/'
     });
+
 }]);
