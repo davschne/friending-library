@@ -14,11 +14,14 @@ var authRouter = express.Router();
 var selfRouter = express.Router();
 var usersRouter = express.Router();
 var booksRouter = express.Router();
+var transRouter = express.Router();
 
 require("./routes/auth-routes")(authRouter);
 require("./routes/self-routes")(selfRouter);
 require("./routes/users-routes")(usersRouter);
 require("./routes/books-routes")(booksRouter);
+require("./routes/trans-routes")(transRouter);
+
 
 var db = mongoose.connection;
 
@@ -34,6 +37,7 @@ app.use("/auth", authRouter);
 app.use("/api/self", authenticate, selfRouter);
 app.use("/api/users", authenticate, usersRouter);
 app.use("/api/books", authenticate, booksRouter);
+app.use("/api/trans", authenticate, transRouter);
 app.route("/login")
   .get(function(req, res) {
     res.redirect("/auth/facebook");
