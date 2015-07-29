@@ -109,6 +109,18 @@ describe("/api/trans", function() {
       });
 
       after(function(done) {
+        Book.findByIdAndUpdate(testBooks[0]._id, {request: ""}, function(err, bookDoc) {
+          if (!err) done();
+        });
+      });
+
+      after(function(done) {
+        User.update({_id: testUsers[2]._id}, {request: []}, function(err, bookDoc) {
+          if (!err) done();
+        });
+      });
+
+      after(function(done) {
         Book.findByIdAndUpdate(testBooks[1]._id, {request: ""}, function(err, bookDoc) {
           if (!err) done();
         });
