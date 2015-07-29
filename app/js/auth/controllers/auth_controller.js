@@ -7,17 +7,16 @@ module.exports = function(app) {
     var Http = crudResource();
 
     function getToken() {
-
       var userToken = $location.search();
-      console.log(userToken);
+      // console.log(userToken);
 
       $scope.user = userToken;
 
       $cookies.put('tok', $scope.user.access_token);
       var munny = $cookies.get('tok')
 
-      console.log(munny);
-      console.log(typeof(munny));
+      // console.log(munny);
+      // console.log(typeof(munny));
 
       $cookies.put('tok', '');
 
@@ -25,31 +24,39 @@ module.exports = function(app) {
 
     getToken();
 
-    console.log($scope.user);
+    // console.log($scope.user);
 
-    function getUser(user) {
+    function getUserData(user) {
+      Http.getUser(user, function(data) {
 
-      Http.getBooks(user, function(data) {
-
-        console.log('Success');
+        console.log('User Grab Success');
         console.log(data);
 
-        $scope.libUser = data;
       });
 
     };
 
-    getUser($scope.user.access_token);
+    getUserData($scope.user.access_token);
 
-    $scobe.submitBook = function(user, data) {
-
-      Http.createBook(user, data, function(data) {
-
-        console.log('Success');
+    var getUserBooks = function(user) {
+      Http.getBooks(user, function(data) {
+        console.log('Book Grab Success');
         console.log(data);
 
-        getUser(user);
+        $scope.Userbooks = data;
       });
+
+    }
+
+    getUserBooks($scope.user.access_token);
+
+    $scope.submitBook = function(user, data) {
+      Http.createBook(user, data, function(data) {
+        console.log('Submit Success');
+        console.log(data);
+      });
+
+      getUserBooks(user);
     }
 
 
