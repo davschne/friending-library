@@ -64,5 +64,59 @@ describe("/api/books", function() {
         });
     });
   });
+});
+
+describe("/api/books/:book", function() {
+
+  describe("DELETE", function() {
+
+    var createdBookId;
+
+    before(function(done) {
+      User.create(user, function(err, data) {
+        if (!err) done();
+      });
+    });
+
+    before(function(done) {
+      Book.create(book) /*, function(err, bookDoc) { */
+        .then(function(bookDoc) {
+
+          // createdBookId = bookDoc;
+          createdBookId = bookDoc._id;
+          book._id = bookDoc._id;
+          return User.findByIdAndUpdate(user._id,
+            {$push: {books: bookDoc._id}}
+          ).exec();
+        }, function(err) {
+          throw err;
+        })
+        .then(function(userDoc) {
+          done();
+        }, function(err) {
+          throw err;
+        });
+    });
+
+    it("should delete a Book document from the database, remove the corresponding reference in the user's books array, and return the deleted Book document as JSON", function(done) {
+      chai.request(url)
+        .del("/api/books/" + createdBookId)
+        .set("Authorization", "Bearer " + user.access_token)
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body.title).to.equal(book.title);
+          done();
+        });
+    });
+
+    after(function(done) {
+      User.findByIdAndRemove(user._id, function(err, data) {
+        if (!err) done();
+      });
+    });
+
+  });
 
 });

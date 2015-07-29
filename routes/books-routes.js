@@ -39,4 +39,26 @@ module.exports = function(router) {
       });
   });
 
+  router.delete("/:bookid", function(req, res) {
+    var userId = req.user._id;
+    var bookId = req.params.bookid;
+    // store record of deleted book to return
+    var output;
+    console.log("Received DELETE request at api/books/" + bookId);
+    Book.findByIdAndRemove(bookId)
+      .exec()
+      .then(function(bookDoc) {
+        output = bookDoc;
+        return User.findByIdAndUpdate(userId)
+          .exec();
+      }, function(err) {
+        throw err;
+      })
+      .then(function() {
+        res.json(output);
+      }, function(err) {
+        handle[500](err, res);
+      });
+  });
+
 };
