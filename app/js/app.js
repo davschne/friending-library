@@ -1,5 +1,7 @@
 'use strict';
 
+debugger;
+
 require('angular/angular');
 require('angular-route');
 require('angular-cookies');
@@ -7,23 +9,25 @@ require('angular-cookies');
 var friendingLibrary = angular.module('friendingLibrary', ['ngRoute', 'ngCookies']);
 
 //services
-require('./auth/services/auth_resource.js')(friendingLibrary);
-require('./services/CRUD_resource.js')(friendingLibrary);
+require('./services/CRUD_resource')(friendingLibrary);
+// require('./auth/services/auth_resource.js')(friendingLibrary);
+
 
 //controllers
-require('./welcome/controllers/welcome_controller.js')(friendingLibrary);
-require('./auth/controllers/auth_controller.js')(friendingLibrary);
-require('./books/controllers/books_controller.js')(friendingLibrary);
+// require('./welcome/controllers/welcome_controller.js')(friendingLibrary);
+require('./auth/controllers/auth_controller')(friendingLibrary);
+// require('./books/controllers/books_controller.js')(friendingLibrary);
 
 //routes
 friendingLibrary.config(['$routeProvider', function($routeProvider) {
   $routeProvider
-    .when('/another', {
-      templateUrl: '/templates/views/test.html',
-      controller: 'booksController'
+    .when('/success', {
+      templateUrl: '/templates/views/user-panel.html',
+      controller: 'authController'
     })
-    .otherwise({
-      redirectTo: '/'
+    .when('/', {
+      templateUrl: '/templates/views/sign-in.html',
+      // controller: 'authController'
     });
 
 }]);
