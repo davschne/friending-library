@@ -8,25 +8,20 @@ module.exports = function(router) {
   router.route("/request")
     .post(function(req, res) {
       Book.findById(req.body._id, function(err, bookDoc) {
-        if (err) {
-            handle[500](err, res);
-        } else if (bookDoc == null) {
-          res.sendStatus(404);
-        } else {
+        if (err) handle[500](err, res);
+        else if (bookDoc == null) res.sendStatus(404);
+        else {
           // Check if book is borrowed or requested
-          if (bookDoc.borrower || bookDoc.request) {
-            res.sendStatus(409);
-          } else {
+          if (bookDoc.borrower || bookDoc.request) res.sendStatus(409);
+          else {
             // Update the user
             User.update(req.user._id, {$push: {requests : req.body._id}}, function(err) {
-              if (err) {
-                  handle[500](err, res);
-              } else {
-                Book.findByIdAndUpdate(req.body._id, {request: req.user._id}, function(err) {
-                  if (err) {
-                      handle[500](err, res);
-                  } else {
-                    res.json(bookDoc);
+              if (err) handle[500](err, res);
+              else {
+                Book.findByIdAndUpdate(req.body._id, {request: req.user._id}, function(err, updatedBookDoc) {
+                  if (err) handle[500](err, res);
+                  else {
+                    res.json(updatedBookDoc);
                   }
                 });
               }
@@ -50,9 +45,20 @@ module.exports = function(router) {
 
   router.route("/approve")
     .post(function(req, res) {
-
-
-
+      Book.findById(req.body._id, function(err, bookDoc) {
+        if (err) handle[500](err, res);
+        else if (bookDoc == null) res.sendStatus(404);
+        else {
+          User.update({_id: bookDoc.request}, { $pull: {requests : req.body._id}, $push: {borrowing : req.body._id} }, function(err) {
+            if (err) handle[500](err, res);
+            else {
+              Book.findByIdAndUpdate(req.body._id, {borrower: bookDoc.request, request: ""}, function(err, updatedBookDoc) {
+                res.json(updatedBookDoc);
+              });
+            }
+          });
+        }
+      });
     });
 
   router.route("/returned")

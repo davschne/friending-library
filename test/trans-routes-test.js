@@ -115,7 +115,7 @@ describe("/api/trans", function() {
       });
 
       after(function(done) {
-        User.update({_id: testUsers[2]._id}, {request: []}, function(err, bookDoc) {
+        User.update({_id: testUsers[2]._id}, {requests: []}, function(err, bookDoc) {
           if (!err) done();
         });
       });
@@ -149,6 +149,52 @@ describe("/api/trans", function() {
 
   describe("/approve POST", function() {
 
+    before(function(done) {
+      User.update({_id: testUsers[1]._id}, {$push: {requests : testBooks[0]._id}}, function(err) {
+        if (!err) done();
+      });
+    });
+
+    before(function(done) {
+      Book.findByIdAndUpdate(testBooks[0]._id, {request: testUsers[1]._id}, function(err, bookDoc) {
+        if (!err) done();
+      });
+    });
+
+    it("should move Book's _id from other User's requests to other User's borrowing, set Book's request to '' and borrower to other User's _id, and return the Book as JSON", function(done) {
+      chai.request(url)
+        .post("/api/trans/approve")
+        .set("Authorization", "Bearer " + testUsers[0].access_token)
+        .send({_id: testBooks[0]._id})
+        .end(function(err, res) {
+          expect(res.body.title).to.eql(testBooks[0].title);
+
+          User.findOne({_id: testUsers[1]._id}, function(err, userDoc) {
+            expect(userDoc.requests.length).to.eql(0);
+            expect(userDoc.borrowing.length).to.eql(1);
+            expect(userDoc.borrowing[0]).to.eql(testBooks[0]._id);
+
+            Book.findById(testBooks[0]._id, function(err, bookDoc) {
+              expect(bookDoc.request).to.eql("");
+              expect(bookDoc.borrower).to.eql(testUsers[1]._id);
+              done();
+            });
+          });
+        });
+    });
+
+
+    after(function(done) {
+      User.update({_id: testUsers[1]._id}, {borrowing : []}, function(err) {
+        if (!err) done();
+      });
+    });
+
+    after(function(done) {
+      Book.findByIdAndUpdate(testBooks[0]._id, {borrower: ""}, function(err, bookDoc) {
+        if (!err) done();
+      });
+    });
 
 
   });
