@@ -5,7 +5,7 @@ var handle = require("../lib/handle");
 module.exports = function(router) {
 
   router.post("/", function(req, res) {
-    console.log("Received POST request at api/books");
+    console.log("Received POST request at /api/books");
     var user = req.user;
     var book = req.body;
     var output;           // Book document to create and return
@@ -31,7 +31,7 @@ module.exports = function(router) {
     var bookId = req.params.bookid;
     // store record of deleted book to return
     var output;
-    console.log("Received DELETE request at api/books/" + bookId);
+    console.log("Received DELETE request at /api/books/" + bookId);
     Book.findByIdAndRemove(bookId)
       .exec()
       .then(function(bookDoc) {
@@ -48,4 +48,12 @@ module.exports = function(router) {
       });
   });
 
+  router.get("/available", function(req, res) {
+    console.log("Received GET request at /api/books/available");
+    // find all books that aren't currently requested or borrowed and don't belong to the current user
+    Book.find({request: "", borrower: "", owner: {$ne: req.user._id}}, function(err, books) {
+      if (err) handle[500](err, res);
+      else res.json(books);
+    });
+  });
 };
