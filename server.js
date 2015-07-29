@@ -35,7 +35,7 @@ app.use("/api/self", authenticate, selfRouter);
 app.use("/api/users", authenticate, usersRouter);
 app.use("/api/books", authenticate, booksRouter);
 app.route("/login")
-  .post(function(req, res) {
+  .get(function(req, res) {
     res.redirect("/auth/facebook");
   });
 
