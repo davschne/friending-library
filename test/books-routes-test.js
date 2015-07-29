@@ -142,6 +142,7 @@ describe("/api/books/available", function() {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
           expect(res.body).to.have.property("length", 1);
+          expect(res.body[0].title).to.equal(testBooks[3].title);
           done();
         });
     })
