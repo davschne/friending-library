@@ -40,8 +40,8 @@ module.exports = function(router) {
     passport.authenticate("facebook"));
 
   router.get("/facebook/callback",
-    passport.authenticate("facebook", {failureRedirect: "/login"}),
+    passport.authenticate("facebook", {failureRedirect: "/"}),
     function(req, res) {
-      res.redirect("/#/succes?access_token=" + req.user.access_token);
+      res.redirect("/#/success?access_token=" + req.user.access_token);
     });
 };
