@@ -53,9 +53,72 @@ describe("/api/trans", function() {
   });
 
   describe("/request", function() {
+
     describe("/POST", function() {
 
+      before(function(done) {
+        Book.findByIdAndUpdate(testBooks[1]._id, {request: testUsers[1]._id}, function(err, bookDoc) {
+          if (!err) done();
+        });
+      });
 
+      before(function(done) {
+        Book.findByIdAndUpdate(testBooks[2]._id, {borrower: testUsers[1]._id}, function(err, bookDoc) {
+          if (!err) done();
+        });
+      });
+
+      it("should add Book's _id to User's requests array, set Book's request to User's _id, and return the Book as JSON", function(done) {
+        chai.request(url)
+          .post("/api/trans/request")
+          .set("Authorization", "Bearer " + testUsers[0].access_token)
+          .send({_id: testBooks[0]._id})
+          .end(function(err, res) {
+            expect(res.body.title).to.eql(testBooks[0].title);
+
+            User.findOne({_id: testUsers[0]._id}, function(err, userDoc) {
+              expect(userDoc.requests[0]).to.eql(testBooks[0]._id);
+              Book.findById(testBooks[0]._id, function(err, bookDoc) {
+                expect(bookDoc.request).to.eql(testUsers[0]._id);
+                done();
+              });
+            });
+          });
+      });
+
+      it("should, if Book currently requested, return 409 (conflict)", function(done) {
+        chai.request(url)
+          .post("/api/trans/request")
+          .set("Authorization", "Bearer " + testUsers[0].access_token)
+          .send({_id: testBooks[1]._id})
+          .end(function(err, res) {
+            expect(res).to.have.status(409);
+            done();
+          });
+      });
+
+      it("should, if Book currently borrowed, return 409 (conflict)", function(done) {
+        chai.request(url)
+          .post("/api/trans/request")
+          .set("Authorization", "Bearer " + testUsers[0].access_token)
+          .send({_id: testBooks[2]._id})
+          .end(function(err, res) {
+            expect(res).to.have.status(409);
+            done();
+          });
+      });
+
+      after(function(done) {
+        Book.findByIdAndUpdate(testBooks[1]._id, {request: ""}, function(err, bookDoc) {
+          if (!err) done();
+        });
+      });
+
+      after(function(done) {
+        Book.findByIdAndUpdate(testBooks[2]._id, {borrower: ""}, function(err, bookDoc) {
+          if (!err) done();
+        });
+      });
 
     });
 
