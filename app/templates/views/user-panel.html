@@ -4,7 +4,7 @@
   <fieldset>
     <div class="login__wrapper">
       <label class="login__label">Title:</label>
-      <input type="text" placeholder="Title" data-ng-model="newbook.title" required></input>
+      <input type="text" id="book-title" placeholder="Title" data-ng-model="newbook.title" required></input>
     </div>
 
     <div class="login__wrapper">
@@ -14,7 +14,7 @@
 
     <div class="login__wrapper">
       <label class="login__label">Genre:</label>
-      <input type="text" placeholder="Genre" data-ng-model="newbook.genre" required></input>
+      <input type="text" value="what" placeholder="Genre" data-ng-model="newbook.genre" required></input>
     </div>
 
     <button type="submit" class="login__button" id="sign-in">Add Book</button>
@@ -22,6 +22,6 @@
 </form>
 
 <ul class="list">
-  <li class="list__item" data-ng-repeat="book in Userbooks"> {{ book.title }}, {{book.authors[0]}}, {{book.categories[0]}}<button>Checkout Book</button></li>
+  <li class="list__item" data-ng-repeat="book in Userbooks"> {{ book.title }}, {{book.authors[0]}}, {{book.categories[0]}}<button>Checkout Book</button><button data-ng-click="destroyBook(user.access_token, book._id)">Destory</button></li>
 </ul>
 </section>
