@@ -51,23 +51,25 @@ describe("/api/self", function() {
     });
   });
 
-  // describe("DELETE", function() {
-  //   it("should delete a User and all of their Books from the database", function(done) {
-  //     chai.request(url)
-  //       .del("/api/self")
-  //       .set("Authorization", "Bearer " + testUsers[0].access_token)
-  //       .end(function(err, res) {
-  //         expect(res).to.have.status(200);
-  //         User.findOne({_id: testUsers[0]._id}, function(err, userDoc) {
-  //           expect(userDoc).to.be.null;
-  //           Book.find({owner: testUsers[0]._id}, function(err, bookDocs) {
-  //             expect(bookDocs.length).to.eql(0);
-  //             done();
-  //           })
-  //         });
-  //       });
-  //   });
-  // });
+  describe("DELETE", function() {
+    it("should delete a User and all of their Books from the database, and return the User as JSON", function(done) {
+      chai.request(url)
+        .del("/api/self")
+        .set("Authorization", "Bearer " + testUsers[0].access_token)
+        .end(function(err, res) {
+          expect(res).to.have.status(200);
+          User.findOne({_id: testUsers[0]._id}, function(err, userDoc) {
+            expect(userDoc).to.be.null;
+            Book.find({owner: testUsers[0]._id}, function(err, bookDocs) {
+              expect(bookDocs.length).to.eql(0);
+              expect(res.body._id).to.eql(testUsers[0]._id);
+              expect(res).to.be.json;
+              done();
+            })
+          });
+        });
+    });
+  });
 
   after(function(done) {
     User.findByIdAndRemove(testUsers[0]._id, function(err, data) {

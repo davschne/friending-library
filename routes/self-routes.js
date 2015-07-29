@@ -28,7 +28,7 @@ module.exports = function(router) {
             if (err) {
               handle[500](err, res);
             } else {
-              res.sendStatus(200);
+              res.json(req.user);
             }
           });
         }
