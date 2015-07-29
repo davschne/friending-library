@@ -6,9 +6,9 @@ var bookSchema = new mongoose.Schema({
   requests: {type: String, ref: "User"}, // ONLY ALLOW ONE REQUEST
   borrower: {type: String, ref: "User"},
   dateBorrowed: Date,
-  title: String,
+  title: {type: String, required: true},
   subtitle: String,
-  authors: [String],
+  authors: [{type: String, required: true}],
   publisher: String,
   publishedDate: String,
   description: String,
