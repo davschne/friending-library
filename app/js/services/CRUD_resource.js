@@ -12,6 +12,7 @@ module.exports = function(app) {
   var handleError = function(err) {
       return function(err) {
       console.log('Mongo says: "ERROR" '  + err);
+
     };
   };
 
@@ -20,7 +21,7 @@ module.exports = function(app) {
   app.factory('crudResource', ['$http', function($http) {
     return function() {
       return {
-        getBooks: function(user, callback) {
+        getUser: function(user, callback) {
           // var token = JSON.stringify(user);
           $http({
             method: 'GET',
@@ -32,11 +33,21 @@ module.exports = function(app) {
           .error(handleError());
         },
 
+        getBooks: function(user, callback) {
+          $http({
+            method: 'GET',
+            url: '/api/self/books',
+            headers: {'Authorization': 'Bearer ' + user}
+          })
+          .success(callback)
+          .error(handleError());
+        },
+
         createBook: function(user, data, callback) {
           $http({
             method: 'POST',
             url: '/api/books',
-            headers:  {'Authorization': 'Bearer ' + user}
+            headers:  {'Authorization': 'Bearer ' + user},
             data: data
           })
           .success(handleSuccess(callback))
