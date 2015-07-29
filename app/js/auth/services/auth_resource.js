@@ -2,42 +2,28 @@
 
 module.exports = function(app) {
 
+  var handleError = function(err) {
+    console.log('Trouble ' + err);
+  }
+
   app.factory('authResource', ['$http', '$cookies', function($http, $cookies) {
     return function() {
       return {
-      logIn: function(data) {
+      logIn: function(callback) {
           $http({
             method: 'GET',
-            url: '/auth/facebook'
+            url: '/login'
           })
-          .success(function(data) {
-            console.log(data);
-            // $cookies.put('eat', data.user.access_token);
-          })
-          .error(function(data) {
-            console.log(data);
-          });
-        },
-
-        testLogin: function(data, err) {
-          $http({
-            method: 'GET',
-            url: '/api/test'
-          })
-          .success(function(data) {
-            console.log(data);
-          })
-          .error(function(err) {
-            console.log(err);
-          })
+          .success(callback)
+          .error(handleError);
         },
 
         logout: function() {
-          $cookies.put('eat', '');
+          // $cookies.put('eat', '');
         },
 
         isSignedIn: function() {
-          return ($cookies.get('eat') && $cookies.get('eat').length);
+          // return ($cookies.get('eat') && $cookies.get('eat').length);
         }
       };
     };

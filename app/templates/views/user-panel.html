@@ -1,0 +1,23 @@
+<section data-ng-controller="authController">
+<h1>User Panel</h1>
+<form class="login__form" data-ng-submit="submitBook(scope.user.access_token, {title : newbook.title, authors: [newbook.author], categories: [newbook.genre]}">
+  <fieldset>
+    <div class="login__wrapper">
+      <label class="login__label">Title:</label>
+      <input type="text" placeholder="Username" data-ng-model="newbook.title" required></input>
+    </div>
+
+    <div class="login__wrapper">
+      <label class="login__label">Author:</label>
+      <input type="password" placeholder="Password" data-ng-model="newbook.author" required></input>
+    </div>
+
+    <div class="login__wrapper">
+      <label class="login__label">Genre:</label>
+      <input type="password" placeholder="Password" data-ng-model="newbook.genre" required></input>
+    </div>
+
+    <button type="submit" class="login__button" id="sign-in">Add Book</button>
+  </fieldset>
+</form>
+</section>

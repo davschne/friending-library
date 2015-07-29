@@ -24,7 +24,7 @@ module.exports = function(app) {
           // var token = JSON.stringify(user);
           $http({
             method: 'GET',
-            url: '/api/users',
+            url: '/api/self',
             headers: {'Authorization': 'Bearer ' + user}
             //could pose problems check if need to replace not in variable
           })
@@ -36,7 +36,7 @@ module.exports = function(app) {
           $http({
             method: 'POST',
             url: '/api/books',
-            headers: userAuth,
+            headers:  {'Authorization': 'Bearer ' + user}
             data: data
           })
           .success(handleSuccess(callback))
