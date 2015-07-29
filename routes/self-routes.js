@@ -7,7 +7,17 @@ var handle = require("../lib/handle");
 module.exports = function(router) {
   router.route("/")
     .get(function(req, res) {
-      res.json(req.user);
+      User.findById(req.user._id)
+        .populate("books")
+        .populate("borrowing")
+        .populate("requests")
+        .exec(function(err, user) {
+          if (err) {
+            handle[500](err, res);
+          } else {
+            res.json(user);
+          }
+        });
     })
     .delete(function(req, res) {
       User.remove({_id: req.user._id}, function(err) {
@@ -23,5 +33,5 @@ module.exports = function(router) {
           });
         }
       });
-    })
+    });
 }
