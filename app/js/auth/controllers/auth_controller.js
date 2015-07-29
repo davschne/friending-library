@@ -57,6 +57,17 @@ module.exports = function(app) {
       });
 
       getUserBooks(user);
+
+      delete $scope.newbook
+    };
+
+    $scope.destroyBook = function(user, bookId) {
+      Http.removeBook(user, bookId, function(data) {
+        console.log('Removed Book!');
+        console.log(data);
+      });
+
+      getUserBooks(user);
     }
 
 

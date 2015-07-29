@@ -16,8 +16,6 @@ module.exports = function(app) {
     };
   };
 
-  // var userAuth = {'Authorization': 'Bearer' + user.access_token};
-
   app.factory('crudResource', ['$http', function($http) {
     return function() {
       return {
@@ -27,7 +25,7 @@ module.exports = function(app) {
             method: 'GET',
             url: '/api/self',
             headers: {'Authorization': 'Bearer ' + user}
-            //could pose problems check if need to replace not in variable
+            //white space in 'Bearer ' + user is crucial needs to be Bearer 1223142134 when sent
           })
           .success(callback)
           .error(handleError());
@@ -54,12 +52,11 @@ module.exports = function(app) {
           .error(handleError());
         },
 
-        removeBook: function(user, callback) {
+        removeBook: function(user, bookId, callback) {
           $http({
             method: 'DELETE',
-            url: '/api/books',
-            headers: userAuth,
-            data: {_id : user.id}
+            url: '/api/books/' + bookId,
+            headers: {'Authorization': 'Bearer ' + user},
           })
           .success(handleSuccess(callback))
           .error(handleError());
