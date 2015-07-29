@@ -2,8 +2,8 @@ var mongoose = require("mongoose");
 // var User = require("./User");
 
 var bookSchema = new mongoose.Schema({
-  owner: {type: String, ref: "User"},
-  requests: {type: String, ref: "User"}, // ONLY ALLOW ONE REQUEST
+  owner: {type: String, ref: "User", index: true},
+  request: {type: String, ref: "User"}, // ONLY ALLOW ONE REQUEST
   borrower: {type: String, ref: "User"},
   dateBorrowed: Date,
   title: {type: String, required: true},

@@ -23,5 +23,20 @@ module.exports = function(router) {
           });
         }
       });
-    })
+    });
+
+  router.route("/books")
+    .get(function(req, res) {
+      console.log("Received GET request at /api/self/books");
+      var user = req.user;
+      Book.find({owner: user._id})
+        .populate("request")
+        .populate("borrower")
+        .exec()
+        .then(function(books) {
+          res.json(books);
+        }, function(err) {
+          handle[500](err, res);
+        });
+  });
 }

@@ -66,3 +66,53 @@ describe("/api/self", function() {
     });
   });
 });
+
+describe("/api/self/books", function() {
+
+  before(function(done) {
+    User.create(testUsers[0])
+      .then(function() {
+        return User.create(testUsers[1]);
+      }, function(err) { throw err; })
+      .then(function() {
+        testBooks[0].owner = testUsers[0]._id;
+        testBooks[0].borrower = testUsers[1]._id;
+        testBooks[0].request = testUsers[1]._id;
+        return Book.create(testBooks[0]);
+      }, function(err) { throw err; })
+      .then(function() {
+        done();
+      }, function(err) { throw err; });
+    });
+
+  describe("GET", function() {
+    it("should return an array of the user's books as JSON with 'request' and 'borrower' fields populated", function(done) {
+      chai.request(url)
+        .get("/api/self/books")
+        .set("Authorization", "Bearer " + testUsers[0].access_token)
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.be.an("array");
+          expect(res.body[0].borrower.displayName).to.equal(testUsers[1].displayName);
+          expect(res.body[0].request.displayName).to.equal(testUsers[1].displayName);
+          done();
+        });
+      });
+    });
+
+  after(function(done) {
+    User.findByIdAndRemove(testUsers[0]._id)
+      .exec()
+      .then(function() {
+        return User.findByIdAndRemove(testUsers[1]._id)
+      }, function(err) { throw err; })
+      .then(function() {
+        return Book.remove({creator: testUsers[0]._id})
+      }, function(err) { throw err; })
+      .then(function() {
+        done();
+      }, function(err) { throw err; });
+  });
+});

@@ -49,21 +49,6 @@ describe("/api/books", function() {
       });
     });
   });
-
-  describe("GET", function() {
-    it("should return an array of the user's books as JSON", function(done) {
-      chai.request(url)
-        .get("/api/books")
-        .set("Authorization", "Bearer " + user.access_token)
-        .end(function(err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          expect(res).to.be.json;
-          expect(res.body).to.be.an("array");
-          done();
-        });
-    });
-  });
 });
 
 describe("/api/books/:book", function() {
