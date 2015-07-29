@@ -13,7 +13,7 @@ var testData = require("../lib/test-data");
 var testBooks = testData.books;
 var testUsers = testData.users;
 
-describe("/api/users", function() {
+describe("/api/users/:userid", function() {
   before(function(done) {
     User.create(testUsers[0], function(err, data) {
       if (!err) done();
