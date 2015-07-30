@@ -1,98 +1,107 @@
-/*----- Search Module -----*/
-.search {
- @extend %center-container;
+// %center-container {
+//   width: 50%;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
 
-   & input {
-   width: 90%;
-  }
-}
+// // Em Spacing
+// $default-em: .25em;
 
-/*----- List Items Module -----*/
-.list {
- background-color: #fff;
- border: .1em solid #dedede;
- border-top-right-radius: .4em;
- border-top-left-radius: .4em;
- box-shadow: 0 .2em .2em -.1em rgba(0, 0, 0, 0.055);
- color: #888;
- display: block;
- margin: .8em 2.2em .8em 2.2em;
- overflow: hidden;
- @extend %center-container;
-}
+// /*----- Search Module -----*/
+// .search {
+//  @extend %center-container;
 
-.list__item {
- border-bottom: .1em solid green;
- padding: $default-em * 4;
-}
+//    & input {
+//    width: 90%;
+//   }
+// }
 
-/*----- Navigation Module -----*/
-.nav__heading {
- font-family: 'NotCourierSans-Bold', sans-serif;
- font-size: 150%;
- padding: $default-em * 4;
-}
+// /*----- List Items Module -----*/
+// .list {
+//  background-color: #fff;
+//  border: .1em solid #dedede;
+//  border-top-right-radius: .4em;
+//  border-top-left-radius: .4em;
+//  box-shadow: 0 .2em .2em -.1em rgba(0, 0, 0, 0.055);
+//  color: #888;
+//  display: block;
+//  margin: .8em 2.2em .8em 2.2em;
+//  overflow: hidden;
+//  @extend %center-container;
+// }
 
-.nav__logo {
- height: $default-em * 6;
- margin-top: -$default-em;
- padding-right: $default-em * 2;
- width: auto;
- float: left;
-}
+// .list__item {
+//  border-bottom: .1em solid green;
+//  padding: $default-em * 4;
+// }
 
-/*----- Sign Up Module -----*/
-.signup {
- padding-top: $default-em * 10;
- padding-bottom: $default-em * 10;
- @extend %center-container;
+// /*----- Navigation Module -----*/
+// .nav__heading {
+//  font-family: 'NotCourierSans-Bold', sans-serif;
+//  font-size: 150%;
+//  padding: $default-em * 4;
+// }
 
-  &__button {
-    width: 100%;
-  }
+// .nav__logo {
+//  height: $default-em * 6;
+//  margin-top: -$default-em;
+//  padding-right: $default-em * 2;
+//  width: auto;
+//  float: left;
+// }
 
-  & input {
-    margin-top: $default-em * 2;
-    margin-bottom: $default-em * 2;
-    width: 100%;
-    padding: $default-em * 2;
-    box-sizing: border-box;
-  }
+// ----- Sign Up Module -----
+// .signup {
+//  padding-top: $default-em * 10;
+//  padding-bottom: $default-em * 10;
+//  @extend %center-container;
 
-  & fieldset {
-    width: $default-em * 80;
-  }
-}
+//   &__button {
+//     width: 100%;
+//   }
 
-/*----- Login Module -----*/
-.login__form {
- float: right;
- vertical-align: middle;
- margin-top: -$default-em * 2 * 18;
+//   & input {
+//     margin-top: $default-em * 2;
+//     margin-bottom: $default-em * 2;
+//     width: 100%;
+//     padding: $default-em * 2;
+//     box-sizing: border-box;
+//   }
+
+//   & fieldset {
+//     width: $default-em * 80;
+//   }
+// }
+
+// /*----- Login Module -----*/
+// .login__form {
+//  float: right;
+//  vertical-align: middle;
+//  margin-top: -$default-em * 2 * 18;
 
 
-  &__wrapper {
-    display: inline-block;
-    margin-left: $default-em * 2;
-    // margin-right: $default-em * 2;
-    height: $default-em * 10;
-  }
+//   &__wrapper {
+//     display: inline-block;
+//     margin-left: $default-em * 2;
+//     // margin-right: $default-em * 2;
+//     height: $default-em * 10;
+//   }
 
-  &__button {
-    margin-left: $default-em * 2;
-  }
+//   &__button {
+//     margin-left: $default-em * 2;
+//   }
 
-  &__label {
-    display: block;
-    padding-bottom: $default-em;
-  }
-}
+//   &__label {
+//     display: block;
+//     padding-bottom: $default-em;
+//   }
+// }
 
-/*----- Footer Module -----*/
-.footer__text {
-  text-align: center;
-}
+// /*----- Footer Module -----*/
+// .footer__text {
+//   text-align: center;
+// }
 
-.footer__padding {
-  padding-top: $default-em * 4;
-}
+// .footer__padding {
+//   padding-top: $default-em * 4;
+// }

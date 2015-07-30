@@ -2,12 +2,12 @@
 // ---------------------------------------------
 
 // Colors
-$primary-color: #bfbfbf; // Dark Gray
-$secondary-color: #f2f2f2; // Light Gray
-$tertiary-color: rgba(38,101,6,0.5); // Green
+$primary-color: #bfbfbf !default; // Dark Gray
+$secondary-color: #f2f2f2 !default; // Light Gray
+$tertiary-color: rgba(38,101,6,0.5) !default; // Green
 
 // Em Spacing
-$default-em: .25em;
+$default-em: .25em !default;
 
 // LEMONADE GRID VARIABLES
 // ---------------------------------------------

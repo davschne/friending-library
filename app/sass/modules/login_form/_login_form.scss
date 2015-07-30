@@ -1,0 +1,23 @@
+/*----- Login Module -----*/
+.login__form {
+ float: right;
+ vertical-align: middle;
+ margin-top: -$default-em * 2 * 18;
+
+
+  &__wrapper {
+    display: inline-block;
+    margin-left: $default-em * 2;
+    // margin-right: $default-em * 2;
+    height: $default-em * 10;
+  }
+
+  &__button {
+    margin-left: $default-em * 2;
+  }
+
+  &__label {
+    display: block;
+    padding-bottom: $default-em;
+  }
+}

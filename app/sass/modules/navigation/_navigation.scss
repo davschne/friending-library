@@ -1,0 +1,14 @@
+/*----- Navigation Module -----*/
+.nav__heading {
+  font-family: 'NotCourierSans-Bold', sans-serif;
+  font-size: 150%;
+  padding: $default-em * 4;
+}
+
+.nav__logo {
+  height: $default-em * 6;
+  margin-top: -$default-em;
+  padding-right: $default-em * 2;
+  width: auto;
+  float: left;
+}
