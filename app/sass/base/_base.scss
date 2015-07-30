@@ -1,0 +1,41 @@
+html {
+  background-image: url('../images/seamless_paper_texture.png');
+}
+
+main {
+  background-image: url('../images/seamless_paper_texture.png');
+  padding-top: $default-em * 12;
+  padding-bottom: $default-em * 13;
+}
+
+header, footer {
+  position: static;
+  height: $default-em * 20;
+  color: $secondary-color;
+  background-color: $tertiary-color;
+}
+
+nav a {
+  text-decoration: none;
+  color: $secondary-color;
+}
+
+form {
+  padding: $default-em;
+}
+
+%border-styling {
+  border-radius: $default-em;
+  border: .1em solid $primary-color;
+  padding: $default-em * 2;
+}
+
+input {
+  @extend %border-styling;
+}
+
+button {
+  @extend %border-styling;
+  cursor: pointer;
+  background-image: -webkit-linear-gradient(top,#eddb11 0,#efcf14 35%,#f1bf18 65%,#f2b21b 100%);
+}

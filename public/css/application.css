@@ -1,6 +1,4 @@
 @charset "UTF-8";
-/*-- LEMONADE GRID VARIABLES
-–––––––––––––––––––––––––––––––––––––––––––––––––– --*/
 /*-- MEYER RESET
 –––––––––––––––––––––––––––––––––––––––––––––––––– --*/
 /* http://meyerweb.com/eric/tools/css/reset/
@@ -69,106 +67,24 @@ nav a {
   color: #f2f2f2; }
 
 form {
-  padding: 1em; }
+  padding: 0.25em; }
 
-input {
-  border-radius: .25em;
-  border: 1px solid #bfbfbf;
-  padding: .5em; }
+input, button {
+  border-radius: 0.25em;
+  border: 0.1em solid #bfbfbf;
+  padding: 0.5em; }
 
 button {
-  border-radius: .25em;
   cursor: pointer;
-  border: 1px solid #bfbfbf;
-  padding: .5em;
   background-image: -webkit-linear-gradient(top, #eddb11 0, #efcf14 35%, #f1bf18 65%, #f2b21b 100%); }
 
-/*----- Search Module -----*/
-.search {
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto; }
+@font-face {
+  font-family: NotCourierSans;
+  src: url("../fonts/NotCourierSans.otf"); }
 
-.search input {
-  width: 90%; }
-
-/*----- List Items Module -----*/
-.list {
-  background-color: #fff;
-  border: .1em solid #dedede;
-  border-top-right-radius: .4em;
-  border-top-left-radius: .4em;
-  box-shadow: 0 0.2em 0.2em -0.1em rgba(0, 0, 0, 0.055);
-  color: #888;
-  display: block;
-  margin: 0.8em 2.2em 0.8em 2.2em;
-  overflow: hidden;
-  width: 50%;
-  margin-left: auto !important;
-  margin-right: auto !important; }
-
-.list__item {
-  border-bottom: .1em solid green;
-  padding: 1em; }
-
-/*----- Navigation Module -----*/
-.nav__heading {
-  font-family: 'NotCourierSans-Bold', sans-serif;
-  font-size: 150%;
-  padding: 1em; }
-
-.nav__logo {
-  height: 1.5em;
-  margin-top: -.25em;
-  padding-right: .5em;
-  width: auto;
-  float: left; }
-
-/*----- Sign Up Module -----*/
-.signup {
-  width: 50%;
-  padding-top: 2.5em;
-  padding-bottom: 2.5em;
-  margin-left: auto;
-  margin-right: auto; }
-
-.signup__button {
-  width: 100%; }
-
-.signup input {
-  margin-top: .5em;
-  margin-bottom: .5em;
-  width: 100%;
-  padding: .5em;
-  box-sizing: border-box; }
-
-.signup fieldset {
-  width: 20em; }
-
-/*----- Login Module -----*/
-.login__form {
-  float: right;
-  vertical-align: middle;
-  margin-top: -4.5em; }
-
-.login__wrapper {
-  display: inline-block;
-  margin-left: .5em;
-  height: 2.5em; }
-
-.login__button {
-  margin-left: .5em; }
-
-.login__label {
-  display: block;
-  padding-bottom: .25em; }
-
-/*----- Footer Module -----*/
-.footer__text {
-  text-align: center; }
-
-.footer__padding {
-  padding-top: 1em; }
+@font-face {
+  font-family: NotCourierSans-Bold;
+  src: url("../fonts/NotCourierSans-Bold.otf"); }
 
 @font-face {
   font-family: 'icomoon';
@@ -192,10 +108,64 @@ button {
 .icon-search:before {
   content: "\e600"; }
 
-@font-face {
-  font-family: NotCourierSans;
-  src: url("../fonts/NotCourierSans.otf"); }
+.search, .signup {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto; }
 
-@font-face {
-  font-family: NotCourierSans-Bold;
-  src: url("../fonts/NotCourierSans-Bold.otf"); }
+/*----- Search Module -----*/
+.search input {
+  width: 90%; }
+
+/*----- Login Module -----*/
+.login__form {
+  float: right;
+  vertical-align: middle;
+  margin-top: -9em; }
+  .login__form__wrapper {
+    display: inline-block;
+    margin-left: 0.5em;
+    height: 2.5em; }
+  .login__form__button {
+    margin-left: 0.5em; }
+  .login__form__label {
+    display: block;
+    padding-bottom: 0.25em; }
+
+/*----- Footer Module -----*/
+.footer__text {
+  text-align: center; }
+
+.footer__padding {
+  padding-top: 1em; }
+
+/*----- Sign Up Module -----*/
+.signup {
+  padding-top: 2.5em;
+  padding-bottom: 2.5em; }
+  .signup__button {
+    width: 100%; }
+  .signup input {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    width: 100%;
+    padding: 0.5em;
+    box-sizing: border-box; }
+  .signup fieldset {
+    width: 20em; }
+
+/*----- Navigation Module -----*/
+.nav__heading {
+  font-family: 'NotCourierSans-Bold', sans-serif;
+  font-size: 150%;
+  padding: 1em; }
+
+.nav__logo {
+  height: 1.5em;
+  margin-top: -0.25em;
+  padding-right: 0.5em;
+  width: auto;
+  float: left; }
+
+.float-right {
+  float: right; }

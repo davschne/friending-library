@@ -1,0 +1,8 @@
+/*----- Search Module -----*/
+.search {
+ @extend %center-container;
+
+   & input {
+   width: 90%;
+  }
+}
