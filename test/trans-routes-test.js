@@ -150,9 +150,8 @@ describe("/api/trans", function() {
 
       it("should remove Book's _id from User's requests, set Book's request to '', and return the book as JSON", function(done) {
         chai.request(url)
-          .del("/api/trans/request")
+          .del("/api/trans/request/" + testBooks[3]._id)
           .set("Authorization", "Bearer " + testUsers[2].access_token)
-          .send({_id: testBooks[3]._id})
           .end(function(err, res) {
             expect(res.body.title).to.eql(testBooks[3].title);
 
