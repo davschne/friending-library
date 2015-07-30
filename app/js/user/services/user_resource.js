@@ -34,12 +34,12 @@ module.exports = function(app) {
           .error(handleError());
         },
 
-        createBook: function(user, data, callback) {
+        createBook: function(user, userData, callback) {
           $http({
             method: 'POST',
             url: '/api/books',
             headers:  {'Authorization': 'Bearer ' + user},
-            data: data
+            data: userData
           })
           .success(callback)
           .error(handleError());
@@ -50,6 +50,17 @@ module.exports = function(app) {
             method: 'DELETE',
             url: '/api/books/' + bookId,
             headers: {'Authorization': 'Bearer ' + user},
+          })
+          .success(callback)
+          .error(handleError());
+        },
+
+        undoRequest: function(user, userData, callback) {
+          $http({
+            method: 'DELETE',
+            url: '/api/trans/request',
+            headers: {'Authorization': 'Bearer ' + user},
+            data: userData
           })
           .success(callback)
           .error(handleError());

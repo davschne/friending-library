@@ -41,6 +41,8 @@ module.exports = function(app) {
           Http.getUser(user, function(data) {
             console.log('User Grab Success');
             console.log(data);
+
+            $scope.bookRequests = data.requests;
           });
         };
 
@@ -51,14 +53,14 @@ module.exports = function(app) {
             console.log('Book Grab Success');
             console.log(data);
 
-            $scope.Userbooks = data;
+            $scope.userBooks = data;
           });
         };
 
         getUserBooks($scope.user.access_token);
 
-        $scope.submitBook = function(user, data) {
-          Http.createBook(user, data, function(data) {
+        $scope.submitBook = function(user, userData) {
+          Http.createBook(user, userData, function(data) {
             console.log('Submit Success');
             console.log(data);
           });
@@ -75,7 +77,16 @@ module.exports = function(app) {
           });
 
           getUserBooks(user);
-        }
+        };
+
+        $scope.removeRequest = function(user, userData) {
+          Http.undoRequest(user, userData, function(data) {
+            console.log('Undo Request');
+            console.log(data);
+          });
+
+          getUserData(user);
+        };
 
         $scope.logOut = function(){
           $cookies.put('tok', '');
