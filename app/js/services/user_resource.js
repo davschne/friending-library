@@ -2,13 +2,6 @@
 
 module.exports = function(app) {
 
-  var handleSuccess = function(data) {
-    return function(data) {
-      console.log('Mongo says: "All Good"');
-      console.log(data);
-    };
-  };
-
   var handleError = function(err) {
       return function(err) {
       console.log('Mongo says: "ERROR" '  + err);
@@ -16,9 +9,7 @@ module.exports = function(app) {
     };
   };
 
-  // var userAuth = {'Authorization': 'Bearer' + user.access_token};
-
-  app.factory('crudResource', ['$http', function($http) {
+  app.factory('userResource', ['$http', function($http) {
     return function() {
       return {
         getUser: function(user, callback) {
@@ -27,7 +18,7 @@ module.exports = function(app) {
             method: 'GET',
             url: '/api/self',
             headers: {'Authorization': 'Bearer ' + user}
-            //could pose problems check if need to replace not in variable
+            //white space in 'Bearer ' + user is crucial needs to be Bearer 1223142134 when sent
           })
           .success(callback)
           .error(handleError());
@@ -50,18 +41,17 @@ module.exports = function(app) {
             headers:  {'Authorization': 'Bearer ' + user},
             data: data
           })
-          .success(handleSuccess(callback))
+          .success(callback)
           .error(handleError());
         },
 
-        removeBook: function(user, callback) {
+        removeBook: function(user, bookId, callback) {
           $http({
             method: 'DELETE',
-            url: '/api/books',
-            headers: userAuth,
-            data: {_id : user.id}
+            url: '/api/books/' + bookId,
+            headers: {'Authorization': 'Bearer ' + user},
           })
-          .success(handleSuccess(callback))
+          .success(callback)
           .error(handleError());
         }
       };
