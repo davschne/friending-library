@@ -12,17 +12,18 @@ var Book = require("../models/Book");
 var testData = require("../lib/test-data");
 var testUsers = testData.users;
 
-// describe("/login GET", function() {
-//   it("should redirect to /auth/facebook", function(done) {
-//     chai.request(url)
-//       .get("/login")
-//       .end(function(err, res) {
-//         expect(err).to.be.null;
-//         expect(res).to.redirectTo(url + "/auth/facebook");
-//         done();
-//       });
-//   });
-// });
+describe("/login GET", function() {
+  it("should redirect to /auth/facebook", function(done) {
+    chai.request(url)
+      .get("/login")
+      .redirects(0)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.redirectTo("/auth/facebook");
+        done();
+      });
+  });
+});
 
 describe("/logout POST", function() {
 

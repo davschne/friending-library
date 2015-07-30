@@ -150,9 +150,8 @@ describe("/api/trans", function() {
 
       it("should remove Book's _id from User's requests, set Book's request to '', and return the book as JSON", function(done) {
         chai.request(url)
-          .del("/api/trans/request")
+          .del("/api/trans/request/" + testBooks[3]._id)
           .set("Authorization", "Bearer " + testUsers[2].access_token)
-          .send({_id: testBooks[3]._id})
           .end(function(err, res) {
             expect(res.body.title).to.eql(testBooks[3].title);
 
@@ -187,7 +186,7 @@ describe("/api/trans", function() {
     });
 
     before(function(done) {
-      Book.findByIdAndUpdate(testBooks[2]._id, {request: testUsers[1]._id}, function(err, bookDoc) {
+      Book.findByIdAndUpdate(testBooks[2]._id, {request: testUsers[1]._id, owner: testUsers[0]._id}, function(err, bookDoc) {
         if (!err) done();
       });
     });
@@ -219,7 +218,7 @@ describe("/api/trans", function() {
     });
 
     after(function(done) {
-      Book.findByIdAndUpdate(testBooks[2]._id, {request: ""}, function(err, bookDoc) {
+      Book.findByIdAndUpdate(testBooks[2]._id, {request: "", owner: testUsers[2]._id}, function(err, bookDoc) {
         if (!err) done();
       });
     });
@@ -287,7 +286,7 @@ describe("/api/trans", function() {
       });
 
       before(function(done) {
-        Book.findByIdAndUpdate(testBooks[3]._id, {borrower: testUsers[3]._id}, function(err, bookDoc) {
+        Book.findByIdAndUpdate(testBooks[3]._id, {borrower: testUsers[3]._id, owner: testUsers[0]._id}, function(err, bookDoc) {
           if (!err) done();
         });
       });
@@ -314,7 +313,7 @@ describe("/api/trans", function() {
       });
 
       after(function(done) {
-        User.update({_id: testUsers[3]._id}, {borrowing : []}, function(err) {
+        User.update({_id: testUsers[3]._id}, {borrowing : [], owner: testUsers[3]._id}, function(err) {
           if (!err) done();
         });
       });
