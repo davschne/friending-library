@@ -24,28 +24,28 @@ describe("/api/trans", function() {
 
     User.create(testUsers[0])
       .then(function() {
-        User.create(testUsers[1])
+        return User.create(testUsers[1])
       }, function(err) { throw err; })
       .then(function() {
-        User.create(testUsers[2])
+        return User.create(testUsers[2])
       }, function(err) { throw err; })
       .then(function() {
-        User.create(testUsers[3])
+        return User.create(testUsers[3])
       }, function(err) { throw err; })
       .then(function() {
-        User.ensureIndexes()
+        return User.ensureIndexes()
       }, function(err) { throw err; })
       .then(function() {
-        Book.create(testBooks[0])
+        return Book.create(testBooks[0])
       }, function(err) { throw err; })
       .then(function() {
-        Book.create(testBooks[1])
+        return Book.create(testBooks[1])
       }, function(err) { throw err; })
       .then(function() {
-        Book.create(testBooks[2])
+        return Book.create(testBooks[2])
       }, function(err) { throw err; })
       .then(function() {
-        Book.create(testBooks[3])
+        return Book.create(testBooks[3])
       }, function(err) { throw err; })
       .then(function() {
         done();
@@ -150,9 +150,8 @@ describe("/api/trans", function() {
 
       it("should remove Book's _id from User's requests, set Book's request to '', and return the book as JSON", function(done) {
         chai.request(url)
-          .del("/api/trans/request")
+          .del("/api/trans/request/" + testBooks[3]._id)
           .set("Authorization", "Bearer " + testUsers[2].access_token)
-          .send({_id: testBooks[3]._id})
           .end(function(err, res) {
             expect(res.body.title).to.eql(testBooks[3].title);
 
@@ -187,7 +186,7 @@ describe("/api/trans", function() {
     });
 
     before(function(done) {
-      Book.findByIdAndUpdate(testBooks[2]._id, {request: testUsers[1]._id}, function(err, bookDoc) {
+      Book.findByIdAndUpdate(testBooks[2]._id, {request: testUsers[1]._id, owner: testUsers[0]._id}, function(err, bookDoc) {
         if (!err) done();
       });
     });
@@ -219,7 +218,7 @@ describe("/api/trans", function() {
     });
 
     after(function(done) {
-      Book.findByIdAndUpdate(testBooks[2]._id, {request: ""}, function(err, bookDoc) {
+      Book.findByIdAndUpdate(testBooks[2]._id, {request: "", owner: testUsers[2]._id}, function(err, bookDoc) {
         if (!err) done();
       });
     });
@@ -287,7 +286,7 @@ describe("/api/trans", function() {
       });
 
       before(function(done) {
-        Book.findByIdAndUpdate(testBooks[3]._id, {borrower: testUsers[3]._id}, function(err, bookDoc) {
+        Book.findByIdAndUpdate(testBooks[3]._id, {borrower: testUsers[3]._id, owner: testUsers[0]._id}, function(err, bookDoc) {
           if (!err) done();
         });
       });
@@ -314,7 +313,7 @@ describe("/api/trans", function() {
       });
 
       after(function(done) {
-        User.update({_id: testUsers[3]._id}, {borrowing : []}, function(err) {
+        User.update({_id: testUsers[3]._id}, {borrowing : [], owner: testUsers[3]._id}, function(err) {
           if (!err) done();
         });
       });
@@ -325,25 +324,25 @@ describe("/api/trans", function() {
 
     User.remove(testUsers[0]._id)
       .then(function() {
-        User.remove(testUsers[1]._id)
+        return User.remove({_id: testUsers[1]._id});
       }, function(err) { throw err; })
       .then(function() {
-        User.remove(testUsers[2]._id)
+        return User.remove({_id: testUsers[2]._id});
       }, function(err) { throw err; })
       .then(function() {
-        User.remove(testUsers[3]._id)
+        return User.remove({_id: testUsers[3]._id});
       }, function(err) { throw err; })
       .then(function() {
-        Book.remove(testBooks[0]._id)
+        return Book.remove({_id: testBooks[0]._id});
       }, function(err) { throw err; })
       .then(function() {
-        Book.remove(testBooks[1]._id)
+        return Book.remove({_id: testBooks[1]._id});
       }, function(err) { throw err; })
       .then(function() {
-        Book.remove(testBooks[2]._id)
+        return Book.remove({_id: testBooks[2]._id});
       }, function(err) { throw err; })
       .then(function() {
-        Book.remove(testBooks[3]._id)
+        return Book.remove({_id: testBooks[3]._id});
       }, function(err) { throw err; })
       .then(function() {
         done();
