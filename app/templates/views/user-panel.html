@@ -25,6 +25,21 @@
 </form>
 
 <ul class="list">
-  <li class="list__item" data-ng-repeat="book in Userbooks"> {{ book.title }}, {{book.authors[0]}}, {{book.categories[0]}}<button>Checkout Book</button><button data-ng-click="destroyBook(user.access_token, book._id)">Destory</button></li>
+  <li class="list__item" data-ng-repeat="book in userBooks"> {{ book.title }}, {{book.authors[0]}}, {{book.categories[0]}}<button data-ng-click="destroyBook(user.access_token, book._id)">Destory</button></li>
+</ul>
+
+<h1>Self Requests</h1>
+<ul class="list">
+  <li class="list__item" data-ng-repeat="selfBook in selfRequests"> {{ selfBook.title }}, {{selfBook.authors[0]}}, {{selfBook.categories[0]}}<button data-ng-click="removeRequest(user.access_token, selfBook._id)">Undo</button></li>
+</ul>
+
+<h1>User Requests</h1>
+<ul class="list">
+  <li class="list__item" data-ng-repeat="userBook in bookRequests"> {{ userBook.title }}, {{userBook.authors[0]}}, {{userBook.categories[0]}}<button data-ng-click="acceptRequest(user.access_token, {_id : userBook._id})">Approve</button><button data-ng-click="rejectRequest(user.access_token, {_id : userBook._id})">Deny</button></li>
+</ul>
+
+<h1>User Borrowing</h1>
+<ul class="list">
+  <li class="list__item" data-ng-repeat="borrow in bookBorrow"> {{ borrow.title }}, {{borrow.authors[0]}}, {{borrow.categories[0]}}<button data-ng-click="acceptRequest(user.access_token, {_id : userBook._id})">Approve</button><button data-ng-click="rejectRequest(user.access_token, {_id : userBook._id})">Deny</button></li>
 </ul>
 </section>

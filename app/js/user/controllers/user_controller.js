@@ -41,6 +41,8 @@ module.exports = function(app) {
           Http.getUser(user, function(data) {
             console.log('User Grab Success');
             console.log(data);
+
+            $scope.selfRequests = data.requests;
           });
         };
 
@@ -51,14 +53,22 @@ module.exports = function(app) {
             console.log('Book Grab Success');
             console.log(data);
 
-            $scope.Userbooks = data;
+            $scope.userBooks = data;
+
+            $scope.bookRequests = [];
+
+            for(var i = 0; i < $scope.userBooks.length; i++) {
+              if($scope.userBooks[i].request) {
+                $scope.bookRequests.push($scope.userBooks[i]);
+              }
+            }
           });
         };
 
         getUserBooks($scope.user.access_token);
 
-        $scope.submitBook = function(user, data) {
-          Http.createBook(user, data, function(data) {
+        $scope.submitBook = function(user, userData) {
+          Http.createBook(user, userData, function(data) {
             console.log('Submit Success');
             console.log(data);
           });
@@ -75,12 +85,39 @@ module.exports = function(app) {
           });
 
           getUserBooks(user);
-        }
+        };
+
+        $scope.removeRequest = function(user, bookId) {
+          Http.undoRequest(user, bookId, function(data) {
+            console.log('Undo Request');
+            console.log(data);
+          });
+
+          getUserData(user);
+        };
+
+        $scope.acceptRequest = function(user, userData) {
+          Http.approveRequest(user, userData, function(data) {
+            console.log('Request Accepted');
+            console.log(data);
+          });
+
+          getUserData(user);
+        };
+
+        $scope.rejectRequest = function(user, userData) {
+          Http.denyRequest(user, userData, function(data) {
+            console.log('Request Rejected');
+            console.log(data);
+          });
+
+          getUserData(user);
+        };
 
         $scope.logOut = function(){
           $cookies.put('tok', '');
           $location.path('/');
-        }
+        };
       };
 
     })();
