@@ -56,16 +56,47 @@ module.exports = function(app) {
             $scope.userBooks = data;
 
             $scope.bookRequests = [];
+            $scope.borrowedBooks = [];
 
             for(var i = 0; i < $scope.userBooks.length; i++) {
               if($scope.userBooks[i].request) {
                 $scope.bookRequests.push($scope.userBooks[i]);
+              }
+              if($scope.userBooks[i].borrower) {
+                $scope.borrowedBooks.push($scope.userBooks[i]);
               }
             }
           });
         };
 
         getUserBooks($scope.user.access_token);
+
+        $scope.askGoogle = function(userData) {
+          Http.connectGoogleBooks(userData, function(data) {
+            console.log('Google Data Back');
+            console.log(data);
+
+            var rawData = data.items;
+            console.log(rawData);
+
+            var usefulInfo = {
+              "author" : data.items[0].volumeInfo.authors,
+              "title" : data.items[0].volumeInfo.title,
+              "genre" : data.items[0].volumeInfo.categories,
+              "images" : data.items[0].volumeInfo.imageLinks,
+              "description" : data.items[0].volumeInfo.description
+            };
+
+            $scope.googleData = usefulInfo;
+
+
+            // for(var i = 0; i < rawData.length; i++) {
+
+            // }
+          });
+
+
+        };
 
         $scope.submitBook = function(user, userData) {
           Http.createBook(user, userData, function(data) {
@@ -93,7 +124,7 @@ module.exports = function(app) {
             console.log(data);
           });
 
-          getUserData(user);
+          getUserBooks(user);
         };
 
         $scope.acceptRequest = function(user, userData) {
@@ -102,7 +133,7 @@ module.exports = function(app) {
             console.log(data);
           });
 
-          getUserData(user);
+          getUserBooks(user);
         };
 
         $scope.rejectRequest = function(user, userData) {
@@ -111,10 +142,24 @@ module.exports = function(app) {
             console.log(data);
           });
 
-          getUserData(user);
+          getUserBooks(user);
         };
 
-        $scope.logOut = function(){
+        $scope.returnBook = function(user, userData) {
+          Http.bookReturn(user, userData, function(data) {
+            console.log('Book Returned');
+            console.log(data);
+          });
+
+          getUserBooks(user);
+        };
+
+        $scope.userLogOut = function(user) {
+          Http.logOut(user, function(data) {
+            console.log('Logged Out');
+            console.log(data);
+          })
+
           $cookies.put('tok', '');
           $location.path('/');
         };

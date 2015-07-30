@@ -34,6 +34,16 @@ module.exports = function(app) {
           .error(handleError());
         },
 
+        connectGoogleBooks: function(userData, callback) {
+          $http({
+            method: 'GET',
+            url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + userData + '&key=AIzaSyCDBfooq1pwrKzZzyUiBTa-cXHA25E63M0'
+            // data: userData
+          })
+          .success(callback)
+          .error(handleError());
+        },
+
         createBook: function(user, userData, callback) {
           $http({
             method: 'POST',
@@ -85,6 +95,27 @@ module.exports = function(app) {
           })
           .success(callback)
           .error(handleError());
+        },
+
+        bookReturn: function(user, userData, callback) {
+          $http({
+            method: 'POST',
+            url: '/api/trans/returned',
+            headers: {'Authorization': 'Bearer ' + user},
+            data: userData
+          })
+          .success(callback)
+          .error(handleError());
+        },
+
+        logOut: function(user, callback) {
+          $http({
+            method: 'POST',
+            url: '/logout',
+            headers: {'Authorization': 'Bearer ' + user}
+          })
+          .success(callback)
+          .error(handleError);
         }
       };
     };
