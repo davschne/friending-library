@@ -120,7 +120,7 @@ describe("/api/books/available", function() {
           return Book.create(testBooks[1]);
         }, function(err) { throw err; })
         .then(function() {
-          testBooks[2].request = "Yeah, I want that."
+          testBooks[2].request = "Yeah, I want that.";
           return Book.create(testBooks[2]);
         }, function(err) { throw err; })
         .then(function() {
@@ -143,7 +143,7 @@ describe("/api/books/available", function() {
           expect(res.body[0].title).to.equal(testBooks[3].title);
           done();
         });
-    })
+    });
 
     after(function(done) {
       User.findByIdAndRemove(testUsers[0]._id)

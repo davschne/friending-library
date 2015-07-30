@@ -7,7 +7,7 @@ var app = require("../server");
 chai.use(require("chai-http"));
 
 var User = require("../models/User");
-var Book = require("../models/Book")
+var Book = require("../models/Book");
 
 var testData = require("../lib/test-data");
 var testBooks = testData.books;
@@ -24,28 +24,28 @@ describe("/api/trans", function() {
 
     User.create(testUsers[0])
       .then(function() {
-        return User.create(testUsers[1])
+        return User.create(testUsers[1]);
       }, function(err) { throw err; })
       .then(function() {
-        return User.create(testUsers[2])
+        return User.create(testUsers[2]);
       }, function(err) { throw err; })
       .then(function() {
-        return User.create(testUsers[3])
+        return User.create(testUsers[3]);
       }, function(err) { throw err; })
       .then(function() {
-        return User.ensureIndexes()
+        return User.ensureIndexes();
       }, function(err) { throw err; })
       .then(function() {
-        return Book.create(testBooks[0])
+        return Book.create(testBooks[0]);
       }, function(err) { throw err; })
       .then(function() {
-        return Book.create(testBooks[1])
+        return Book.create(testBooks[1]);
       }, function(err) { throw err; })
       .then(function() {
-        return Book.create(testBooks[2])
+        return Book.create(testBooks[2]);
       }, function(err) { throw err; })
       .then(function() {
-        return Book.create(testBooks[3])
+        return Book.create(testBooks[3]);
       }, function(err) { throw err; })
       .then(function() {
         done();
@@ -206,8 +206,8 @@ describe("/api/trans", function() {
               expect(userDoc.requests[0]).to.eql(testBooks[1]._id);
               expect(userDoc.requests[1]).to.eql(testBooks[3]._id);
               done();
-            })
-          })
+            });
+          });
         });
     });
 

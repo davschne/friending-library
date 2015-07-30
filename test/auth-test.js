@@ -12,14 +12,14 @@ var dummyUser = {
   _id: "Dummy",
   displayName: "Idiot",
   access_token: "jerkface"
-}
+};
 
 describe("API", function() {
 
   before(function(done) {
     User.create(dummyUser, function(err, data) {
       if (!err) done();
-    })
+    });
   });
 
   it("should grant access to endpoint /api/test if access token is included in header field Authorization", function(done) {
@@ -29,7 +29,7 @@ describe("API", function() {
       .end(function(err, res) {
         expect(res).to.have.status(200);
         done();
-      })
+      });
   });
 
   after(function(done) {
@@ -37,4 +37,4 @@ describe("API", function() {
       if (!err) done();
     });
   });
-})
+});
