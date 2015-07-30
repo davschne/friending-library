@@ -1,6 +1,34 @@
 @charset "UTF-8";
-/*-- LEMONADE GRID VARIABLES
-–––––––––––––––––––––––––––––––––––––––––––––––––– --*/
+html {
+  background-image: url("../images/seamless_paper_texture.png"); }
+
+main {
+  background-image: url("../images/seamless_paper_texture.png");
+  padding-top: 3em;
+  padding-bottom: 3.25em; }
+
+header, footer {
+  position: static;
+  height: 5em;
+  color: #f2f2f2;
+  background-color: rgba(38, 101, 6, 0.5); }
+
+nav a {
+  text-decoration: none;
+  color: #f2f2f2; }
+
+form {
+  padding: 0.25em; }
+
+input, button {
+  border-radius: 0.25em;
+  border: 0.1em solid #bfbfbf;
+  padding: 0.5em; }
+
+button {
+  cursor: pointer;
+  background-image: -webkit-linear-gradient(top, #eddb11 0, #efcf14 35%, #f1bf18 65%, #f2b21b 100%); }
+
 /*-- MEYER RESET
 –––––––––––––––––––––––––––––––––––––––––––––––––– --*/
 /* http://meyerweb.com/eric/tools/css/reset/
@@ -50,35 +78,35 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-html {
-  background-image: url("../images/seamless_paper_texture.png"); }
+@font-face {
+  font-family: NotCourierSans;
+  src: url("../fonts/NotCourierSans.otf"); }
 
-main {
-  background-image: url("../images/seamless_paper_texture.png");
-  padding-top: 3em;
-  padding-bottom: 3.25em; }
+@font-face {
+  font-family: NotCourierSans-Bold;
+  src: url("../fonts/NotCourierSans-Bold.otf"); }
 
-header, footer {
-  position: static;
-  height: 5em;
-  color: #f2f2f2;
-  background-color: rgba(38, 101, 6, 0.5); }
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.eot?-smydlc");
+  src: url("../fonts/icomoon.eot?#iefix-smydlc") format("embedded-opentype"), url("../fonts/icomoon.ttf?-smydlc") format("truetype"), url("../fonts/icomoon.woff?-smydlc") format("woff"), url("../tfonts/icomoon.svg?-smydlc#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 
-nav a {
-  text-decoration: none;
-  color: #f2f2f2; }
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
 
-form {
-  padding: 0.25em; }
-
-input, button {
-  border-radius: 0.25em;
-  border: 0.1em solid #bfbfbf;
-  padding: 0.5em; }
-
-button {
-  cursor: pointer;
-  background-image: -webkit-linear-gradient(top, #eddb11 0, #efcf14 35%, #f1bf18 65%, #f2b21b 100%); }
+.icon-search:before {
+  content: "\e600"; }
 
 .search, .list, .signup {
   width: 50%;
@@ -155,32 +183,123 @@ button {
 .footer__padding {
   padding-top: 1em; }
 
-@font-face {
-  font-family: 'icomoon';
-  src: url("../fonts/icomoon.eot?-smydlc");
-  src: url("../fonts/icomoon.eot?#iefix-smydlc") format("embedded-opentype"), url("../fonts/icomoon.ttf?-smydlc") format("truetype"), url("../fonts/icomoon.woff?-smydlc") format("woff"), url("../tfonts/icomoon.svg?-smydlc#icomoon") format("svg");
-  font-weight: normal;
-  font-style: normal; }
+/*-- LEMONADE GRID
+–––––––––––––––––––––––––––––––––––––––––––––––––– --*/
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
 
-[class^="icon-"], [class*=" icon-"] {
-  font-family: 'icomoon';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+.frame {
+  margin: 0 auto;
+  max-width: 100%; }
+  .frame:after {
+    content: "";
+    display: table;
+    clear: both; }
 
-.icon-search:before {
-  content: "\e600"; }
+[class*='bit-'] {
+  float: left;
+  padding: 0.3em; }
 
-@font-face {
-  font-family: NotCourierSans;
-  src: url("../fonts/NotCourierSans.otf"); }
+.bit-1 {
+  width: 100%; }
 
-@font-face {
-  font-family: NotCourierSans-Bold;
-  src: url("../fonts/NotCourierSans-Bold.otf"); }
+.bit-2 {
+  width: 50%; }
+
+.bit-3 {
+  width: 33.33333%; }
+
+.bit-4 {
+  width: 25%; }
+
+.bit-5 {
+  width: 20%; }
+
+.bit-6 {
+  width: 16.66667%; }
+
+.bit-7 {
+  width: 14.28571%; }
+
+.bit-8 {
+  width: 12.5%; }
+
+.bit-9 {
+  width: 11.11111%; }
+
+.bit-10 {
+  width: 10%; }
+
+.bit-11 {
+  width: 9.09091%; }
+
+.bit-12 {
+  width: 8.33333%; }
+
+.bit-25 {
+  width: 25%; }
+
+.bit-40 {
+  width: 40%; }
+
+.bit-60 {
+  width: 60%; }
+
+.bit-75 {
+  width: 75%; }
+
+@media (max-width: 30em) {
+  .bit-1 {
+    width: 100%; }
+  .bit-2 {
+    width: 100%; }
+  .bit-3 {
+    width: 100%; }
+  .bit-4 {
+    width: 100%; }
+  .bit-5 {
+    width: 100%; }
+  .bit-6 {
+    width: 100%; }
+  .bit-7 {
+    width: 100%; }
+  .bit-8 {
+    width: 100%; }
+  .bit-9 {
+    width: 100%; }
+  .bit-10 {
+    width: 100%; }
+  .bit-11 {
+    width: 100%; }
+  .bit-12 {
+    width: 100%; } }
+
+@media (min-width: 30em) and (max-width: 50em) {
+  .bit-4,
+  .bit-6,
+  .bit-8,
+  .bit-10,
+  .bit-12 {
+    width: 50%; }
+  .bit-1,
+  .bit-2,
+  .bit-3,
+  .bit-5,
+  .bit-7,
+  .bit-9,
+  .bit-11 {
+    width: 100%; } }
+
+@media (min-width: 50em) and (max-width: 68.75em) {
+  .bit-2,
+  .bit-7 {
+    width: 100%; }
+  .bit-4,
+  .bit-8,
+  .bit-10,
+  .bit-12 {
+    width: 50%; } }
