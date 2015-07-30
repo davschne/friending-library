@@ -49,4 +49,4 @@ module.exports = function(router) {
           handle[500](err, res);
         });
   });
-}
+};
