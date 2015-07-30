@@ -70,8 +70,19 @@ module.exports = function(router) {
 
   router.route("/returned")
     .post(function(req, res) {
-
-
-
+      Book.findById(req.body._id, function(err, bookDoc) {
+        if (err) handle[500](err, res);
+        else if (bookDoc == null) res.sendStatus(404);
+        else {
+          User.update({_id: bookDoc.borrower}, { $pull: {borrowing : req.body._id} }, function(err) {
+            if (err) handle[500](err, res);
+            else {
+              Book.findByIdAndUpdate(req.body._id, {borrower: ""}, function(err, updatedBookDoc) {
+                res.json(updatedBookDoc);
+              });
+            }
+          });
+        }
+      });
     });
 }
