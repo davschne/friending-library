@@ -40,7 +40,7 @@ describe("/logout POST", function() {
         expect(res).to.have.status(200);
         User.findById(testUsers[0]._id, function(err, userDoc) {
           if (err) throw err;
-          expect(userDoc.access_token).to.equal("");
+          expect(userDoc.access_token).to.be.undefined;
           done();
         });
       });

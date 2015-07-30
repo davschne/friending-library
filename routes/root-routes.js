@@ -10,7 +10,7 @@ module.exports = function(router) {
 
   router.post("/logout", authenticate, function(req, res) {
     User.findByIdAndUpdate(req.user._id,
-      {$set: {access_token: ""}},
+      {$unset: {access_token: 1}},
       function(err) {
         if (err) handle[500](err, res);
         else res.json({msg: "Log-out successful"});
