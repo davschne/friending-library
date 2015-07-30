@@ -14,27 +14,29 @@ var testBooks = testData.books;
 var testUsers = testData.users;
 
 describe("/api/self", function() {
-  before(function(done) {
-    testUsers[0].books.push(testBooks[0]._id);
-    testUsers[0].borrowing.push(testBooks[1]._id);
-    testUsers[0].requests.push(testBooks[2]._id)
-    User.create(testUsers[0], function(err, data) {
-      if (!err) {
-        testBooks[0].owner = testUsers[0]._id;
-        Book.create(testBooks[0], function(err, data) {
-          testBooks[1].owner = testUsers[1]._id;
-          Book.create(testBooks[1], function(err, data) {
-            testBooks[2].owner = testUsers[1]._id;
-            Book.create(testBooks[2], function(err, data) {
-              done();
-            });
-          });
-        });
-      }
-    });
-  });
 
   describe("GET", function() {
+
+    before(function(done) {
+      testUsers[0].books.push(testBooks[0]._id);
+      testUsers[0].borrowing.push(testBooks[1]._id);
+      testUsers[0].requests.push(testBooks[2]._id)
+      User.create(testUsers[0], function(err, data) {
+        if (!err) {
+          testBooks[0].owner = testUsers[0]._id;
+          Book.create(testBooks[0], function(err, data) {
+            testBooks[1].owner = testUsers[1]._id;
+            Book.create(testBooks[1], function(err, data) {
+              testBooks[2].owner = testUsers[1]._id;
+              Book.create(testBooks[2], function(err, data) {
+                done();
+              });
+            });
+          });
+        }
+      });
+    });
+
     it("should return an existent User as JSON, fully populated", function(done) {
       chai.request(url)
         .get("/api/self")
@@ -49,9 +51,31 @@ describe("/api/self", function() {
           done();
         });
     });
+
+    after(function(done) {
+      User.findByIdAndRemove(testUsers[0]._id, function(err, data) {
+        if (!err) done();
+      });
+    });
+
+    after(function(done) {
+      Book.remove({$or: [{_id: testBooks[0]._id},
+                         {_id: testBooks[1]._id},
+                         {_id: testBooks[2]._id}]
+      }, function(err) {
+        if (!err) done();
+      });
+    });
   });
 
   describe("DELETE", function() {
+
+    before(function(done) {
+      User.create(testUsers[0], function(err, data) {
+        if (!err) done();
+      });
+    });
+
     it("should delete a User and all of their Books from the database, and return the User as JSON", function(done) {
       chai.request(url)
         .del("/api/self")
@@ -68,12 +92,6 @@ describe("/api/self", function() {
             })
           });
         });
-    });
-  });
-
-  after(function(done) {
-    User.findByIdAndRemove(testUsers[0]._id, function(err, data) {
-      if (!err) done();
     });
   });
 });
@@ -120,7 +138,7 @@ describe("/api/self/books", function() {
         return User.findByIdAndRemove(testUsers[1]._id)
       }, function(err) { throw err; })
       .then(function() {
-        return Book.remove({creator: testUsers[0]._id})
+        return Book.remove({owner: testUsers[0]._id})
       }, function(err) { throw err; })
       .then(function() {
         done();
