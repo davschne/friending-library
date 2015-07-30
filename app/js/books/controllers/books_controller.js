@@ -2,17 +2,22 @@
 
 module.exports = function(app) {
 
-  app.controller('booksController', ['$scope', 'crudResource', function($scope, crudResource) {
+  app.controller('booksController', ['$scope', 'bookResource', '$cookies', function($scope, bookResource, $cookies) {
 
-    var Http = crudResource();
+    var Http = bookResource();
 
-    $scope.populateBookList = function(user) {
-      console.log(user);
-      Http.getBooks(user, function(data) {
+    var userToken = $cookies.get('tok');
+    console.log(userToken);
+
+    function populateBookPile (user) {
+      Http.availableBooks(user, function(data) {
         console.log('Inside function');
+        console.log(data);
         $scope.books = data;
       });
     }
+
+    populateBookPile(userToken);
 
   }]);
 };

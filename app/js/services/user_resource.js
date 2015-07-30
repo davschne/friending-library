@@ -2,13 +2,6 @@
 
 module.exports = function(app) {
 
-  var handleSuccess = function(data) {
-    return function(data) {
-      console.log('Mongo says: "All Good"');
-      console.log(data);
-    };
-  };
-
   var handleError = function(err) {
       return function(err) {
       console.log('Mongo says: "ERROR" '  + err);
@@ -16,7 +9,7 @@ module.exports = function(app) {
     };
   };
 
-  app.factory('crudResource', ['$http', function($http) {
+  app.factory('userResource', ['$http', function($http) {
     return function() {
       return {
         getUser: function(user, callback) {
@@ -48,7 +41,7 @@ module.exports = function(app) {
             headers:  {'Authorization': 'Bearer ' + user},
             data: data
           })
-          .success(handleSuccess(callback))
+          .success(callback)
           .error(handleError());
         },
 
@@ -58,7 +51,7 @@ module.exports = function(app) {
             url: '/api/books/' + bookId,
             headers: {'Authorization': 'Bearer ' + user},
           })
-          .success(handleSuccess(callback))
+          .success(callback)
           .error(handleError());
         }
       };
