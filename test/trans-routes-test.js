@@ -180,7 +180,49 @@ describe("/api/trans", function() {
 
   describe("/deny POST", function() {
 
+    before(function(done) {
+      User.update({_id: testUsers[1]._id}, {$pushAll: {requests : [testBooks[1]._id, testBooks[2]._id, testBooks[3]._id]}}, function(err) {
+        if (!err) done();
+      });
+    });
 
+    before(function(done) {
+      Book.findByIdAndUpdate(testBooks[2]._id, {request: testUsers[1]._id}, function(err, bookDoc) {
+        if (!err) done();
+      });
+    });
+
+    it("should remove Book's _id from other User's requests, set Book's request to '', and return the Book as JSON", function(done) {
+      chai.request(url)
+        .post("/api/trans/deny")
+        .set("Authorization", "Bearer " + testUsers[0].access_token)
+        .send({_id: testBooks[2]._id})
+        .end(function(err, res) {
+          expect(res.body.title).to.eql(testBooks[2].title);
+          Book.findById(testBooks[2]._id, function(err, bookDoc) {
+            expect(bookDoc.request).to.eql("");
+            User.findOne({_id: testUsers[1]._id}, function(err, userDoc) {
+              expect(userDoc.requests.length).to.eql(2);
+              // Check correct book was removed from the requests
+              expect(userDoc.requests[0]).to.eql(testBooks[1]._id);
+              expect(userDoc.requests[1]).to.eql(testBooks[3]._id);
+              done();
+            })
+          })
+        });
+    });
+
+    after(function(done) {
+      User.update({_id: testUsers[1]._id}, {requests : []}, function(err) {
+        if (!err) done();
+      });
+    });
+
+    after(function(done) {
+      Book.findByIdAndUpdate(testBooks[2]._id, {request: ""}, function(err, bookDoc) {
+        if (!err) done();
+      });
+    });
 
   });
 
