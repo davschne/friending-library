@@ -71,24 +71,21 @@ nav a {
 form {
   padding: 1em; }
 
-input {
+input, button {
   border-radius: .25em;
-  border: 1px solid #bfbfbf;
-  padding: .5em; }
+  border: 0.1em solid #bfbfbf;
+  padding: 0.5em; }
 
 button {
-  border-radius: .25em;
   cursor: pointer;
-  border: 1px solid #bfbfbf;
-  padding: .5em;
   background-image: -webkit-linear-gradient(top, #eddb11 0, #efcf14 35%, #f1bf18 65%, #f2b21b 100%); }
 
-/*----- Search Module -----*/
-.search {
+.search, .list, .signup {
   width: 50%;
   margin-left: auto;
   margin-right: auto; }
 
+/*----- Search Module -----*/
 .search input {
   width: 90%; }
 
@@ -102,10 +99,7 @@ button {
   color: #888;
   display: block;
   margin: 0.8em 2.2em 0.8em 2.2em;
-  overflow: hidden;
-  width: 50%;
-  margin-left: auto !important;
-  margin-right: auto !important; }
+  overflow: hidden; }
 
 .list__item {
   border-bottom: .1em solid green;
@@ -126,42 +120,33 @@ button {
 
 /*----- Sign Up Module -----*/
 .signup {
-  width: 50%;
   padding-top: 2.5em;
-  padding-bottom: 2.5em;
-  margin-left: auto;
-  margin-right: auto; }
-
-.signup__button {
-  width: 100%; }
-
-.signup input {
-  margin-top: .5em;
-  margin-bottom: .5em;
-  width: 100%;
-  padding: .5em;
-  box-sizing: border-box; }
-
-.signup fieldset {
-  width: 20em; }
+  padding-bottom: 2.5em; }
+  .signup__button {
+    width: 100%; }
+  .signup input {
+    margin-top: .5em;
+    margin-bottom: .5em;
+    width: 100%;
+    padding: .5em;
+    box-sizing: border-box; }
+  .signup fieldset {
+    width: 20em; }
 
 /*----- Login Module -----*/
 .login__form {
   float: right;
   vertical-align: middle;
   margin-top: -4.5em; }
-
-.login__wrapper {
-  display: inline-block;
-  margin-left: .5em;
-  height: 2.5em; }
-
-.login__button {
-  margin-left: .5em; }
-
-.login__label {
-  display: block;
-  padding-bottom: .25em; }
+  .login__form__wrapper {
+    display: inline-block;
+    margin-left: .5em;
+    height: 2.5em; }
+  .login__form__button {
+    margin-left: .5em; }
+  .login__form__label {
+    display: block;
+    padding-bottom: .25em; }
 
 /*----- Footer Module -----*/
 .footer__text {

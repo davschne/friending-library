@@ -1,12 +1,18 @@
-/*----- Search Module -----*/
-.search {
- width: 50%;
- margin-left: auto;
- margin-right: auto;
+%center-container {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.search input {
- width: 90%;
+$primary-bg-color: rgba(38,101,6,0.5);
+
+/*----- Search Module -----*/
+.search {
+ @extend %center-container;
+
+   & input {
+   width: 90%;
+  }
 }
 
 /*----- List Items Module -----*/
@@ -20,9 +26,7 @@
  display: block;
  margin: .8em 2.2em .8em 2.2em;
  overflow: hidden;
- width: 50%;
- margin-left: auto !important;
- margin-right: auto !important;
+ @extend %center-container;
 }
 
 .list__item {
@@ -47,27 +51,25 @@
 
 /*----- Sign Up Module -----*/
 .signup {
- width: 50%;
  padding-top: 2.5em;
  padding-bottom: 2.5em;
- margin-left: auto;
- margin-right: auto;
-}
+ @extend %center-container;
 
-.signup__button {
- width: 100%;
-}
+  &__button {
+    width: 100%;
+  }
 
-.signup input {
- margin-top: .5em;
- margin-bottom: .5em;
- width: 100%;
- padding:.5em;
- box-sizing: border-box;
-}
+  & input {
+    margin-top: .5em;
+    margin-bottom: .5em;
+    width: 100%;
+    padding:.5em;
+    box-sizing: border-box;
+  }
 
-.signup fieldset {
- width: 20em;
+  & fieldset {
+    width: 20em;
+  }
 }
 
 /*----- Login Module -----*/
@@ -75,29 +77,30 @@
  float: right;
  vertical-align: middle;
  margin-top: -4.5em;
-}
 
-.login__wrapper {
-   display: inline-block;
-   margin-left: .5em;
-   // margin-right: .5em;
-   height: 2.5em;
-}
 
-.login__button {
- margin-left: .5em;
-}
+  &__wrapper {
+    display: inline-block;
+    margin-left: .5em;
+    // margin-right: .5em;
+    height: 2.5em;
+  }
 
-.login__label {
-   display: block;
-   padding-bottom: .25em;
+  &__button {
+    margin-left: .5em;
+  }
+
+  &__label {
+    display: block;
+    padding-bottom: .25em;
+  }
 }
 
 /*----- Footer Module -----*/
 .footer__text {
- text-align: center;
+  text-align: center;
 }
 
 .footer__padding {
- padding-top: 1em;
+    padding-top: 1em;
 }

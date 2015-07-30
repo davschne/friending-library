@@ -1,42 +1,50 @@
+// Colors
+$primary-color: #bfbfbf; // Dark Gray
+$secondary-color: #f2f2f2; // Light Gray
+$tertiary-color: rgba(38,101,6,0.5); // Green
+
+// Em Spacing
+$default-em: .25em;
+
+
 html {
   background-image: url('../images/seamless_paper_texture.png');
 }
 
 main {
   background-image: url('../images/seamless_paper_texture.png');
-  padding-top: 3em;
-  padding-bottom: 3.25em;
+  padding-top: $default-em * 12;
+  padding-bottom: $default-em * 13;
 }
 
 header, footer {
   position: static;
-  height: 5em;
-  color: #f2f2f2;
+  height: $default-em * 20;
+  color: $secondary-color;
   background-color:rgba(38,101,6,0.5);
 }
 
 nav a {
   text-decoration: none;
-  color: #f2f2f2;
+  color: $secondary-color;
 }
 
 form {
-  padding: 1em;
+  padding: $default-em;
+}
+
+%border-styling {
+  border-radius: $default-em;
+  border: .1em solid $primary-color;
+  padding: $default-em * 2;
 }
 
 input {
-  border-radius: .25em;
-  border: 1px solid #bfbfbf;
-  padding: .5em;
+  @extend %border-styling;
 }
 
 button {
-  border-radius: .25em;
+  @extend %border-styling;
   cursor: pointer;
-  border: 1px solid #bfbfbf;
-  padding: .5em;
   background-image: -webkit-linear-gradient(top,#eddb11 0,#efcf14 35%,#f1bf18 65%,#f2b21b 100%);
-}
-
-ul {
 }
