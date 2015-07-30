@@ -42,7 +42,7 @@ module.exports = function(app) {
             console.log('User Grab Success');
             console.log(data);
 
-            $scope.bookRequests = data.requests;
+            $scope.selfRequests = data.requests;
           });
         };
 
@@ -54,6 +54,14 @@ module.exports = function(app) {
             console.log(data);
 
             $scope.userBooks = data;
+
+            $scope.bookRequests = [];
+
+            for(var i = 0; i < $scope.userBooks.length; i++) {
+              if($scope.userBooks[i].request) {
+                $scope.bookRequests.push($scope.userBooks[i]);
+              }
+            }
           });
         };
 
@@ -79,9 +87,27 @@ module.exports = function(app) {
           getUserBooks(user);
         };
 
-        $scope.removeRequest = function(user, userData) {
-          Http.undoRequest(user, userData, function(data) {
+        $scope.removeRequest = function(user, bookId) {
+          Http.undoRequest(user, bookId, function(data) {
             console.log('Undo Request');
+            console.log(data);
+          });
+
+          getUserData(user);
+        };
+
+        $scope.acceptRequest = function(user, userData) {
+          Http.approveRequest(user, userData, function(data) {
+            console.log('Request Accepted');
+            console.log(data);
+          });
+
+          getUserData(user);
+        };
+
+        $scope.rejectRequest = function(user, userData) {
+          Http.denyRequest(user, userData, function(data) {
+            console.log('Request Rejected');
             console.log(data);
           });
 
@@ -91,7 +117,7 @@ module.exports = function(app) {
         $scope.logOut = function(){
           $cookies.put('tok', '');
           $location.path('/');
-        }
+        };
       };
 
     })();

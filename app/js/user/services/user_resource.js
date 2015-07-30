@@ -55,10 +55,31 @@ module.exports = function(app) {
           .error(handleError());
         },
 
-        undoRequest: function(user, userData, callback) {
+        undoRequest: function(user, bookId, callback) {
           $http({
             method: 'DELETE',
-            url: '/api/trans/request',
+            url: '/api/trans/request/' + bookId,
+            headers: {'Authorization': 'Bearer ' + user},
+          })
+          .success(callback)
+          .error(handleError());
+        },
+
+        approveRequest: function(user, userData, callback) {
+          $http({
+            method: 'POST',
+            url: '/api/trans/approve',
+            headers: {'Authorization': 'Bearer ' + user},
+            data: userData
+          })
+          .success(callback)
+          .error(handleError());
+        },
+
+        denyRequest: function(user, userData, callback) {
+          $http({
+            method: 'POST',
+            url: '/api/trans/deny',
             headers: {'Authorization': 'Bearer ' + user},
             data: userData
           })
