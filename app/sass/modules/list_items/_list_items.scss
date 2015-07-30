@@ -1,18 +1,18 @@
 /*----- List Items Module -----*/
 .list {
- background-color: #fff;
- border: .1em solid #dedede;
- border-top-right-radius: .4em;
- border-top-left-radius: .4em;
- box-shadow: 0 .2em .2em -.1em rgba(0, 0, 0, 0.055);
- color: #888;
- display: block;
- margin: .8em 2.2em .8em 2.2em;
- overflow: hidden;
- @extend %center-container;
-}
+  background-color: #fff;
+  border: .1em solid #dedede;
+  border-top-right-radius: .4em;
+  border-top-left-radius: .4em;
+  box-shadow: 0 .2em .2em -.1em rgba(0, 0, 0, 0.055);
+  color: #888;
+  display: block;
+  margin: .8em 2.2em .8em 2.2em;
+  overflow: hidden;
+  @extend %center-container;
 
-.list__item {
- border-bottom: .1em solid green;
- padding: $default-em * 4;
+  &__item {
+    border-bottom: .1em solid green;
+    padding: $default-em * 4;
+  }
 }

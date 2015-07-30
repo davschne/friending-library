@@ -177,10 +177,12 @@ button {
   display: block;
   margin: 0.8em 2.2em 0.8em 2.2em;
   overflow: hidden; }
-
-.list__item {
-  border-bottom: .1em solid green;
-  padding: 1em; }
+  .list__item {
+    border-bottom: .1em solid green;
+    padding: 1em; }
 
 .float-right {
   float: right; }
+
+.center-text {
+  text-align: center; }
