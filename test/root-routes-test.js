@@ -18,7 +18,7 @@ describe("/login GET", function() {
       .get("/login")
       .redirects(0)
       .end(function(err, res) {
-        expect(err).to.be.null;
+        expect(err).to.eql(null);
         expect(res).to.redirectTo("/auth/facebook");
         done();
       });
@@ -37,11 +37,11 @@ describe("/logout POST", function() {
       .post("/logout")
       .set("Authorization", "Bearer " + testUsers[0].access_token)
       .end(function(err, res) {
-        expect(err).to.be.null;
+        expect(err).to.eql(null);
         expect(res).to.have.status(200);
         User.findById(testUsers[0]._id, function(err, userDoc) {
           if (err) throw err;
-          expect(userDoc.access_token).to.be.undefined;
+          expect(userDoc.access_token).to.eql(undefined);
           done();
         });
       });

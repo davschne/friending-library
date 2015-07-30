@@ -7,7 +7,7 @@ var app = require("../server");
 chai.use(require("chai-http"));
 
 var User = require("../models/User");
-var Book = require("../models/Book")
+var Book = require("../models/Book");
 
 var testData = require("../lib/test-data");
 var testBooks = testData.books;
@@ -20,7 +20,7 @@ describe("/api/self", function() {
     before(function(done) {
       testUsers[0].books.push(testBooks[0]._id);
       testUsers[0].borrowing.push(testBooks[1]._id);
-      testUsers[0].requests.push(testBooks[2]._id)
+      testUsers[0].requests.push(testBooks[2]._id);
       User.create(testUsers[0], function(err, data) {
         if (!err) {
           testBooks[0].owner = testUsers[0]._id;
@@ -89,7 +89,7 @@ describe("/api/self", function() {
               expect(res.body._id).to.eql(testUsers[0]._id);
               expect(res).to.be.json;
               done();
-            })
+            });
           });
         });
     });
@@ -135,10 +135,10 @@ describe("/api/self/books", function() {
     User.findByIdAndRemove(testUsers[0]._id)
       .exec()
       .then(function() {
-        return User.findByIdAndRemove(testUsers[1]._id)
+        return User.findByIdAndRemove(testUsers[1]._id);
       }, function(err) { throw err; })
       .then(function() {
-        return Book.remove({owner: testUsers[0]._id})
+        return Book.remove({owner: testUsers[0]._id});
       }, function(err) { throw err; })
       .then(function() {
         done();

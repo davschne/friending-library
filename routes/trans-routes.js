@@ -8,20 +8,20 @@ module.exports = function(router) {
   router.delete("/request/:bookid", function(req, res) {
       Book.findByIdAndUpdate(req.params.bookid, {request: ""}, function(err, updatedBookDoc) {
         if (err) handle[500](err, res);
-        else if (updatedBookDoc == null) res.sendStatus(404);
+        else if (updatedBookDoc === null) res.sendStatus(404);
         else {
           User.update({_id: req.user._id}, {$pull: {requests : req.params.bookid}}, function(err) {
             if (err) handle[500](err, res);
             res.json(updatedBookDoc);
-          })
+          });
         }
       });
-    })
+    });
 
   router.post("/request", function(req, res) {
     Book.findById(req.body._id, function(err, bookDoc) {
       if (err) handle[500](err, res);
-      else if (bookDoc == null) res.sendStatus(404);
+      else if (bookDoc === null) res.sendStatus(404);
       else {
         // Check if book is borrowed or requested
         if (bookDoc.borrower || bookDoc.request) res.sendStatus(409);
@@ -41,13 +41,13 @@ module.exports = function(router) {
         }
       }
     });
-  })
+  });
 
   router.route("/deny")
     .post(function(req, res) {
       Book.findById(req.body._id, function(err, bookDoc) {
         if (err) handle[500](err, res);
-        else if (bookDoc == null) res.sendStatus(404);
+        else if (bookDoc === null) res.sendStatus(404);
         else if (bookDoc.owner != req.user._id) res.sendStatus(403);
         else {
           User.update({_id: bookDoc.request}, { $pull: {requests : req.body._id} }, function(err) {
@@ -66,7 +66,7 @@ module.exports = function(router) {
     .post(function(req, res) {
       Book.findById(req.body._id, function(err, bookDoc) {
         if (err) handle[500](err, res);
-        else if (bookDoc == null) res.sendStatus(404);
+        else if (bookDoc === null) res.sendStatus(404);
         else if (bookDoc.owner != req.user._id) res.sendStatus(403);
         else {
           User.update({_id: bookDoc.request}, { $pull: {requests : req.body._id}, $push: {borrowing : req.body._id} }, function(err) {
@@ -85,7 +85,7 @@ module.exports = function(router) {
     .post(function(req, res) {
       Book.findById(req.body._id, function(err, bookDoc) {
         if (err) handle[500](err, res);
-        else if (bookDoc == null) res.sendStatus(404);
+        else if (bookDoc === null) res.sendStatus(404);
         else if (bookDoc.owner != req.user._id) res.sendStatus(403);
         else {
           User.update({_id: bookDoc.borrower}, { $pull: {borrowing : req.body._id} }, function(err) {
