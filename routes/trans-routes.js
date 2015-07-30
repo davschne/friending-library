@@ -15,7 +15,7 @@ module.exports = function(router) {
           if (bookDoc.borrower || bookDoc.request) res.sendStatus(409);
           else {
             // Update the user
-            User.update(req.user._id, {$push: {requests : req.body._id}}, function(err) {
+            User.update({_id: req.user._id}, {$push: {requests : req.body._id}}, function(err) {
               if (err) handle[500](err, res);
               else {
                 Book.findByIdAndUpdate(req.body._id, {request: req.user._id}, function(err, updatedBookDoc) {
