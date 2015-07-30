@@ -16,16 +16,16 @@ module.exports = function(app) {
           })
           .success(callback)
           .error(handleError);
-        },
+        };
+        //move logout to user controller
+        // logout: function() {
+        //   $cookies.put('tok', '');
+        // },
 
-        logout: function() {
-          // $cookies.put('eat', '');
-        },
+        // isSignedIn: function() {
+        //   return ($cookies.get('tok') && $cookies.get('tok').length);
+        // }
 
-        isSignedIn: function() {
-          // return ($cookies.get('eat') && $cookies.get('eat').length);
-        }
-      };
     };
   }]);
 

@@ -6,69 +6,84 @@ module.exports = function(app) {
 
     var Http = userResource();
 
-    function getToken() {
-      var userToken = $location.search();
-      // console.log(userToken);
+    (function() {
 
-      $scope.user = userToken;
+      if($location.search().access_token || ($cookies.get('tok').length > 3)) {
+        runResource();
+      }
 
-      $cookies.put('tok', $scope.user.access_token);
-      var munny = $cookies.get('tok')
+      if($cookies.get('tok') === '' || !($cookies.get('tok'))) {
+        $location.path('/');
+      }
 
-      // console.log(munny);
-      // console.log(typeof(munny));
+      function runResource() {
 
-      // $cookies.put('tok', '');
+        var getToken = function() {
+          if($location.search().access_token) {
+            console.log('Ran True');
+            var userToken = $location.search();
+            $scope.user = userToken;
+            $cookies.put('tok', $scope.user.access_token);
+            $location.url('/success');
+          } else {
+            console.log('Ran Else');
+            var token = {
+              access_token : $cookies.get('tok')
+            }
+            $scope.user = token;
+          }
+        };
 
-    };
+        getToken();
 
-    getToken();
 
-    // console.log($scope.user);
+        var getUserData = function(user) {
+          Http.getUser(user, function(data) {
+            console.log('User Grab Success');
+            console.log(data);
+          });
+        };
 
-    function getUserData(user) {
-      Http.getUser(user, function(data) {
+        getUserData($scope.user.access_token);
 
-        console.log('User Grab Success');
-        console.log(data);
+        var getUserBooks = function(user) {
+          Http.getBooks(user, function(data) {
+            console.log('Book Grab Success');
+            console.log(data);
 
-      });
+            $scope.Userbooks = data;
+          });
+        };
 
-    };
+        getUserBooks($scope.user.access_token);
 
-    getUserData($scope.user.access_token);
+        $scope.submitBook = function(user, data) {
+          Http.createBook(user, data, function(data) {
+            console.log('Submit Success');
+            console.log(data);
+          });
 
-    var getUserBooks = function(user) {
-      Http.getBooks(user, function(data) {
-        console.log('Book Grab Success');
-        console.log(data);
+          getUserBooks(user);
 
-        $scope.Userbooks = data;
-      });
+          delete $scope.newbook
+        };
 
-    }
+        $scope.destroyBook = function(user, bookId) {
+          Http.removeBook(user, bookId, function(data) {
+            console.log('Removed Book!');
+            console.log(data);
+          });
 
-    getUserBooks($scope.user.access_token);
+          getUserBooks(user);
+        }
 
-    $scope.submitBook = function(user, data) {
-      Http.createBook(user, data, function(data) {
-        console.log('Submit Success');
-        console.log(data);
-      });
+        $scope.logOut = function(){
+          $cookies.put('tok', '');
+          $location.path('/');
+        }
+      };
 
-      getUserBooks(user);
-
-      delete $scope.newbook
-    };
-
-    $scope.destroyBook = function(user, bookId) {
-      Http.removeBook(user, bookId, function(data) {
-        console.log('Removed Book!');
-        console.log(data);
-      });
-
-      getUserBooks(user);
-    }
+    })();
 
   }]);
 
