@@ -136,7 +136,44 @@ describe("/api/trans", function() {
 
     describe("/DELETE", function() {
 
+      before(function(done) {
+        User.update({_id: testUsers[2]._id}, {$pushAll: {requests : [testBooks[1]._id, testBooks[3]._id, testBooks[2]._id]}}, function(err) {
+          if (!err) done();
+        });
+      });
 
+      before(function(done) {
+        Book.findByIdAndUpdate(testBooks[3]._id, {request: testUsers[2]._id}, function(err, bookDoc) {
+          if (!err) done();
+        });
+      });
+
+      it("should remove Book's _id from User's requests, set Book's request to '', and return the book as JSON", function(done) {
+        chai.request(url)
+          .del("/api/trans/request")
+          .set("Authorization", "Bearer " + testUsers[2].access_token)
+          .send({_id: testBooks[3]._id})
+          .end(function(err, res) {
+            expect(res.body.title).to.eql(testBooks[3].title);
+
+            Book.findById(testBooks[3]._id, function(err, bookDoc) {
+              expect(bookDoc.request).to.eql("");
+              User.findOne({_id: testUsers[2]._id}, function(err, userDoc) {
+                expect(userDoc.requests.length).to.eql(2);
+                // Check to make sure that the correct book was removed from the requests array
+                expect(userDoc.requests[0]).to.eql(testBooks[1]._id);
+                expect(userDoc.requests[1]).to.eql(testBooks[2]._id);
+                done();
+              });
+            });
+          });
+      });
+
+      after(function(done) {
+        User.update({_id: testUsers[2]._id}, {requests : []}, function(err) {
+          if (!err) done();
+        });
+      });
 
     });
   });
@@ -201,7 +238,44 @@ describe("/api/trans", function() {
 
   describe("/returned POST", function() {
 
+    before(function(done) {
+        User.update({_id: testUsers[3]._id}, {$pushAll: {borrowing : [testBooks[1]._id, testBooks[3]._id, testBooks[2]._id]}}, function(err) {
+          if (!err) done();
+        });
+      });
 
+      before(function(done) {
+        Book.findByIdAndUpdate(testBooks[3]._id, {borrower: testUsers[3]._id}, function(err, bookDoc) {
+          if (!err) done();
+        });
+      });
+
+      it("should remove Book's _id from User's borrowing, set Book's borrower to '', and return the book as JSON", function(done) {
+        chai.request(url)
+          .post("/api/trans/returned")
+          .set("Authorization", "Bearer " + testUsers[0].access_token)
+          .send({_id: testBooks[3]._id})
+          .end(function(err, res) {
+            expect(res.body.title).to.eql(testBooks[3].title);
+
+            Book.findById(testBooks[3]._id, function(err, bookDoc) {
+              expect(bookDoc.borrower).to.eql("");
+              User.findOne({_id: testUsers[3]._id}, function(err, userDoc) {
+                expect(userDoc.borrowing.length).to.eql(2);
+                // Check to make sure that the correct book was removed from the borrowing array
+                expect(userDoc.borrowing[0]).to.eql(testBooks[1]._id);
+                expect(userDoc.borrowing[1]).to.eql(testBooks[2]._id);
+                done();
+              });
+            });
+          });
+      });
+
+      after(function(done) {
+        User.update({_id: testUsers[3]._id}, {borrowing : []}, function(err) {
+          if (!err) done();
+        });
+      });
 
   });
 
