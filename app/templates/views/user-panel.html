@@ -1,44 +1,44 @@
 <section>
-<h1>User Panel</h1>
+<h1 class="center-text">User Panel</h1>
 
-<button data-ng-click="logOut()">Log Out</button>
+<button id="logout" data-ng-click="logOut()">Log Out</button>
 
-<form class="login__form" data-ng-submit="submitBook(user.access_token, {title : newbook.title, authors: [newbook.author], categories: [newbook.genre]})">
+<form class="addBook" data-ng-submit="submitBook(user.access_token, {title : newbook.title, authors: [newbook.author], categories: [newbook.genre]})">
   <fieldset>
-    <div class="login__wrapper">
-      <label class="login__label">Title:</label>
+    <div class="addBook__wrapper">
+      <label class="addBook__label">Title:</label>
       <input type="text" id="book-title" placeholder="Title" data-ng-model="newbook.title" required></input>
     </div>
 
-    <div class="login__wrapper">
-      <label class="login__label">Author:</label>
+    <div class="addBook__wrapper">
+      <label class="addBook__label">Author:</label>
       <input type="text" placeholder="Author" data-ng-model="newbook.author" required></input>
     </div>
 
-    <div class="login__wrapper">
-      <label class="login__label">Genre:</label>
+    <div class="addBook__wrapper">
+      <label class="addBook__label">Genre:</label>
       <input type="text" value="what" placeholder="Genre" data-ng-model="newbook.genre" required></input>
     </div>
 
-    <button type="submit" class="login__button" id="sign-in">Add Book</button>
+    <button type="submit" class="addBook__button" id="sign-in">Add Book</button>
   </fieldset>
 </form>
 
 <ul class="list">
-  <li class="list__item" data-ng-repeat="book in userBooks"> {{ book.title }}, {{book.authors[0]}}, {{book.categories[0]}}<button data-ng-click="destroyBook(user.access_token, book._id)">Destory</button></li>
+  <li class="list__item" data-ng-repeat="book in userBooks"> {{ book.title }}, {{book.authors[0]}}, {{book.categories[0]}}<button data-ng-click="destroyBook(user.access_token, book._id)">Destroy</button></li>
 </ul>
 
-<h1>Self Requests</h1>
+<h1 class="center-text">Self Requests</h1>
 <ul class="list">
   <li class="list__item" data-ng-repeat="selfBook in selfRequests"> {{ selfBook.title }}, {{selfBook.authors[0]}}, {{selfBook.categories[0]}}<button data-ng-click="removeRequest(user.access_token, selfBook._id)">Undo</button></li>
 </ul>
 
-<h1>User Requests</h1>
+<h1 class="center-text">User Requests</h1>
 <ul class="list">
   <li class="list__item" data-ng-repeat="userBook in bookRequests"> {{ userBook.title }}, {{userBook.authors[0]}}, {{userBook.categories[0]}}<button data-ng-click="acceptRequest(user.access_token, {_id : userBook._id})">Approve</button><button data-ng-click="rejectRequest(user.access_token, {_id : userBook._id})">Deny</button></li>
 </ul>
 
-<h1>User Borrowing</h1>
+<h1 class="center-text">User Borrowing</h1>
 <ul class="list">
   <li class="list__item" data-ng-repeat="borrow in bookBorrow"> {{ borrow.title }}, {{borrow.authors[0]}}, {{borrow.categories[0]}}<button data-ng-click="acceptRequest(user.access_token, {_id : userBook._id})">Approve</button><button data-ng-click="rejectRequest(user.access_token, {_id : userBook._id})">Deny</button></li>
 </ul>
