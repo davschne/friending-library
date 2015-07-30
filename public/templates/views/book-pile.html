@@ -1,1 +1,1 @@
-<section><h1>Book Pile</h1><ul class=list><li class=list__item data-ng-repeat="book in books">{{ book.title }}, {{book.authors[0]}}, {{book.categories[0]}}<button data-ng-click="checkBook(user.access_token, {_id : book._id})">Checkout Book</button></li></ul></section>
+<section><h1>Book Pile</h1><ul class=list><li class=list__item data-ng-repeat="book in books">{{ book.title }}, {{book.authors[0]}}, {{book.categories[0]}}<button data-ng-click="checkBook(user.access_token, {_id : book._id})(book)">Checkout Book</button></li></ul></section>

@@ -1,5 +1,8 @@
 <section>
 <h1>User Panel</h1>
+
+<button data-ng-click="logOut()">Log Out</button>
+
 <form class="login__form" data-ng-submit="submitBook(user.access_token, {title : newbook.title, authors: [newbook.author], categories: [newbook.genre]})">
   <fieldset>
     <div class="login__wrapper">
