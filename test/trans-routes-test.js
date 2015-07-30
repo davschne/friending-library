@@ -187,7 +187,7 @@ describe("/api/trans", function() {
     });
 
     before(function(done) {
-      Book.findByIdAndUpdate(testBooks[2]._id, {request: testUsers[1]._id}, function(err, bookDoc) {
+      Book.findByIdAndUpdate(testBooks[2]._id, {request: testUsers[1]._id, owner: testUsers[0]._id}, function(err, bookDoc) {
         if (!err) done();
       });
     });
@@ -219,7 +219,7 @@ describe("/api/trans", function() {
     });
 
     after(function(done) {
-      Book.findByIdAndUpdate(testBooks[2]._id, {request: ""}, function(err, bookDoc) {
+      Book.findByIdAndUpdate(testBooks[2]._id, {request: "", owner: testUsers[2]._id}, function(err, bookDoc) {
         if (!err) done();
       });
     });
@@ -287,7 +287,7 @@ describe("/api/trans", function() {
       });
 
       before(function(done) {
-        Book.findByIdAndUpdate(testBooks[3]._id, {borrower: testUsers[3]._id}, function(err, bookDoc) {
+        Book.findByIdAndUpdate(testBooks[3]._id, {borrower: testUsers[3]._id, owner: testUsers[0]._id}, function(err, bookDoc) {
           if (!err) done();
         });
       });
@@ -314,7 +314,7 @@ describe("/api/trans", function() {
       });
 
       after(function(done) {
-        User.update({_id: testUsers[3]._id}, {borrowing : []}, function(err) {
+        User.update({_id: testUsers[3]._id}, {borrowing : [], owner: testUsers[3]._id}, function(err) {
           if (!err) done();
         });
       });

@@ -48,6 +48,7 @@ module.exports = function(router) {
       Book.findById(req.body._id, function(err, bookDoc) {
         if (err) handle[500](err, res);
         else if (bookDoc == null) res.sendStatus(404);
+        else if (bookDoc.owner != req.user._id) res.sendStatus(403);
         else {
           User.update({_id: bookDoc.request}, { $pull: {requests : req.body._id} }, function(err) {
             if (err) handle[500](err, res);
@@ -66,6 +67,7 @@ module.exports = function(router) {
       Book.findById(req.body._id, function(err, bookDoc) {
         if (err) handle[500](err, res);
         else if (bookDoc == null) res.sendStatus(404);
+        else if (bookDoc.owner != req.user._id) res.sendStatus(403);
         else {
           User.update({_id: bookDoc.request}, { $pull: {requests : req.body._id}, $push: {borrowing : req.body._id} }, function(err) {
             if (err) handle[500](err, res);
@@ -84,6 +86,7 @@ module.exports = function(router) {
       Book.findById(req.body._id, function(err, bookDoc) {
         if (err) handle[500](err, res);
         else if (bookDoc == null) res.sendStatus(404);
+        else if (bookDoc.owner != req.user._id) res.sendStatus(403);
         else {
           User.update({_id: bookDoc.borrower}, { $pull: {borrowing : req.body._id} }, function(err) {
             if (err) handle[500](err, res);
