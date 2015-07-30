@@ -1,8 +1,9 @@
-/*----- Login Module -----*/
-.login__form {
- float: right;
- vertical-align: middle;
- margin-top: -$default-em * 2 * 18;
+/*----- Add Book Module -----*/
+.addBook {
+ // float: right;
+   @extends %center-container;
+   vertical-align: middle;
+   // margin-top: -$default-em * 2 * 18;
 
 
   &__wrapper {

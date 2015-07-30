@@ -108,27 +108,26 @@ button {
 .icon-search:before {
   content: "\e600"; }
 
-.search, .signup {
+.search, .signup, .list {
   width: 50%;
-  margin-left: auto;
-  margin-right: auto; }
+  margin-left: auto !important;
+  margin-right: auto !important; }
 
 /*----- Search Module -----*/
 .search input {
   width: 90%; }
 
-/*----- Login Module -----*/
-.login__form {
-  float: right;
-  vertical-align: middle;
-  margin-top: -9em; }
-  .login__form__wrapper {
+/*----- Add Book Module -----*/
+.addBook {
+  @extends %center-container;
+  vertical-align: middle; }
+  .addBook__wrapper {
     display: inline-block;
     margin-left: 0.5em;
     height: 2.5em; }
-  .login__form__button {
+  .addBook__button {
     margin-left: 0.5em; }
-  .login__form__label {
+  .addBook__label {
     display: block;
     padding-bottom: 0.25em; }
 
@@ -166,6 +165,22 @@ button {
   padding-right: 0.5em;
   width: auto;
   float: left; }
+
+/*----- List Items Module -----*/
+.list {
+  background-color: #fff;
+  border: .1em solid #dedede;
+  border-top-right-radius: .4em;
+  border-top-left-radius: .4em;
+  box-shadow: 0 0.2em 0.2em -0.1em rgba(0, 0, 0, 0.055);
+  color: #888;
+  display: block;
+  margin: 0.8em 2.2em 0.8em 2.2em;
+  overflow: hidden; }
+
+.list__item {
+  border-bottom: .1em solid green;
+  padding: 1em; }
 
 .float-right {
   float: right; }
