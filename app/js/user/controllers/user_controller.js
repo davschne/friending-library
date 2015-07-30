@@ -2,9 +2,9 @@
 
 module.exports = function(app) {
 
-  app.controller('userController', ['$scope', '$location', 'crudResource', '$cookies', function($scope, $location, crudResource, $cookies) {
+  app.controller('userController', ['$scope', '$location', 'userResource', '$cookies', function($scope, $location, userResource, $cookies) {
 
-    var Http = crudResource();
+    var Http = userResource();
 
     function getToken() {
       var userToken = $location.search();
@@ -18,7 +18,7 @@ module.exports = function(app) {
       // console.log(munny);
       // console.log(typeof(munny));
 
-      $cookies.put('tok', '');
+      // $cookies.put('tok', '');
 
     };
 
@@ -70,20 +70,6 @@ module.exports = function(app) {
       getUserBooks(user);
     }
 
-
-
-
-
-
-
-
-
-        // $scope.user = data;
-
-        // $cookies.put('eat', data.user.access_token);
-
-
-
   }]);
 
-}
+};
