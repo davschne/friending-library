@@ -24,28 +24,28 @@ describe("/api/trans", function() {
 
     User.create(testUsers[0])
       .then(function() {
-        User.create(testUsers[1])
+        return User.create(testUsers[1])
       }, function(err) { throw err; })
       .then(function() {
-        User.create(testUsers[2])
+        return User.create(testUsers[2])
       }, function(err) { throw err; })
       .then(function() {
-        User.create(testUsers[3])
+        return User.create(testUsers[3])
       }, function(err) { throw err; })
       .then(function() {
-        User.ensureIndexes()
+        return User.ensureIndexes()
       }, function(err) { throw err; })
       .then(function() {
-        Book.create(testBooks[0])
+        return Book.create(testBooks[0])
       }, function(err) { throw err; })
       .then(function() {
-        Book.create(testBooks[1])
+        return Book.create(testBooks[1])
       }, function(err) { throw err; })
       .then(function() {
-        Book.create(testBooks[2])
+        return Book.create(testBooks[2])
       }, function(err) { throw err; })
       .then(function() {
-        Book.create(testBooks[3])
+        return Book.create(testBooks[3])
       }, function(err) { throw err; })
       .then(function() {
         done();
@@ -324,25 +324,25 @@ describe("/api/trans", function() {
 
     User.remove(testUsers[0]._id)
       .then(function() {
-        User.remove(testUsers[1]._id)
+        return User.remove({_id: testUsers[1]._id});
       }, function(err) { throw err; })
       .then(function() {
-        User.remove(testUsers[2]._id)
+        return User.remove({_id: testUsers[2]._id});
       }, function(err) { throw err; })
       .then(function() {
-        User.remove(testUsers[3]._id)
+        return User.remove({_id: testUsers[3]._id});
       }, function(err) { throw err; })
       .then(function() {
-        Book.remove(testBooks[0]._id)
+        return Book.remove({_id: testBooks[0]._id});
       }, function(err) { throw err; })
       .then(function() {
-        Book.remove(testBooks[1]._id)
+        return Book.remove({_id: testBooks[1]._id});
       }, function(err) { throw err; })
       .then(function() {
-        Book.remove(testBooks[2]._id)
+        return Book.remove({_id: testBooks[2]._id});
       }, function(err) { throw err; })
       .then(function() {
-        Book.remove(testBooks[3]._id)
+        return Book.remove({_id: testBooks[3]._id});
       }, function(err) { throw err; })
       .then(function() {
         done();

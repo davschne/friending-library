@@ -14,14 +14,12 @@ var db = mongoose.connection;
 
 var authRouter  = express.Router();
 var selfRouter  = express.Router();
-var usersRouter = express.Router();
 var booksRouter = express.Router();
 var transRouter = express.Router();
 var rootRouter  = express.Router();
 
 require("./routes/auth-routes")(authRouter);
 require("./routes/self-routes")(selfRouter);
-require("./routes/users-routes")(usersRouter);
 require("./routes/books-routes")(booksRouter);
 require("./routes/trans-routes")(transRouter);
 require("./routes/root-routes")(rootRouter);
@@ -32,14 +30,9 @@ app.use(bodyParser.json());
 
 app.use("/auth", authRouter);
 app.use("/api/self", authenticate, selfRouter);
-app.use("/api/users", authenticate, usersRouter);
 app.use("/api/books", authenticate, booksRouter);
 app.use("/api/trans", authenticate, transRouter);
 app.use("/", rootRouter);
-
-app.get("/api/test", authenticate, function(req, res) {
-  res.send("Logged in as " + req.user.displayName);
-});
 
 app.listen(port, function() {
   console.log("Server running on port " + port);
