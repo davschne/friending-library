@@ -1,3 +1,5 @@
+/* jshint expr: true */
+
 var chai = require("chai");
 var expect = chai.expect;
 var port = process.env.PORT || 3000;
@@ -12,8 +14,6 @@ var Book = require("../models/Book");
 var testData = require("../lib/test-data");
 var testUsers = testData.users;
 var testBooks = testData.books;
-// var user = testData.users[0];
-// var book = testData.books[0];
 
 describe("/api/books", function() {
 
@@ -122,7 +122,7 @@ describe("/api/books/available", function() {
           return Book.create(testBooks[1]);
         }, function(err) { throw err; })
         .then(function() {
-          testBooks[2].request = "Yeah, I want that."
+          testBooks[2].request = "Yeah, I want that.";
           return Book.create(testBooks[2]);
         }, function(err) { throw err; })
         .then(function() {
@@ -145,7 +145,7 @@ describe("/api/books/available", function() {
           expect(res.body[0].title).to.equal(testBooks[3].title);
           done();
         });
-    })
+    });
 
     after(function(done) {
       User.findByIdAndRemove(testUsers[0]._id)

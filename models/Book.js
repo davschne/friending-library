@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-// var User = require("./User");
 
 var bookSchema = new mongoose.Schema({
   owner: {type: String, ref: "User", index: true},
@@ -25,15 +24,6 @@ var bookSchema = new mongoose.Schema({
     small: String
   }
 });
-
-// bookSchema.statics.add = function(book) {
-//   return this.create(book)
-//     .then(function(bookDoc) {
-//       return bookDoc;
-//     }, function(err) {
-//       throw err;
-//     });
-// };
 
 var Book = mongoose.model("Book", bookSchema);
 
