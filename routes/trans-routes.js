@@ -18,30 +18,30 @@ module.exports = function(router) {
       });
     })
 
-    router.post("/request", function(req, res) {
-      Book.findById(req.body._id, function(err, bookDoc) {
-        if (err) handle[500](err, res);
-        else if (bookDoc == null) res.sendStatus(404);
+  router.post("/request", function(req, res) {
+    Book.findById(req.body._id, function(err, bookDoc) {
+      if (err) handle[500](err, res);
+      else if (bookDoc == null) res.sendStatus(404);
+      else {
+        // Check if book is borrowed or requested
+        if (bookDoc.borrower || bookDoc.request) res.sendStatus(409);
         else {
-          // Check if book is borrowed or requested
-          if (bookDoc.borrower || bookDoc.request) res.sendStatus(409);
-          else {
-            // Update the user
-            User.update({_id: req.user._id}, {$push: {requests : req.body._id}}, function(err) {
-              if (err) handle[500](err, res);
-              else {
-                Book.findByIdAndUpdate(req.body._id, {request: req.user._id}, function(err, updatedBookDoc) {
-                  if (err) handle[500](err, res);
-                  else {
-                    res.json(updatedBookDoc);
-                  }
-                });
-              }
-            });
-          }
+          // Update the user
+          User.update({_id: req.user._id}, {$push: {requests : req.body._id}}, function(err) {
+            if (err) handle[500](err, res);
+            else {
+              Book.findByIdAndUpdate(req.body._id, {request: req.user._id}, function(err, updatedBookDoc) {
+                if (err) handle[500](err, res);
+                else {
+                  res.json(updatedBookDoc);
+                }
+              });
+            }
+          });
         }
-      });
-    })
+      }
+    });
+  })
 
   router.route("/deny")
     .post(function(req, res) {
@@ -99,4 +99,4 @@ module.exports = function(router) {
         }
       });
     });
-}
+};

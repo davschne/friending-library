@@ -12,8 +12,6 @@ var Book = require("../models/Book");
 var testData = require("../lib/test-data");
 var testUsers = testData.users;
 var testBooks = testData.books;
-// var user = testData.users[0];
-// var book = testData.books[0];
 
 describe("/api/books", function() {
 
