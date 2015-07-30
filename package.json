@@ -45,6 +45,7 @@
     "mongoose-findorcreate": "^0.1.2",
     "passport": "^0.2.2",
     "passport-facebook": "^2.0.0",
-    "passport-http-bearer": "^1.0.1"
+    "passport-http-bearer": "^1.0.1",
+    "passport-twitter": "^1.0.3"
   }
 }
