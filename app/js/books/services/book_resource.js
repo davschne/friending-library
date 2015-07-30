@@ -20,6 +20,17 @@ module.exports = function(app) {
           })
           .success(callback)
           .error(handleError());
+        },
+
+        checkoutBook: function(user, bookId, callback) {
+          $http({
+            method: 'POST',
+            url: '/api/trans/request',
+            headers: {'Authorization': 'Bearer ' + user},
+            data: bookId
+          })
+          .success(callback)
+          .error(handleError());
         }
       };
     };
