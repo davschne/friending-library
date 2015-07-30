@@ -56,7 +56,7 @@ describe("/api/trans", function() {
 
   describe("/request", function() {
 
-    describe("/POST", function() {
+    describe("POST", function() {
 
       before(function(done) {
         Book.findByIdAndUpdate(testBooks[1]._id, {request: testUsers[1]._id}, function(err, bookDoc) {
@@ -79,7 +79,6 @@ describe("/api/trans", function() {
             expect(res.body.title).to.eql(testBooks[0].title);
 
             User.findOne({_id: testUsers[0]._id}, function(err, userDoc) {
-              expect(userDoc.requests[0]).to.eql(testBooks[0]._id);
               Book.findById(testBooks[0]._id, function(err, bookDoc) {
                 expect(bookDoc.request).to.eql(testUsers[0]._id);
                 done();
@@ -136,7 +135,7 @@ describe("/api/trans", function() {
 
     });
 
-    describe("/DELETE", function() {
+    describe("DELETE", function() {
 
       before(function(done) {
         User.update({_id: testUsers[2]._id}, {$pushAll: {requests : [testBooks[1]._id, testBooks[3]._id, testBooks[2]._id]}}, function(err) {
