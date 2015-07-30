@@ -69,10 +69,10 @@ nav a {
   color: #f2f2f2; }
 
 form {
-  padding: 1em; }
+  padding: 0.25em; }
 
 input, button {
-  border-radius: .25em;
+  border-radius: 0.25em;
   border: 0.1em solid #bfbfbf;
   padding: 0.5em; }
 
@@ -113,8 +113,8 @@ button {
 
 .nav__logo {
   height: 1.5em;
-  margin-top: -.25em;
-  padding-right: .5em;
+  margin-top: -0.25em;
+  padding-right: 0.5em;
   width: auto;
   float: left; }
 
@@ -125,10 +125,10 @@ button {
   .signup__button {
     width: 100%; }
   .signup input {
-    margin-top: .5em;
-    margin-bottom: .5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
     width: 100%;
-    padding: .5em;
+    padding: 0.5em;
     box-sizing: border-box; }
   .signup fieldset {
     width: 20em; }
@@ -137,16 +137,16 @@ button {
 .login__form {
   float: right;
   vertical-align: middle;
-  margin-top: -4.5em; }
+  margin-top: -9em; }
   .login__form__wrapper {
     display: inline-block;
-    margin-left: .5em;
+    margin-left: 0.5em;
     height: 2.5em; }
   .login__form__button {
-    margin-left: .5em; }
+    margin-left: 0.5em; }
   .login__form__label {
     display: block;
-    padding-bottom: .25em; }
+    padding-bottom: 0.25em; }
 
 /*----- Footer Module -----*/
 .footer__text {

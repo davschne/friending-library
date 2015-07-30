@@ -21,7 +21,7 @@ header, footer {
   position: static;
   height: $default-em * 20;
   color: $secondary-color;
-  background-color:rgba(38,101,6,0.5);
+  background-color: $tertiary-color;
 }
 
 nav a {
