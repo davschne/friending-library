@@ -2,75 +2,73 @@
 
 module.exports = function(app) {
 
-  app.controller('userController', ['$scope', '$location', 'crudResource', '$cookies', function($scope, $location, crudResource, $cookies) {
+  app.controller('authController', ['$scope', '$location', 'authResource', '$cookies', function($scope, $location, authResource, $cookies) {
 
-    var Http = crudResource();
+  //   var Http = crudResource();
 
-    function getToken() {
-      var userToken = $location.search();
-      // console.log(userToken);
+  //   function getToken() {
+  //     var userToken = $location.search();
+  //     // console.log(userToken);
 
-      $scope.user = userToken;
+  //     $scope.user = userToken;
 
-      $cookies.put('tok', $scope.user.access_token);
-      var munny = $cookies.get('tok')
+  //     $cookies.put('tok', $scope.user.access_token);
+  //     var munny = $cookies.get('tok')
 
-      // console.log(munny);
-      // console.log(typeof(munny));
+  //     // console.log(munny);
+  //     // console.log(typeof(munny));
 
-      $cookies.put('tok', '');
+  //     $cookies.put('tok', '');
 
-    };
+  //   };
 
-    getToken();
+  //   getToken();
 
-    // console.log($scope.user);
+  //   // console.log($scope.user);
 
-    function getUserData(user) {
-      Http.getUser(user, function(data) {
+  //   function getUserData(user) {
+  //     Http.getUser(user, function(data) {
 
-        console.log('User Grab Success');
-        console.log(data);
+  //       console.log('User Grab Success');
+  //       console.log(data);
 
-      });
+  //     });
 
-    };
+  //   };
 
-    getUserData($scope.user.access_token);
+  //   getUserData($scope.user.access_token);
 
-    var getUserBooks = function(user) {
-      Http.getBooks(user, function(data) {
-        console.log('Book Grab Success');
-        console.log(data);
+  //   var getUserBooks = function(user) {
+  //     Http.getBooks(user, function(data) {
+  //       console.log('Book Grab Success');
+  //       console.log(data);
 
-        $scope.Userbooks = data;
-      });
+  //       $scope.Userbooks = data;
+  //     });
 
-    }
+  //   }
 
-    getUserBooks($scope.user.access_token);
+  //   getUserBooks($scope.user.access_token);
 
-    $scope.submitBook = function(user, data) {
-      Http.createBook(user, data, function(data) {
-        console.log('Submit Success');
-        console.log(data);
-      });
+  //   $scope.submitBook = function(user, data) {
+  //     Http.createBook(user, data, function(data) {
+  //       console.log('Submit Success');
+  //       console.log(data);
+  //     });
 
-      getUserBooks(user);
+  //     getUserBooks(user);
 
-      delete $scope.newbook
-    };
+  //     delete $scope.newbook
+  //   };
 
-    $scope.destroyBook = function(user, bookId) {
-      Http.removeBook(user, bookId, function(data) {
-        console.log('Removed Book!');
-        console.log(data);
-      });
+  //   $scope.destroyBook = function(user, bookId) {
+  //     Http.removeBook(user, bookId, function(data) {
+  //       console.log('Removed Book!');
+  //       console.log(data);
+  //     });
 
-      getUserBooks(user);
-    }
-
-
+  //     getUserBooks(user);
+  //   }
 
 
 
@@ -78,12 +76,14 @@ module.exports = function(app) {
 
 
 
-        // $scope.user = data;
 
-        // $cookies.put('eat', data.user.access_token);
+
+  //       // $scope.user = data;
+
+  //       // $cookies.put('eat', data.user.access_token);
 
 
 
   }]);
 
-}
+};
