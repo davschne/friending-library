@@ -5,7 +5,7 @@ var User = require("../models/User");
 passport.use(new FacebookStrategy({
   clientID: process.env.FB_ID,
   clientSecret: process.env.FB_SECRET,
-  callbackURL: "http://localhost:3000/auth/facebook/callback",
+  callbackURL: "http://bibliopile.herokuapp.com/auth/facebook/callback",
   enableProof: false
   },
   function(access_token, refreshToken, profile, done) {
