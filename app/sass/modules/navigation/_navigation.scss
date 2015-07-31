@@ -12,3 +12,18 @@
   width: auto;
   float: left;
 }
+
+.nav__anchors {
+  display: inline-block;
+  padding: $default-em * 4;
+  color: black;
+  border: .1em solid black;
+
+}
+
+.nav__template {
+  @extend %center-container;
+  overflow: auto;
+}
+
+

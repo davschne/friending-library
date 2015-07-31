@@ -1,47 +1,59 @@
 <section>
-<h1 class="center-text">User Panel</h1>
+<section class="nav__template">
+  <nav>
+    <a href="" class="nav__anchors">Available Books</a>
+    <a href="" class="nav__anchors">Requested Books</a>
+    <a href="" class="nav__anchors">My Books</a>
+    <a href="" class="nav__anchors" data-ng-click="userLogOut(user.access_token)">Log Out</a>
+  </nav>
+</section>
 
-<button id="logout" data-ng-click="userLogOut(user.access_token)">Log Out</button>
-
-<section>
+<section class="form__module">
   <form data-ng-submit="askGoogle(googlebook.isbn)">
     <input type="text" data-ng-model="googlebook.isbn" required></input>
     <button type="submit">Ask Google</button>
   </form>
-  <section data-ng-if="checkResult">
+</section>
+
+  <section class="error__message" data-ng-if="checkResult">
     <p>Sorry we could not find that. Please Check your ISBN</p>
   </section>
-  <section data-ng-if="googleData">
-    <p>Is this the Book you want to post?</p>
+
+<section data-ng-if="googleData" class="book__preview">
+  <h2>Found Book</h2>
+  <section class="book__preview__section" data-ng-if="googleData">
     <img data-ng-src="{{googleData.images.smallThumbnail}}"/>
   </section>
-  <section data-ng-if="googleData">
+
+  <section class="book__preview__section" data-ng-if="googleData">
     <ul>
       <li>Title: {{googleData.title}}</li>
       <li>Author: {{googleData.author[0]}}</li>
       <li>Genre: {{googleData.genre[0]}}</li>
     </ul>
+    <button data-ng-click="submitBook(user.access_token, {title: googleData.title, authors: googleData.author, imageLinks: googleData.images, categories: googleData.genre, description: googleData.description})">Yes!</button>
   </section>
-  <button data-ng-if="googleData" data-ng-click="submitBook(user.access_token, {title: googleData.title, authors: googleData.author, imageLinks: googleData.images, categories: googleData.genre, description: googleData.description})">Yes!</button>
 </section>
 
-<h1>Posted Books</h1>
+<h1 class="center-text">Posted Books</h1>
 
-<ul class="list">
-  <li class="list__item" data-ng-repeat="book in userBooks">
-    <section>
-      <img data-ng-src="{{book.imageLinks.smallThumbnail}}">
-    </section>
-    <section>
-      <ul>
-        <li>Title: {{book.title}}</li>
-        <li> Author: {{book.authors[0]}} </li>
-        <li> Genre: {{book.categories[0]}} </li>
-      </ul>
-      <button data-ng-click="destroyBook(user.access_token, book._id)">Destroy</button>
-    </section>
-  </li>
-</ul>
+<section class="book__list">
+  <ul class="list">
+    <li class="list__item" data-ng-repeat="book in userBooks">
+      <section class="book__list__section">
+        <img data-ng-src="{{book.imageLinks.smallThumbnail}}">
+      </section>
+      <section class="book__list__section">
+        <ul>
+          <li>Title: {{book.title}}</li>
+          <li> Author: {{book.authors[0]}} </li>
+          <li> Genre: {{book.categories[0]}} </li>
+        </ul>
+        <button data-ng-click="destroyBook(user.access_token, book._id)">Destroy</button>
+      </section>
+    </li>
+  </ul>
+</section>
 
 <h1 class="center-text">User Requests</h1>
 <ul class="list">

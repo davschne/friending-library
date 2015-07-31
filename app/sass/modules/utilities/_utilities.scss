@@ -1,0 +1,26 @@
+.float-right {
+  float: right;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.book__preview {
+  @extend %center-container;
+  overflow: auto;
+}
+
+.book__preview__section {
+  float: left;
+  // display: inline-block;
+  margin-bottom: 1em;
+}
+
+.book__list {
+  overflow: auto;
+}
+
+.error__message {
+  @extend %center-container;
+}

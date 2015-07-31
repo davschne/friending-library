@@ -7,7 +7,7 @@ var uglify = require('gulp-uglify');
 var minifyCSS = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
 // var mocha = require("gulp-mocha");
-var jshint = require("gulp-jshint");
+// var jshint = require("gulp-jshint");
 
 // var gulpDB = require("./gulp-db");
 
@@ -45,21 +45,27 @@ gulp.task('copy', function() {
     .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('copy-fonts', function() {
+gulp.task('copy-otf', function() {
 
   return gulp.src('./app/**/*.otf')
     .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('build', ['sass', 'copy', 'copy-fonts', 'webpack']);
+gulp.task('copy-svg', function() {
+
+  return gulp.src('./app/**/*.ttf')
+    .pipe(gulp.dest('./public/'));
+});
+
+gulp.task('build', ['sass', 'copy', 'copy-otf', 'copy-svg', 'webpack']);
 
 gulp.task('default', ['build']);
 
-gulp.task("lint", function() {
-  return gulp.src(["./routes/*.js", "./test/*.js", "./middleware/*.js", "./models/*.js", "./lib/*.js", "./server.js"])
-    .pipe(jshint())
-    .pipe(jshint.reporter("default"));
-});
+// gulp.task("lint", function() {
+//   return gulp.src(["./routes/*.js", "./test/*.js", "./middleware/*.js", "./models/*.js", "./lib/*.js", "./server.js"])
+//     .pipe(jshint())
+//     .pipe(jshint.reporter("default"));
+// });
 
 // gulp.task("test", function() {
 //   return gulp.src("./test/*.js")
