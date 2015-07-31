@@ -105,8 +105,6 @@ module.exports = function(app) {
 
         getUserBooks($scope.user.access_token);
 
-
-
         $scope.askGoogle = function(userData) {
           Http.connectGoogleBooks(userData, function(data) {
             console.log('Google Data Back');
@@ -138,9 +136,9 @@ module.exports = function(app) {
           Http.createBook(user, userData, function(data) {
             console.log('Submit Success');
             console.log(data);
-          });
 
-          getUserBooks(user);
+            getUserBooks(user);
+          });
 
           delete $scope.googleData
         };
