@@ -19,26 +19,34 @@ module.exports = function(app) {
         console.log(data);
 
         $scope.books = data;
+        $scope.showDescription = false;
 
-        // for(var i = 0; i < $scope.books.length; i++) {
-        //   $scope.books[i].requested = false
-        // }
+        $scope.toggleDescription = function(choice) {
+          if(choice === 1) {
+            $scope.showDescription = true;
+          } else {
+            $scope.showDescription = false;
+          }
+        };
+
+        if($scope.books.length === 0) {
+          $scope.noBooks = true;
+        } else {
+          $scope.noBooks = false;
+        }
       });
     };
 
     populateBookPile(userToken);
 
     $scope.checkBook = function(user, bookId) {
-
       Http.checkoutBook(user, bookId, function(data) {
         console.log('Checked Out');
         console.log(data);
-      });
 
-      // return function(bookObject) {
-      //   bookObject.requested = true;
-      // }
-    }
+        populateBookPile(user);
+      });
+    };
 
   }]);
 };

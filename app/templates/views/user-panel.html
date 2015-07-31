@@ -1,10 +1,10 @@
 <section>
 <section class="nav__template">
   <nav>
-    <a href="" class="nav__anchors">Available Books</a>
-    <a href="" class="nav__anchors">Requested Books</a>
-    <a href="" class="nav__anchors">My Books</a>
-    <a href="" class="nav__anchors" data-ng-click="userLogOut(user.access_token)">Log Out</a>
+    <a href="#/pile" class="nav__anchors">Available Books</a>
+    <a href="#/success" class="nav__anchors">My Books</a>
+    <a href="#/requests" class="nav__anchors">My Requests</a>
+    <a href="#/" class="nav__anchors" data-ng-click="userLogOut(user.access_token)">Log Out</a>
   </nav>
 </section>
 
@@ -36,10 +36,10 @@
 </section>
 
 <h1 class="center-text">Posted Books</h1>
-
 <section class="book__list">
   <ul class="list">
-    <li class="list__item" data-ng-repeat="book in userBooks">
+    <h2 data-ng-if="allRequested">All Books Out</h2>
+    <li class="list__item" data-ng-repeat="book in availableBooks">
       <section class="book__list__section">
         <img data-ng-src="{{book.imageLinks.smallThumbnail}}">
       </section>
@@ -57,6 +57,7 @@
 
 <h1 class="center-text">User Requests</h1>
 <ul class="list">
+  <h2 data-ng-if="noRequests">No Books Requested </h2>
   <li class="list__item" data-ng-repeat="userBook in bookRequests">
     <section>
       <img data-ng-src="{{userBook.imageLinks.smallThumbnail}}">
@@ -73,8 +74,9 @@
   </li>
 </ul>
 
-<h1 class="center-text">User Borrowing</h1>
+<h1 class="center-text">Books Lended</h1>
 <ul class="list">
+  <h2 data-ng-if="noneBorrowed">No Books Borrowed</h2>
   <li class="list__item" data-ng-repeat="borrow in borrowedBooks">
     <section>
       <img data-ng-src="{{borrow.imageLinks.smallThumbnail}}"/>

@@ -18,17 +18,6 @@ module.exports = function(app) {
           .success(callback)
           .error(handleError);
         }
-
-
-        //move logout to user controller
-        // logout: function() {
-        //   $cookies.put('tok', '');
-        // },
-
-        // isSignedIn: function() {
-        //   return ($cookies.get('tok') && $cookies.get('tok').length);
-        // }
-
       };
     };
   }]);
