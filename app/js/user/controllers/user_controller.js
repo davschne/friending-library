@@ -127,7 +127,7 @@ module.exports = function(app) {
               };
 
               $scope.googleData = usefulInfo;
-              delete $scope.googleBook
+              delete $scope.googleBook;
             }
           });
         };
@@ -136,11 +136,10 @@ module.exports = function(app) {
           Http.createBook(user, userData, function(data) {
             console.log('Submit Success');
             console.log(data);
-
-            getUserBooks(user);
           });
 
-          delete $scope.googleData
+          getUserBooks(user);
+          delete $scope.googleData;
         };
 
         $scope.destroyBook = function(user, bookId) {
