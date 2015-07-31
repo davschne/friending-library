@@ -1,0 +1,22 @@
+/*----- Sign Up Module -----*/
+.signup {
+ padding-top: $default-em * 10;
+ padding-bottom: $default-em * 10;
+ @extend %center-container;
+
+  &__button {
+    width: 100%;
+  }
+
+  & input {
+    margin-top: $default-em * 2;
+    margin-bottom: $default-em * 2;
+    width: 100%;
+    padding: $default-em * 2;
+    box-sizing: border-box;
+  }
+
+  & fieldset {
+    width: $default-em * 80;
+  }
+}

@@ -1,3 +1,5 @@
+/* jshint expr: true */
+
 var chai = require("chai");
 var expect = chai.expect;
 var port = process.env.PORT || 3000;
@@ -7,7 +9,7 @@ var app = require("../server");
 chai.use(require("chai-http"));
 
 var User = require("../models/User");
-var Book = require("../models/Book")
+var Book = require("../models/Book");
 
 var testData = require("../lib/test-data");
 var testBooks = testData.books;
@@ -18,13 +20,13 @@ describe("/api/self", function() {
   describe("GET", function() {
 
     before(function(done) {
-      testUsers[0].books.push(testBooks[0]._id);
+      testUsers[0].books.push(testBooks[3]._id);
       testUsers[0].borrowing.push(testBooks[1]._id);
-      testUsers[0].requests.push(testBooks[2]._id)
+      testUsers[0].requests.push(testBooks[2]._id);
       User.create(testUsers[0], function(err, data) {
         if (!err) {
-          testBooks[0].owner = testUsers[0]._id;
-          Book.create(testBooks[0], function(err, data) {
+          testBooks[3].owner = testUsers[0]._id;
+          Book.create(testBooks[3], function(err, data) {
             testBooks[1].owner = testUsers[1]._id;
             Book.create(testBooks[1], function(err, data) {
               testBooks[2].owner = testUsers[1]._id;
@@ -59,7 +61,7 @@ describe("/api/self", function() {
     });
 
     after(function(done) {
-      Book.remove({$or: [{_id: testBooks[0]._id},
+      Book.remove({$or: [{_id: testBooks[3]._id},
                          {_id: testBooks[1]._id},
                          {_id: testBooks[2]._id}]
       }, function(err) {
@@ -89,7 +91,7 @@ describe("/api/self", function() {
               expect(res.body._id).to.eql(testUsers[0]._id);
               expect(res).to.be.json;
               done();
-            })
+            });
           });
         });
     });
@@ -104,10 +106,10 @@ describe("/api/self/books", function() {
         return User.create(testUsers[1]);
       }, function(err) { throw err; })
       .then(function() {
-        testBooks[0].owner = testUsers[0]._id;
-        testBooks[0].borrower = testUsers[1]._id;
-        testBooks[0].request = testUsers[1]._id;
-        return Book.create(testBooks[0]);
+        testBooks[3].owner = testUsers[0]._id;
+        testBooks[3].borrower = testUsers[1]._id;
+        testBooks[3].request = testUsers[1]._id;
+        return Book.create(testBooks[3]);
       }, function(err) { throw err; })
       .then(function() {
         done();
@@ -135,10 +137,10 @@ describe("/api/self/books", function() {
     User.findByIdAndRemove(testUsers[0]._id)
       .exec()
       .then(function() {
-        return User.findByIdAndRemove(testUsers[1]._id)
+        return User.findByIdAndRemove(testUsers[1]._id);
       }, function(err) { throw err; })
       .then(function() {
-        return Book.remove({owner: testUsers[0]._id})
+        return Book.remove({owner: testUsers[0]._id});
       }, function(err) { throw err; })
       .then(function() {
         done();
