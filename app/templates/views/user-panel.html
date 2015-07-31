@@ -3,54 +3,77 @@
 
 <button id="logout" data-ng-click="userLogOut(user.access_token)">Log Out</button>
 
-<form data-ng-submit="askGoogle(googlebook.isbn)">
-  <input type="text" data-ng-model="googlebook.isbn" required></input>
-  <button type="submit">Ask Google</button>
-</form>
-
-<section data-ng-if="googleData">
-  <p>Is this the Book you want to post?</p>
-  <img data-ng-src="{{googleData.images.smallThumbnail}}"/>
-  <button data-ng-click="submitBook(user.access_token, {title: googleData.title, authors: googleData.author, imageLinks: googleData.images, categories: googleData.genre, description: googleData.description})">Yes!</button>
+<section>
+  <form data-ng-submit="askGoogle(googlebook.isbn)">
+    <input type="text" data-ng-model="googlebook.isbn" required></input>
+    <button type="submit">Ask Google</button>
+  </form>
+  <section data-ng-if="checkResult">
+    <p>Sorry we could not find that. Please Check your ISBN</p>
+  </section>
+  <section data-ng-if="googleData">
+    <p>Is this the Book you want to post?</p>
+    <img data-ng-src="{{googleData.images.smallThumbnail}}"/>
+  </section>
+  <section data-ng-if="googleData">
+    <ul>
+      <li>Title: {{googleData.title}}</li>
+      <li>Author: {{googleData.author[0]}}</li>
+      <li>Genre: {{googleData.genre[0]}}</li>
+    </ul>
+  </section>
+  <button data-ng-if="googleData" data-ng-click="submitBook(user.access_token, {title: googleData.title, authors: googleData.author, imageLinks: googleData.images, categories: googleData.genre, description: googleData.description})">Yes!</button>
 </section>
 
-<form class="addBook" data-ng-submit="submitBook(user.access_token, {title : newbook.title, authors: [newbook.author], categories: [newbook.genre]})">
-  <fieldset>
-    <div class="addBook__wrapper">
-      <label class="addBook__label">Title:</label>
-      <input type="text" id="book-title" placeholder="Title" data-ng-model="newbook.title" required></input>
-    </div>
-
-    <div class="addBook__wrapper">
-      <label class="addBook__label">Author:</label>
-      <input type="text" placeholder="Author" data-ng-model="newbook.author" required></input>
-    </div>
-
-    <div class="addBook__wrapper">
-      <label class="addBook__label">Genre:</label>
-      <input type="text" value="what" placeholder="Genre" data-ng-model="newbook.genre" required></input>
-    </div>
-
-    <button type="submit" class="addBook__button" id="sign-in">Add Book</button>
-  </fieldset>
-</form>
+<h1>Posted Books</h1>
 
 <ul class="list">
-  <li class="list__item" data-ng-repeat="book in userBooks"> <img data-ng-src="{{book.imageLinks.smallThumbnail}}"/> Title: {{book.title}}, Author: {{book.authors[0]}}, Genre: {{book.categories[0]}}<button data-ng-click="destroyBook(user.access_token, book._id)">Destroy</button></li>
-</ul>
-
-<h1 class="center-text">Self Requests</h1>
-<ul class="list">
-  <li class="list__item" data-ng-repeat="selfBook in selfRequests"> Title: {{selfBook.title}}, Author: {{selfBook.authors[0]}}, Genre: {{selfBook.categories[0]}}<button data-ng-click="removeRequest(user.access_token, selfBook._id)">Undo</button></li>
+  <li class="list__item" data-ng-repeat="book in userBooks">
+    <section>
+      <img data-ng-src="{{book.imageLinks.smallThumbnail}}">
+    </section>
+    <section>
+      <ul>
+        <li>Title: {{book.title}}</li>
+        <li> Author: {{book.authors[0]}} </li>
+        <li> Genre: {{book.categories[0]}} </li>
+      </ul>
+      <button data-ng-click="destroyBook(user.access_token, book._id)">Destroy</button>
+    </section>
+  </li>
 </ul>
 
 <h1 class="center-text">User Requests</h1>
 <ul class="list">
-  <li class="list__item" data-ng-repeat="userBook in bookRequests"> Title: {{userBook.title}}, Author: {{userBook.authors[0]}}, Genre: {{userBook.categories[0]}}<button data-ng-click="acceptRequest(user.access_token, {_id : userBook._id})">Approve</button><button data-ng-click="rejectRequest(user.access_token, {_id : userBook._id})">Deny</button></li>
+  <li class="list__item" data-ng-repeat="userBook in bookRequests">
+    <section>
+      <img data-ng-src="{{userBook.imageLinks.smallThumbnail}}">
+    </section>
+    <section>
+      <ul>
+        <li>Title: {{userBook.title}}</li>
+        <li> Author: {{userBook.authors[0]}} </li>
+        <li> Genre: {{userBook.categories[0]}} </li>
+      </ul>
+      <button data-ng-click="acceptRequest(user.access_token, {_id : userBook._id})">Approve</button>
+      <button data-ng-click="rejectRequest(user.access_token, {_id : userBook._id})">Deny</button>
+    </section>
+  </li>
 </ul>
 
 <h1 class="center-text">User Borrowing</h1>
 <ul class="list">
-  <li class="list__item" data-ng-repeat="borrow in borrowedBooks"> Title: {{borrow.title}}, Author: {{borrow.authors[0]}}, Genre: {{borrow.categories[0]}}<button data-ng-click="returnBook(user.access_token, {_id : borrow._id})">Returned</button></li>
+  <li class="list__item" data-ng-repeat="borrow in borrowedBooks">
+    <section>
+      <img data-ng-src="{{borrow.imageLinks.smallThumbnail}}"/>
+    </section>
+    <section>
+      <ul>
+        <li>Title: {{borrow.title}}</li>
+        <li>Author: {{borrow.authors[0]}}</li>
+        <li>Genre: {{borrow.categories[0]}}</li>
+      </ul>
+      <button data-ng-click="returnBook(user.access_token, {_id : borrow._id})">Returned</button>
+  </li>
 </ul>
 </section>
