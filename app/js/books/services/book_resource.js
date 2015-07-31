@@ -31,6 +31,16 @@ module.exports = function(app) {
           })
           .success(callback)
           .error(handleError());
+        },
+
+        logOut: function(user, callback) {
+          $http({
+            method: 'POST',
+            url: '/logout',
+            headers: {'Authorization': 'Bearer ' + user}
+          })
+          .success(callback)
+          .error(handleError);
         }
       };
     };
