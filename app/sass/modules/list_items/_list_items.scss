@@ -14,5 +14,10 @@
   &__item {
     border-bottom: .1em solid green;
     padding: $default-em * 4;
+    overflow: auto;
   }
+}
+
+.book__list__section {
+  float: left;
 }

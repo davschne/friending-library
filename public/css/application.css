@@ -88,8 +88,8 @@ button {
 
 @font-face {
   font-family: 'icomoon';
-  src: url("../fonts/icomoon.eot?-smydlc");
-  src: url("../fonts/icomoon.eot?#iefix-smydlc") format("embedded-opentype"), url("../fonts/icomoon.ttf?-smydlc") format("truetype"), url("../fonts/icomoon.woff?-smydlc") format("woff"), url("../tfonts/icomoon.svg?-smydlc#icomoon") format("svg");
+  src: url("../fonts/icomoon.eot?9rgmxt");
+  src: url("../fonts/icomoon.eot?#iefix9rgmxt") format("embedded-opentype"), url("../fonts/icomoon.ttf?9rgmxt") format("truetype"), url("../fonts/icomoon.woff?9rgmxt") format("woff"), url("../fonts/icomoon.svg?9rgmxt#icomoon") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -108,7 +108,13 @@ button {
 .icon-search:before {
   content: "\e600"; }
 
-.search, .signup, .list {
+.icon-facebook2:before {
+  content: "\e601"; }
+
+.icon-github:before {
+  content: "\e602"; }
+
+.search, .signup, .signin, .nav__template, .list, .book__preview, .error__message, .form__module {
   width: 50%;
   margin-left: auto !important;
   margin-right: auto !important; }
@@ -166,6 +172,15 @@ button {
   width: auto;
   float: left; }
 
+.nav__anchors {
+  display: inline-block;
+  padding: 1em;
+  color: black;
+  border: .1em solid black; }
+
+.nav__template {
+  overflow: auto; }
+
 /*----- List Items Module -----*/
 .list {
   background-color: #fff;
@@ -179,10 +194,24 @@ button {
   overflow: hidden; }
   .list__item {
     border-bottom: .1em solid green;
-    padding: 1em; }
+    padding: 1em;
+    overflow: auto; }
+
+.book__list__section {
+  float: left; }
 
 .float-right {
   float: right; }
 
 .center-text {
   text-align: center; }
+
+.book__preview {
+  overflow: auto; }
+
+.book__preview__section {
+  float: left;
+  margin-bottom: 1em; }
+
+.book__list {
+  overflow: auto; }

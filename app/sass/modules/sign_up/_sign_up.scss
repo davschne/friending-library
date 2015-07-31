@@ -20,3 +20,7 @@
     width: $default-em * 80;
   }
 }
+
+.signin {
+  @extend %center-container;
+}
