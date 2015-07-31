@@ -51,6 +51,9 @@ table {
 html {
   background-image: url("../images/seamless_paper_texture.png"); }
 
+body {
+  font-family: 'Open Sans', sans-serif; }
+
 main {
   background-image: url("../images/seamless_paper_texture.png");
   padding-top: 3em;
@@ -58,7 +61,6 @@ main {
 
 header, footer {
   position: static;
-  height: 5em;
   color: #f2f2f2;
   background-color: rgba(38, 101, 6, 0.5); }
 
@@ -67,15 +69,21 @@ nav a {
   color: #f2f2f2; }
 
 form {
-  padding: 0.25em; }
+  padding: 2em;
+  background-color: #fff; }
 
 input, button {
   border-radius: 0.25em;
   border: 0.1em solid #bfbfbf;
   padding: 0.5em; }
 
+input {
+  padding: 1em; }
+
 button {
   cursor: pointer;
+  font-size: 0.875em;
+  padding: 0.625em;
   background-image: -webkit-linear-gradient(top, #eddb11 0, #efcf14 35%, #f1bf18 65%, #f2b21b 100%); }
 
 @font-face {
@@ -85,6 +93,36 @@ button {
 @font-face {
   font-family: NotCourierSans-Bold;
   src: url("../fonts/NotCourierSans-Bold.otf"); }
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url("../fonts/open-sans/OpenSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url("../fonts/open-sans/OpenSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url("../fonts/open-sans/OpenSans-Semibold.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url("../fonts/open-sans/OpenSans-Bold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url("../fonts/open-sans/OpenSans-ExtraBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal; }
 
 @font-face {
   font-family: 'icomoon';
@@ -114,7 +152,7 @@ button {
 .icon-github:before {
   content: "\e602"; }
 
-.search, .signup, .signin, .nav__template, .list, .book__preview, .error__message, .form__module {
+.search, .signup, .signin, .nav__template, .list, .book__list__header, .book__preview, .error__message, .form {
   width: 50%;
   margin-left: auto !important;
   margin-right: auto !important; }
@@ -138,11 +176,28 @@ button {
     padding-bottom: 0.25em; }
 
 /*----- Footer Module -----*/
-.footer__text {
-  text-align: center; }
+.footer {
+  padding: 1.5em; }
+  .footer p {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.75em;
+    text-align: center;
+    color: #fff;
+    margin-top: 1em; }
+  .footer a {
+    text-decoration: none; }
 
-.footer__padding {
-  padding-top: 1em; }
+.footer__bottom__text {
+  margin-bottom: 1.25em; }
+
+.icon-github {
+  color: #fff;
+  font-size: 2.5em; }
+  .icon-github:visited {
+    color: #fff; }
+  .icon-github:hover {
+    color: #f1b41a; }
 
 /*----- Sign Up Module -----*/
 .signup {
@@ -158,6 +213,34 @@ button {
     box-sizing: border-box; }
   .signup fieldset {
     width: 20em; }
+
+.signin {
+  font-family: 'Open Sans', sans-serif;
+  padding: 3em;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  background-color: #fff; }
+  .signin p {
+    font-weight: 400;
+    margin-bottom: 1.5em;
+    color: rgba(33, 33, 33, 0.7); }
+
+.signin__header {
+  font-weight: 500;
+  color: rgba(33, 33, 33, 0.7);
+  font-size: 2.5em;
+  margin-bottom: 1em; }
+
+.signin__facebook {
+  background-color: #3b5999;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5em; }
+  .signin__facebook:visited {
+    color: #fff; }
+
+.icon-facebook2 {
+  margin-right: 0.25em; }
 
 /*----- Navigation Module -----*/
 .nav__heading {
@@ -175,8 +258,27 @@ button {
 .nav__anchors {
   display: inline-block;
   padding: 1em;
-  color: black;
-  border: .1em solid black; }
+  background-color: #f89919;
+  color: #fff;
+  border: .1em solid transparent;
+  transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear; }
+  .nav__anchors:hover {
+    background-color: #fff;
+    color: rgba(33, 33, 33, 0.7); }
+  .nav__anchors__active {
+    border-bottom: 0.25em solid #f89919; }
+
+.nav__anchor__logout {
+  float: right;
+  color: rgba(33, 33, 33, 0.7);
+  background-color: #fff;
+  border: 0.1em solid #f1b41a;
+  padding: 1em;
+  transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear; }
+  .nav__anchor__logout:hover {
+    color: #fff;
+    background-color: #f1b41a;
+    border: 0.1em solid #f1b41a; }
 
 .nav__template {
   overflow: auto; }
@@ -185,20 +287,63 @@ button {
 .list {
   background-color: #fff;
   border: .1em solid #dedede;
-  border-top-right-radius: .4em;
-  border-top-left-radius: .4em;
+  border-bottom-right-radius: .4em;
+  border-bottom-left-radius: .4em;
   box-shadow: 0 0.2em 0.2em -0.1em rgba(0, 0, 0, 0.055);
   color: #888;
   display: block;
-  margin: 0.8em 2.2em 0.8em 2.2em;
-  overflow: hidden; }
+  margin: 0 2.2em 0.8em 2.2em;
+  overflow: auto; }
   .list__item {
-    border-bottom: .1em solid green;
+    border-bottom: 0.1em solid rgba(38, 101, 6, 0.5);
     padding: 1em;
     overflow: auto; }
 
 .book__list__section {
-  float: left; }
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: auto;
+  padding: 1em; }
+
+.book__list__subsection {
+  float: left;
+  margin-right: 2em; }
+  .book__list__subsection p {
+    font-size: 1.12m;
+    font-weight: 500;
+    margin-bottom: .7em; }
+  .book__list__subsection li {
+    margin-bottom: .5em;
+    font-weight: 300; }
+
+.book__list__header {
+  font-weight: 400;
+  font-size: 2em;
+  text-align: center;
+  color: rgba(33, 33, 33, 0.7);
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.5em 0;
+  margin-top: 1.5em; }
+
+.book__list__none {
+  font-size: 1em;
+  font-weight: 300;
+  text-align: center;
+  color: rgba(33, 33, 33, 0.5);
+  padding: 2.5em; }
+
+.description {
+  background-color: #fff; }
+
+.description__header {
+  font-size: 1.5m;
+  font-weight: 500;
+  margin-bottom: .7em; }
+
+.description__p {
+  font-weight: 300;
+  margin-bottom: 1em; }
 
 .float-right {
   float: right; }
@@ -215,3 +360,37 @@ button {
 
 .book__list {
   overflow: auto; }
+
+.form {
+  overflow: auto; }
+
+.form__module {
+  width: 100%;
+  margin-top: 1.5em;
+  float: left; }
+
+.form__module__header {
+  font-weight: 400;
+  font-size: 2em;
+  text-align: center;
+  color: rgba(33, 33, 33, 0.7);
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.5em 0; }
+
+.form__module__p {
+  margin-bottom: 1em; }
+
+.form__module-input-button {
+  display: inline-block;
+  margin-right: auto;
+  margin-left: auto; }
+
+.error__message {
+  background-color: #fff; }
+
+.error__message__p {
+  font-size: 1em;
+  font-weight: 300;
+  text-align: center;
+  color: rgba(33, 33, 33, 0.5);
+  padding: 2.5em; }

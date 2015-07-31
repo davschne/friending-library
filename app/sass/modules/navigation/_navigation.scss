@@ -16,9 +16,32 @@
 .nav__anchors {
   display: inline-block;
   padding: $default-em * 4;
-  color: black;
-  border: .1em solid black;
+  background-color: $nav-orange;
+  color: #fff;
+  border: .1em solid transparent;
+  transition: background-color .2s linear, color .2s linear, border .2s linear;
+  &:hover {
+    background-color: #fff;
+    color: $font-grey;
+  }
+  &__active {
+    border-bottom: $default-em solid $nav-orange;
+  }
 
+}
+
+.nav__anchor__logout {
+  float: right;
+  color: $font-grey;
+  background-color: #fff;
+  border: .1em solid rgba(241, 180, 26, 1);
+  padding: $default-em * 4;
+  transition: background-color .2s linear, color .2s linear, border .2s linear;
+  &:hover {
+    color: #fff;
+    background-color: rgba(241, 180, 26, 1);
+    border: .1em solid rgba(241, 180, 26, 1);
+  }
 }
 
 .nav__template {

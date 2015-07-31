@@ -1,8 +1,29 @@
 /*----- Footer Module -----*/
-.footer__text {
-  text-align: center;
+.footer {
+  padding: $default-em * 6;
+  p {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: $default-em * 3;
+    text-align: center;
+    color: #fff;
+    margin-top: $default-em * 4;
+  }
+  a {
+    text-decoration: none;
+  }
 }
 
-.footer__padding {
-  padding-top: $default-em * 4;
+.footer__bottom__text {
+  margin-bottom: $default-em * 5;
+}
+.icon-github {
+  color: #fff;
+  font-size: $default-em * 10;
+  &:visited {
+    color: #fff;
+  }
+  &:hover {
+    color: rgba(241, 180, 26, 1);
+  }
 }

@@ -7,3 +7,36 @@
   font-family: NotCourierSans-Bold;
   src: url("../fonts/NotCourierSans-Bold.otf");
 }
+
+//Open-sans
+
+@font-face {
+     font-family: 'Open Sans';
+     src: url('../fonts/open-sans/OpenSans-Regular.ttf') format('truetype');
+     font-weight: 400;
+     font-style: normal;
+}
+@font-face {
+     font-family: 'Open Sans';
+     src: url('../fonts/open-sans/OpenSans-Light.ttf') format('truetype');
+     font-weight: 300;
+     font-style: normal;
+}
+@font-face {
+     font-family: 'Open Sans';
+     src: url('../fonts/open-sans/OpenSans-Semibold.ttf') format('truetype');
+     font-weight: 500;
+     font-style: normal;
+}
+@font-face {
+     font-family: 'Open Sans';
+     src: url('../fonts/open-sans/OpenSans-Bold.ttf') format('truetype');
+     font-weight: 600;
+     font-style: normal;
+}
+@font-face {
+     font-family: 'Open Sans';
+     src: url('../fonts/open-sans/OpenSans-ExtraBold.ttf') format('truetype');
+     font-weight: 700;
+     font-style: normal;
+}

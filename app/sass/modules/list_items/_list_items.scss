@@ -2,22 +2,73 @@
 .list {
   background-color: #fff;
   border: .1em solid #dedede;
-  border-top-right-radius: .4em;
-  border-top-left-radius: .4em;
+  border-bottom-right-radius: .4em;
+  border-bottom-left-radius: .4em;
   box-shadow: 0 .2em .2em -.1em rgba(0, 0, 0, 0.055);
   color: #888;
   display: block;
-  margin: .8em 2.2em .8em 2.2em;
-  overflow: hidden;
+  margin: 0 2.2em .8em 2.2em;
+  overflow: auto;
   @extend %center-container;
 
   &__item {
-    border-bottom: .1em solid green;
+    border-bottom: .1em solid rgba(38,101,6,0.5);
     padding: $default-em * 4;
     overflow: auto;
   }
 }
-
 .book__list__section {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: auto;
+  padding: 1em;
+}
+.book__list__subsection {
   float: left;
+  margin-right: 2em;
+  p {
+    font-size: 1.12m;
+    font-weight: 500;
+    margin-bottom: .7em;
+  }
+  li {
+    margin-bottom: .5em;
+    font-weight: 300;
+  }
+
+}
+
+.book__list__header {
+  font-weight: 400;
+  font-size: $default-em * 8;
+  text-align: center;
+  color: $font-grey;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: $default-em * 2 0;
+  margin-top: $default-em * 6;
+  @extend %center-container;
+}
+
+.book__list__none {
+  font-size: $default-em * 4;
+  font-weight: 300;
+  text-align: center;
+  color: rgba(33, 33, 33, 0.5);
+  padding: $default-em * 10;
+}
+
+.description {
+  background-color: #fff;
+}
+
+.description__header {
+  font-size: 1.5m;
+  font-weight: 500;
+  margin-bottom: .7em;
+}
+
+.description__p {
+  font-weight: 300;
+  margin-bottom: 1em;
 }
