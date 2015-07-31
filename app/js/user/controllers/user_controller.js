@@ -71,6 +71,8 @@ module.exports = function(app) {
 
         getUserBooks($scope.user.access_token);
 
+
+
         $scope.askGoogle = function(userData) {
           Http.connectGoogleBooks(userData, function(data) {
             console.log('Google Data Back');
@@ -79,23 +81,22 @@ module.exports = function(app) {
             var rawData = data.items;
             console.log(rawData);
 
-            var usefulInfo = {
-              "author" : data.items[0].volumeInfo.authors,
-              "title" : data.items[0].volumeInfo.title,
-              "genre" : data.items[0].volumeInfo.categories,
-              "images" : data.items[0].volumeInfo.imageLinks,
-              "description" : data.items[0].volumeInfo.description
-            };
+            $scope.checkResult = false;
 
-            $scope.googleData = usefulInfo;
+            if(!(rawData)) {
+              $scope.checkResult = true;
+            } else {
+              var usefulInfo = {
+                "author" : data.items[0].volumeInfo.authors,
+                "title" : data.items[0].volumeInfo.title,
+                "genre" : data.items[0].volumeInfo.categories,
+                "images" : data.items[0].volumeInfo.imageLinks,
+                "description" : data.items[0].volumeInfo.description
+              };
 
-
-            // for(var i = 0; i < rawData.length; i++) {
-
-            // }
+              $scope.googleData = usefulInfo;
+            }
           });
-
-
         };
 
         $scope.submitBook = function(user, userData) {
@@ -106,7 +107,7 @@ module.exports = function(app) {
 
           getUserBooks(user);
 
-          delete $scope.newbook
+          delete $scope.googleData
         };
 
         $scope.destroyBook = function(user, bookId) {
