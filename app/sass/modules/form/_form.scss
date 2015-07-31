@@ -1,8 +1,9 @@
 .form {
-  width: 60em;
-  display: block;
-  margin: 0 auto;
+  // width: 60em;
+  // display: block;
+  // margin: 0 auto;
   overflow: auto;
+  @extend %center-container;
 }
 
 .form__module {

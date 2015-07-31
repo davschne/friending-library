@@ -152,7 +152,7 @@ button {
 .icon-github:before {
   content: "\e602"; }
 
-.search, .signup, .signin, .nav__template, .list, .book__list__header, .book__preview, .error__message {
+.search, .signup, .signin, .nav__template, .list, .book__list__header, .book__preview, .error__message, .form {
   width: 50%;
   margin-left: auto !important;
   margin-right: auto !important; }
@@ -362,9 +362,6 @@ button {
   overflow: auto; }
 
 .form {
-  width: 60em;
-  display: block;
-  margin: 0 auto;
   overflow: auto; }
 
 .form__module {

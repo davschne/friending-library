@@ -23,8 +23,8 @@
             <li><p>Author:</p>{{selfBook.authors[0]}}</li>
             <li><p>Genre:</p>{{selfBook.categories[0]}}</li>
           </ul>
+          <button data-ng-click="removeRequest(user.access_token, selfBook._id)">Undo</button>
         </section>
-        <button data-ng-click="removeRequest(user.access_token, selfBook._id)">Undo</button>
       </section>
     </li>
   </ul>
