@@ -23,4 +23,35 @@
 
 .signin {
   @extend %center-container;
+  font-family: 'Open Sans', sans-serif;
+  padding: $default-em * 12;
+  margin-top: $default-em * 12;
+  margin-bottom: $default-em * 12;
+  background-color: #fff;
+  p {
+    font-weight: 400;
+    margin-bottom: $default-em * 6;
+    color: $font-grey;
+  }
+}
+
+.signin__header {
+  font-weight: 500;
+  color: $font-grey;
+  font-size: $default-em * 10;
+  margin-bottom: $default-em * 4;
+}
+
+.signin__facebook {
+  background-color: $facebook-color;
+  color: #fff;
+  text-decoration: none;
+  padding: $default-em * 2;
+  &:visited {
+    color: #fff;
+  }
+}
+
+.icon-facebook2 {
+  margin-right: $default-em;
 }

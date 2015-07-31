@@ -1,8 +1,52 @@
-<h1 class="center-text">Self Requests</h1>
-<ul class="list">
-  <li class="list__item" data-ng-repeat="selfBook in selfRequests"> Title: {{selfBook.title}}, Author: {{selfBook.authors[0]}}, Genre: {{selfBook.categories[0]}}<button data-ng-click="removeRequest(user.access_token, selfBook._id)">Undo</button></li>
-</ul>
+<section>
+  <section class="nav__template">
+  <nav>
+    <a href="#/pile" class="nav__anchors">Available Books</a>
+    <a href="#/success" class="nav__anchors">My Books</a>
+    <a href="#/requests" class="nav__anchors">My Requests</a>
+    <a href="#/" class="nav__anchor__logout" data-ng-click="userLogOut(user.access_token)">Log Out</a>
+  </nav>
+  </section>
 
-<ul class="list">
-  <li class="list__item" data-ng-repeat="book in Userbooks"> {{ book.title }}, {{book.authors[0]}}, {{book.categories[0]}}<button>Checkout Book</button><button data-ng-click="destroyBook(user.access_token, book._id)">Destory</button></li>
-</ul>
+<h1 class="book__list__header">Requested Books</h1>
+<section class="book__list">
+  <ul class="list">
+    <h2 class="book__list__none" data-ng-if="noSelfRequests">No book requests</h2>
+    <li class="list__item" data-ng-repeat="selfBook in selfRequests">
+      <section class="book__list__section">
+        <section class="book__list__subsection">
+          <img data-ng-src="{{selfBook.imageLinks.smallThumbnail}}">
+        </section>
+        <section class="book__list__subsection">
+          <ul>
+            <li><p>Title:</p>{{selfBook.title}}</li>
+            <li><p>Author:</p>{{selfBook.authors[0]}}</li>
+            <li><p>Genre:</p>{{selfBook.categories[0]}}</li>
+          </ul>
+          <button data-ng-click="removeRequest(user.access_token, selfBook._id)">Undo</button>
+        </section>
+      </section>
+    </li>
+  </ul>
+</section>
+
+<h1 class="book__list__header">Currently Borrowing</h1>
+<section class="book__list">
+  <ul class="list">
+    <h2 class="book__list__none" data-ng-if="noneApproved">No books borrowed</h2>
+    <li class="list__item" data-ng-repeat="borrow in selfBorrowing">
+      <section class="book__list__section">
+        <section class="book__list__subsection">
+        <img data-ng-src="{{borrow.imageLinks.smallThumbnail}}">
+        </section>
+        <section class="book__list__subsection">
+          <ul>
+            <li><p>Title:</p>{{borrow.title}}</li>
+            <li><p>Author:</p>{{borrow.authors[0]}}</li>
+            <li><p>Genre:</p>{{borrow.categories[0]}}</li>
+          </ul>
+        </section>
+      </section>
+    </li>
+  </ul>
+</section>
