@@ -4,85 +4,30 @@ module.exports = function(app) {
 
   app.controller('authController', ['$scope', '$location', 'authResource', '$cookies', function($scope, $location, authResource, $cookies) {
 
-  //   var Http = crudResource();
+    var Http = authResource();
 
-  //   function getToken() {
-  //     var userToken = $location.search();
-  //     // console.log(userToken);
+    var grabToken = function() {
+      return function() {
+        var token = {
+          access_token : $cookies.get('tok')
+        };
 
-  //     $scope.user = userToken;
+        $scope.userToken = token;
+      };
+      console.log('Ran grabToken');
+    };
 
-  //     $cookies.put('tok', $scope.user.access_token);
-  //     var munny = $cookies.get('tok')
+    grabToken();
 
-  //     // console.log(munny);
-  //     // console.log(typeof(munny));
+    $scope.userLogOut = function(user) {
+      Http.logOut(user, function(data) {
+        console.log('Logged Out');
+        console.log(data);
+      })
 
-  //     $cookies.put('tok', '');
-
-  //   };
-
-  //   getToken();
-
-  //   // console.log($scope.user);
-
-  //   function getUserData(user) {
-  //     Http.getUser(user, function(data) {
-
-  //       console.log('User Grab Success');
-  //       console.log(data);
-
-  //     });
-
-  //   };
-
-  //   getUserData($scope.user.access_token);
-
-  //   var getUserBooks = function(user) {
-  //     Http.getBooks(user, function(data) {
-  //       console.log('Book Grab Success');
-  //       console.log(data);
-
-  //       $scope.Userbooks = data;
-  //     });
-
-  //   }
-
-  //   getUserBooks($scope.user.access_token);
-
-  //   $scope.submitBook = function(user, data) {
-  //     Http.createBook(user, data, function(data) {
-  //       console.log('Submit Success');
-  //       console.log(data);
-  //     });
-
-  //     getUserBooks(user);
-
-  //     delete $scope.newbook
-  //   };
-
-  //   $scope.destroyBook = function(user, bookId) {
-  //     Http.removeBook(user, bookId, function(data) {
-  //       console.log('Removed Book!');
-  //       console.log(data);
-  //     });
-
-  //     getUserBooks(user);
-  //   }
-
-
-
-
-
-
-
-
-
-  //       // $scope.user = data;
-
-  //       // $cookies.put('eat', data.user.access_token);
-
-
+      $cookies.put('tok', '');
+      $location.path('/');
+    };
 
   }]);
 

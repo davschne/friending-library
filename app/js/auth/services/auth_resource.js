@@ -9,14 +9,17 @@ module.exports = function(app) {
   app.factory('authResource', ['$http', '$cookies', function($http, $cookies) {
     return function() {
       return {
-      logIn: function(callback) {
+      logOut: function(user, callback) {
           $http({
-            method: 'GET',
-            url: '/login'
+            method: 'POST',
+            url: '/logout',
+            headers: {'Authorization': 'Bearer ' + user}
           })
           .success(callback)
           .error(handleError);
         }
+
+
         //move logout to user controller
         // logout: function() {
         //   $cookies.put('tok', '');
