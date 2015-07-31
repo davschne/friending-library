@@ -129,6 +129,7 @@ module.exports = function(app) {
               };
 
               $scope.googleData = usefulInfo;
+              delete $scope.googleBook
             }
           });
         };
