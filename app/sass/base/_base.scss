@@ -1,6 +1,9 @@
 html {
   background-image: url('../images/seamless_paper_texture.png');
 }
+body {
+  font-family: 'Open Sans', sans-serif;
+}
 
 main {
   background-image: url('../images/seamless_paper_texture.png');
@@ -10,7 +13,6 @@ main {
 
 header, footer {
   position: static;
-  height: $default-em * 20;
   color: $secondary-color;
   background-color: $tertiary-color;
 }
@@ -21,7 +23,8 @@ nav a {
 }
 
 form {
-  padding: $default-em;
+  padding: 2em;
+  background-color: #fff;
 }
 
 %border-styling {
@@ -32,10 +35,13 @@ form {
 
 input {
   @extend %border-styling;
+  padding: $default-em * 4;
 }
 
 button {
   @extend %border-styling;
   cursor: pointer;
+  font-size: $default-em * 3.5;
+  padding: $default-em * 2.5;
   background-image: -webkit-linear-gradient(top,#eddb11 0,#efcf14 35%,#f1bf18 65%,#f2b21b 100%);
 }

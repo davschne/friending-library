@@ -1,4 +1,43 @@
-.form__module {
-  @extend %center-container;
+.form {
+  width: 60em;
+  display: block;
+  margin: 0 auto;
+  overflow: auto;
 }
 
+.form__module {
+  width: 100%;
+  margin-top: $default-em * 6;
+  float: left;
+}
+
+.form__module__header {
+  font-weight: 400;
+  font-size: $default-em * 8;
+  text-align: center;
+  color: $font-grey;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: $default-em * 2 0;
+
+}
+.form__module__p {
+  margin-bottom: 1em;
+}
+
+.form__module-input-button {
+  display: inline-block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.error__message {
+  background-color: #fff;
+}
+
+.error__message__p {
+  font-size: $default-em * 4;
+  font-weight: 300;
+  text-align: center;
+  color: rgba(33, 33, 33, 0.5);
+  padding: $default-em * 10;
+}
