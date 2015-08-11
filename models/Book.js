@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var deepPopulate = require('mongoose-deep-populate');
 
 var bookSchema = new mongoose.Schema({
   owner: {type: String, ref: "User", index: true},
@@ -24,6 +25,8 @@ var bookSchema = new mongoose.Schema({
     small: String
   }
 });
+
+bookSchema.plugin(deepPopulate);
 
 var Book = mongoose.model("Book", bookSchema);
 
