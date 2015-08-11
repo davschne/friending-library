@@ -114,6 +114,12 @@ describe("/api/books/available", function() {
     before(function(done) {
       User.create(testUsers[0])
         .then(function() {
+          // testUsers[1] will be owner of testBooks[3]
+          var user = testUsers[1];
+          user.books.push(testBooks[3]._id);
+          return User.create(user);
+        }, function(err) { throw err; })
+        .then(function() {
           testBooks[0].owner = testUsers[0]._id;
           return Book.create(testBooks[0]);
         }, function(err) { throw err; })
@@ -126,6 +132,9 @@ describe("/api/books/available", function() {
           return Book.create(testBooks[2]);
         }, function(err) { throw err; })
         .then(function() {
+          // This is the book that should be returned in the test.
+          // Its owner is testUsers[1].
+          testBooks[3].owner = testUsers[1]._id;
           return Book.create(testBooks[3]);
         }, function(err) { throw err; })
         .then(function() {
@@ -133,22 +142,27 @@ describe("/api/books/available", function() {
         }, function(err) { throw err; });
       });
 
-    it("should return a JSON array of books that don't belong to the current user, have no outstanding requests, and aren't currently borrowed", function(done) {
+    it("should return a JSON array of books that don't belong to the current user, have no outstanding requests, and aren't currently borrowed. .owner property should be populated", function(done) {
       chai.request(url)
         .get("/api/books/available")
         .set("Authorization", "Bearer " + testUsers[0].access_token)
         .end(function(err, res) {
+          console.log(res.body);
           expect(err).to.be.null;
           expect(res).to.have.status(200);
           expect(res).to.be.json;
           expect(res.body).to.have.property("length", 1);
           expect(res.body[0].title).to.equal(testBooks[3].title);
+          expect(res.body[0].owner.displayName).to.equal("David");
           done();
         });
     });
 
     after(function(done) {
-      User.findByIdAndRemove(testUsers[0]._id)
+      User.remove({$or:
+        [{_id: testUsers[0]._id},
+         {_id: testUsers[1]._id}]
+        })
         .exec()
         .then(function() {
           return Book.remove({$or:
