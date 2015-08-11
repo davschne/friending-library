@@ -8,7 +8,7 @@
   </nav>
 </section>
 
-<h1 class="book__list__header">Requested Books</h1>
+<h1 class="book__list__header">My Requests</h1>
 <section class="book__list">
   <ul class="list">
     <h2 class="book__list__none" data-ng-if="noSelfRequests">No book requests</h2>
@@ -22,6 +22,7 @@
             <li><p>Title:</p>{{selfBook.title}}</li>
             <li><p>Author:</p>{{selfBook.authors[0]}}</li>
             <li><p>Genre:</p>{{selfBook.categories[0]}}</li>
+            <li><p>Owner:</p>{{selfBook.owner.displayName}}</li>
           </ul>
           <button data-ng-click="removeRequest(user.access_token, selfBook._id)">Undo</button>
         </section>
@@ -44,6 +45,7 @@
             <li><p>Title:</p>{{borrow.title}}</li>
             <li><p>Author:</p>{{borrow.authors[0]}}</li>
             <li><p>Genre:</p>{{borrow.categories[0]}}</li>
+            <li><p>Owner:</p>{{borrow.owner.displayName}}</li>
           </ul>
         </section>
       </section>

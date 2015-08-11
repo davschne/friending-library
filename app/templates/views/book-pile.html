@@ -8,7 +8,7 @@
     </nav>
   </section>
 
-  <h1 class="book__list__header">Book Pile</h1>
+  <h1 class="book__list__header">Available Books</h1>
   <section class="book__list">
     <ul class="list">
       <h2 class="book__list__none" data-ng-if="noBooks">No Books Available</h2>
@@ -22,9 +22,10 @@
               <li><p>Title:</p>{{book.title}}</li>
               <li><p>Author:</p>{{book.authors[0]}}</li>
               <li><p>Genre:</p>{{book.categories[0]}}</li>
+              <li><p>Owner:</p>{{book.owner.displayName}}</li>
             </ul>
             <button data-ng-click="toggleDescription(1, book)">Show Description</button>
-            <button data-ng-click="checkBook(user.access_token, {_id : book._id})">Checkout Book</button>
+            <button data-ng-click="checkBook(user.access_token, {_id : book._id})">Request Book</button>
           </section>
         </section>
         <section class="description" data-ng-if="book.showDescription">

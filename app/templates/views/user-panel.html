@@ -10,7 +10,7 @@
 
 <section class="form">
   <section class="form__module">
-    <h1 class="form__module__header">Post A Book</h1>
+    <h1 class="form__module__header">Add A Book</h1>
     <form data-ng-submit="askGoogle(googlebook.isbn)">
       <p class="form__module__p">Enter 10 or 13 Length ISBN</p>
       <section class="form__module-input-button">
@@ -41,7 +41,7 @@
   </section>
 </section>
 
-<h1 class="book__list__header">Posted Books</h1>
+<h1 class="book__list__header">My Book Pile</h1>
 <section class="book__list">
   <ul class="list">
     <h2 class="book__list__none" data-ng-if="allRequested">All Books Out</h2>
@@ -63,7 +63,7 @@
   </ul>
 </section>
 
-<h1 class="book__list__header">User Requests</h1>
+<h1 class="book__list__header">Requests For My Books</h1>
 <ul class="list">
   <h2 class="book__list__none" data-ng-if="noRequests">No Books Requested </h2>
   <li class="list__item" data-ng-repeat="userBook in bookRequests">
@@ -76,6 +76,7 @@
           <li><p>Title:</p>{{userBook.title}}</li>
           <li><p>Author:</p>{{userBook.authors[0]}} </li>
           <li><p>Genre:</p>{{userBook.categories[0]}} </li>
+          <li><p>Requester:</p>{{userBook.request.displayName}}</li>
         </ul>
         <button data-ng-click="acceptRequest(user.access_token, {_id : userBook._id})">Approve</button>
         <button data-ng-click="rejectRequest(user.access_token, {_id : userBook._id})">Deny</button>
@@ -84,9 +85,9 @@
   </li>
 </ul>
 
-<h1 class="book__list__header">Books Lended</h1>
+<h1 class="book__list__header">Books Lent</h1>
 <ul class="list">
-  <h2 class="book__list__none" data-ng-if="noneBorrowed">No Books Borrowed</h2>
+  <h2 class="book__list__none" data-ng-if="noneBorrowed">No Books Lent</h2>
   <li class="list__item" data-ng-repeat="borrow in borrowedBooks">
     <section class="book__list__section">
       <section class="book__list__subsection">
@@ -97,6 +98,7 @@
           <li><p>Title:</p>{{borrow.title}}</li>
           <li><p>Author:</p>{{borrow.authors[0]}}</li>
           <li><p>Genre:</p>{{borrow.categories[0]}}</li>
+          <li><p>Borrower:</p>{{borrow.borrower.displayName}}</li>
         </ul>
         <button data-ng-click="returnBook(user.access_token, {_id : borrow._id})">Returned</button>
       </section>
