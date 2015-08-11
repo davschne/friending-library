@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var findOrCreate = require("mongoose-findorcreate");
+var deepPopulate = require('mongoose-deep-populate');
 
 var userSchema = new mongoose.Schema({
   _id: String,
@@ -11,6 +12,7 @@ var userSchema = new mongoose.Schema({
 });
 
 userSchema.plugin(findOrCreate);
+userSchema.plugin(deepPopulate);
 
 var User = mongoose.model("User", userSchema);
 
