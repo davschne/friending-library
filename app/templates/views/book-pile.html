@@ -22,7 +22,7 @@
               <li><p>Title:</p>{{book.title}}</li>
               <li><p>Author:</p>{{book.authors[0]}}</li>
               <li><p>Genre:</p>{{book.categories[0]}}</li>
-              <li><p>Owner:</p>{{book.owner}}</li>
+              <li><p>Owner:</p>{{book.owner.displayName}}</li>
             </ul>
             <button data-ng-click="toggleDescription(1, book)">Show Description</button>
             <button data-ng-click="checkBook(user.access_token, {_id : book._id})">Request Book</button>
