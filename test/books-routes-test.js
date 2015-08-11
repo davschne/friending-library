@@ -117,7 +117,7 @@ describe("/api/books/available", function() {
           // testUsers[1] will be owner of testBooks[3]
           var user = testUsers[1];
           user.books.push(testBooks[3]._id);
-          return User.create();
+          return User.create(user);
         }, function(err) { throw err; })
         .then(function() {
           testBooks[0].owner = testUsers[0]._id;
@@ -147,17 +147,22 @@ describe("/api/books/available", function() {
         .get("/api/books/available")
         .set("Authorization", "Bearer " + testUsers[0].access_token)
         .end(function(err, res) {
+          console.log(res.body);
           expect(err).to.be.null;
           expect(res).to.have.status(200);
           expect(res).to.be.json;
           expect(res.body).to.have.property("length", 1);
           expect(res.body[0].title).to.equal(testBooks[3].title);
+          expect(res.body[0].owner.displayName).to.equal("David");
           done();
         });
     });
 
     after(function(done) {
-      User.findByIdAndRemove(testUsers[0]._id)
+      User.remove({$or:
+        [{_id: testUsers[0]._id},
+         {_id: testUsers[1]._id}]
+        })
         .exec()
         .then(function() {
           return Book.remove({$or:
