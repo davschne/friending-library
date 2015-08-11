@@ -51,9 +51,13 @@ module.exports = function(router) {
   router.get("/available", function(req, res) {
     console.log("Received GET request at /api/books/available");
     // find all books that aren't currently requested or borrowed and don't belong to the current user
-    Book.find({request: "", borrower: "", owner: {$ne: req.user._id}}, function(err, books) {
-      if (err) handle[500](err, res);
-      else res.json(books);
-    });
+    Book.find({request: "", borrower: "", owner: {$ne: req.user._id}})
+      .populate("owner")
+      .exec()
+      .then(function(books) {
+        res.json(books);
+      }, function(err) {
+        handle[500](err, res);
+      });
   });
 };
