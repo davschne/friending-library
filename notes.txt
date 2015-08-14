@@ -1,12 +1,65 @@
-Waffle
+IMPLEMENTING FRIENDS:
+--------------------
 
-User
-  -email (_id) : primary key? enforce uniqueness
-  -first name
-  -last name
-  -books (Books)
-  -friends (other Users)
+OUTLINE:
+-------
 
-Book
-  -ISBN (primary key)
-  -
+- browse or search all users for friends (/api/users GET)
+  - get profile pics from Facebook?
+- 3 levels of detail for user data
+  - self    : all data
+  - friends : basic info + books
+  - other   : basic info
+- friend requests : make, accept, deny
+- remove friend (disallow if currently borrowing)
+- friends array in User model
+- books/available query needs to search friends' books arrays
+
+-------------------------------------------------------------
+SPECIFICS:
+---------
+
+Models:
+------
+
+User:
+
+- friends: [{type: String, ref: User}]
+- friend_requests: [{type: String, ref: User}]
+
+Server Routes:
+-------------
+
+new:
+
+- /api/users                   GET    : get all users (basic info)
+- /api/friends                 GET    : get all friends
+- /api/friends/:userid         DELETE : remove friend (disallow if currently borrowing)
+- /api/friends/request         POST   : make friend request (body: user._id)
+- /api/friends/approve         POST   : approve friend request (body: user._id)
+- /api/friends/deny            POST   : deny friend request (body: user._id)
+
+modify:
+
+- /api/self            GET : populate friends' basic info
+- /api/books/available GET : search friends' books
+
+Client Views:
+------------
+
+new:
+
+- My Friends
+  - For each record, display basic info (displayName, first?, last? picture?)
+
+  - My Friends
+    - Remove button (/api/friends/:userid DELETE)
+
+  - Friend Requests
+    - Approve button (/api/friends/approve POST)
+    - Deny button (/api/friends/deny POST)
+
+  - Add Friend button --> load Browse Users Sub-view (/api/users GET)
+    - Browse Users Sub-view:
+      - list all users (displayName, first?, last?, picture?)
+      - Request button : (/api/friends/request POST)
